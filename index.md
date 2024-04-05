@@ -12,7 +12,7 @@
 3.   여러 공격방식을 통해 다양한 공격을 상황에 맞게 취사선택한다.
 4.   선형적인 스토리 전개 방식으로 이루어진다.
 
-개발현황 : [notion](https://loving-perigee-38c.notion.site/20c6d59674e749769f85e0128748ff72?pvs=4)
+개발현황 : [Google Drive](https://drive.google.com/drive/folders/1PLdymtSjLYZg932usjZbjHqhsccBn9oi?usp=drive_link)
 ### 2. 소개 영상
 ![sample](https://github.com/kookmin-sw/capstone-2024-41/assets/21676370/85ec4410-1ded-49ac-8cff-4f7e34c78297)
 
