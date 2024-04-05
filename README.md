@@ -1,6 +1,6 @@
 # ADAM - 포스트아포칼립스 플랫포머 액션 게임
 
-### 1. 프로잭트 소개
+### 1. 프로젝트 소개
 ![image](https://github.com/kookmin-sw/capstone-2024-41/assets/21676370/b8ad8caf-4771-4d41-9b43-8f4ab54f19ca)
 
 본 프로젝트는 싱글 플레이로 진행된다.
