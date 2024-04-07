@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Enemy
   - Ground
+  - MonCol
+  - Boss
+  - NarrationObject
   layers:
   - Default
   - TransparentFX
@@ -14,10 +17,11 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
-  - 
-  - 
-  - 
+  - Monster
+  - Player
+  - BackGround
+  - Boss
+  - HoverGround
   - 
   - 
   - 
