@@ -241,15 +241,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbde2422c0efc8442980b5526a6a914d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterName: 
+  monsterType: 0
   health: 3
-  attackDamage: 0
+  maxHealth: 2
+  attackDamage: 1
   attackRange: 1.25
   moveSpeed: 2
   stateType: 0
+  moveType: 0
+  attackDelay: 1
+  attackable: 1
   rb: {fileID: 0}
   animator: {fileID: 0}
   spriteRenderer: {fileID: 0}
+  player: {fileID: 0}
   attackCollider: {fileID: 5037272087405383348}
 --- !u!114 &5037272086281506392
 MonoBehaviour:
@@ -284,7 +289,7 @@ MonoBehaviour:
   - {x: -0.25717896, y: -0.2861669, z: 0}
   m_ShapePathHash: 1524302717
   m_Mesh: {fileID: 0}
-  m_InstanceId: -35716
+  m_InstanceId: 63332
 --- !u!1 &5037272087405383349
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,7 +329,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5037272087405383349}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1

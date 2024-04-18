@@ -16,9 +16,9 @@ public class MonStateMachine {
     {
         if(_mon.gameObject.activeSelf == false) return;
         if (currentState != null)
-        {
             currentState.Exit(_mon);
-        }
+        
+        
         _mon.stateType = stateType;
         currentState = MonManager.GetState(stateType);
         currentState.Enter(_mon);

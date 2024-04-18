@@ -1,0 +1,20 @@
+{
+  "GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1088612345-0": {
+    "GameObjectId": "GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1088612345-0",
+    "CommentText": "빛과 그림자, 포스트 프로세싱",
+    "AssetGUID": "2cda990e2423bbf4892e6590ba056729",
+    "UniqueItemID": "GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1088612345-0"
+  },
+  "GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1272467348-0": {
+    "GameObjectId": "GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1272467348-0",
+    "CommentText": "배경, 플랫폼, 그리드 등",
+    "AssetGUID": "2cda990e2423bbf4892e6590ba056729",
+    "UniqueItemID": "GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1272467348-0"
+  },
+  "GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-456013768-0": {
+    "GameObjectId": "GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-456013768-0",
+    "CommentText": "몬스터 혹은 보스에관한 오브젝트들",
+    "AssetGUID": "2cda990e2423bbf4892e6590ba056729",
+    "UniqueItemID": "GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-456013768-0"
+  }
+}

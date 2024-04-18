@@ -7,7 +7,12 @@ public enum MonType
 {
     Mecha,
     Drone,
-    Droid
+    Droid,
+    DarkMec,
+    BallTank,
+    Shielder,
+    TheHive,
+    Wasp
 }
 
 public class MonsterPool : MonoBehaviour
@@ -56,6 +61,7 @@ public class MonsterPool : MonoBehaviour
                 obj.transform.SetParent(null);
                 obj.gameObject.SetActive(true);
                 obj.Init();
+                Instance._poolingObjectList.Remove(obj);
                 return obj;
             }
         }

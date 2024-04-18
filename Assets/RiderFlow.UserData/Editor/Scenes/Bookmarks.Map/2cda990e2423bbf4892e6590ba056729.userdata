@@ -1,0 +1,27 @@
+{
+  "GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-548429815-0": {
+    "GameObjectId": "GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-548429815-0",
+    "AssetGUID": "2cda990e2423bbf4892e6590ba056729",
+    "UniqueItemID": "GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-548429815-0"
+  },
+  "GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-681473786-0": {
+    "GameObjectId": "GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-681473786-0",
+    "AssetGUID": "2cda990e2423bbf4892e6590ba056729",
+    "UniqueItemID": "GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-681473786-0"
+  },
+  "GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-157093074-0": {
+    "GameObjectId": "GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-157093074-0",
+    "AssetGUID": "2cda990e2423bbf4892e6590ba056729",
+    "UniqueItemID": "GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-157093074-0"
+  },
+  "GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1760932034-0": {
+    "GameObjectId": "GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1760932034-0",
+    "AssetGUID": "2cda990e2423bbf4892e6590ba056729",
+    "UniqueItemID": "GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1760932034-0"
+  },
+  "GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1022198392-0": {
+    "GameObjectId": "GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1022198392-0",
+    "AssetGUID": "2cda990e2423bbf4892e6590ba056729",
+    "UniqueItemID": "GlobalObjectId_V1-2-2cda990e2423bbf4892e6590ba056729-1022198392-0"
+  }
+}
