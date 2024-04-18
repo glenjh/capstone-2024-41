@@ -31,7 +31,7 @@ public class MonStateIdle : IMonState
     
     public void Enter(Monster monster)
     {
-        if (monster.isActiveAndEnabled == true)
+        if (monster.isActiveAndEnabled)
         {
             monster.animator.SetBool("isMove", false);
             monster.StartWait();
@@ -70,8 +70,8 @@ public class MonStateMove :IMonState
     {
         // 다음 지형이 바닥인지 확인
         Vector2 frontVec = new Vector2(monster.rb.position.x + (monster.moveSpeed >0 ? 0.5f:-0.5f), monster.rb.position.y);
-        Debug.DrawRay(frontVec, Vector3.down, new Color(0, 1, 0));
-        RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down, 1, LayerMask.GetMask("Ground"));
+        Debug.DrawRay(frontVec,Vector3.down, new Color(0, 1, 0));
+        RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down, monster.spriteRenderer.sprite.bounds.size.y/2+0.1f, LayerMask.GetMask("Ground"));
         if (rayHit.collider == null)
         {
             monster.moveSpeed *= -1;
@@ -175,7 +175,14 @@ public class MonStateChase : IMonState
     {
         if(target == null)
             return;
-        
+        if (monster.moveType == MoveType.Fly)
+        {
+            //target의 위치를 향해 날아감
+            monster.rb.velocity = new Vector2((target.position.x - monster.transform.position.x) * monster.moveSpeed,
+                (target.position.y - monster.transform.position.y) * monster.moveSpeed);
+            return;
+        }
+
         if (target.position.x < monster.transform.position.x && monster.moveSpeed > 0)
         {
             monster.moveSpeed *= -1;

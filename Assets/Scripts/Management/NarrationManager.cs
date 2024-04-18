@@ -13,13 +13,13 @@ public class NarrationManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject.transform.root);
             
             narrationText = GetComponent<TextMeshProUGUI>();
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(this);
         }
     }
     
