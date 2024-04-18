@@ -1,0 +1,47 @@
+
+Hcsharpsquid:S3903"+Move 'PlayerStates' into a named namespace.(ïÖ½¾
+Gcsharpsquid:S3903"%Move 'Player' into a named namespace.(ö“ÊÇúÿÿÿÿ
+?csharpsquid:S2933D""Make 'pulseAttackTime' 'readonly'.(ŞÛÇ¬
+@csharpsquid:S2933L"Make 'dashingTime' 'readonly'.(¯Ñù¶üÿÿÿÿ
+Acsharpsquid:S2933M"Make 'dashCoolDown' 'readonly'.(Û‚¼¸øÿÿÿÿ
+`csharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(“ÆıY
+acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(¤Ô”™
+fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(¨£’Àşÿÿÿÿ
+fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(·åÀıÿÿÿÿ
+fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(­ŸøÓüÿÿÿÿ
+fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(Áàá¢øÿÿÿÿ
+fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(ì©ëüÿÿÿÿ
+fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(ÊÈ÷êıÿÿÿÿ
+acsharpsquid:S1104!"DMake this field 'private' and encapsulate it in a 'public' property.(ıóåô
+fcsharpsquid:S1104""DMake this field 'private' and encapsulate it in a 'public' property.(‹ß·»ûÿÿÿÿ
+fcsharpsquid:S1104%"DMake this field 'private' and encapsulate it in a 'public' property.(Ç¥Ûÿÿÿÿÿ
+acsharpsquid:S1104("DMake this field 'private' and encapsulate it in a 'public' property.(æ»’º
+acsharpsquid:S1104+"DMake this field 'private' and encapsulate it in a 'public' property.(„„ÂÄ
+fcsharpsquid:S1104,"DMake this field 'private' and encapsulate it in a 'public' property.(·©ªùÿÿÿÿ
+acsharpsquid:S1104-"DMake this field 'private' and encapsulate it in a 'public' property.(«–ËÓ
+fcsharpsquid:S1104."DMake this field 'private' and encapsulate it in a 'public' property.(ïÄƒùÿÿÿÿ
+fcsharpsquid:S1104/"DMake this field 'private' and encapsulate it in a 'public' property.(ïıÉÓÿÿÿÿÿ
+acsharpsquid:S11042"DMake this field 'private' and encapsulate it in a 'public' property.(¢ÈÈè
+acsharpsquid:S11043"DMake this field 'private' and encapsulate it in a 'public' property.(áÍÜê
+fcsharpsquid:S11047"DMake this field 'private' and encapsulate it in a 'public' property.(£¼õ—şÿÿÿÿ
+acsharpsquid:S11048"DMake this field 'private' and encapsulate it in a 'public' property.(ÌøËñ
+fcsharpsquid:S11049"DMake this field 'private' and encapsulate it in a 'public' property.(Şöµùÿÿÿÿ
+fcsharpsquid:S1104:"DMake this field 'private' and encapsulate it in a 'public' property.(°ù°µüÿÿÿÿ
+acsharpsquid:S1104;"DMake this field 'private' and encapsulate it in a 'public' property.(‰›Òÿ
+acsharpsquid:S1104>"DMake this field 'private' and encapsulate it in a 'public' property.(Ä»ÿ£
+acsharpsquid:S1104?"DMake this field 'private' and encapsulate it in a 'public' property.(»€ë“
+acsharpsquid:S1104@"DMake this field 'private' and encapsulate it in a 'public' property.(óâ¿­
+fcsharpsquid:S1104A"DMake this field 'private' and encapsulate it in a 'public' property.(ã˜šøÿÿÿÿ
+acsharpsquid:S1104C"DMake this field 'private' and encapsulate it in a 'public' property.(ŞÙìŞ
+acsharpsquid:S1104G"DMake this field 'private' and encapsulate it in a 'public' property.(Ûè…Ñ
+acsharpsquid:S1104H"DMake this field 'private' and encapsulate it in a 'public' property.(ôÅŞĞ
+fcsharpsquid:S1104I"DMake this field 'private' and encapsulate it in a 'public' property.(ïË½Ùùÿÿÿÿ
+acsharpsquid:S1104J"DMake this field 'private' and encapsulate it in a 'public' property.(¤ºÙç
+acsharpsquid:S1104K"DMake this field 'private' and encapsulate it in a 'public' property.( ş…
+acsharpsquid:S1104P"DMake this field 'private' and encapsulate it in a 'public' property.(¶ĞÅ
+acsharpsquid:S1104T"DMake this field 'private' and encapsulate it in a 'public' property.(­ìÉ¸
+fcsharpsquid:S1104U"DMake this field 'private' and encapsulate it in a 'public' property.(™öî×ûÿÿÿÿ
+lcsharpsquid:S927Ú"JRename parameter 'other' to 'attacker' to match the interface declaration.(ŸáÂ—ÿÿÿÿÿ
+csharpsquid:S1450#"]Remove the field 'horizontalMove' and declare it as a local variable in the relevant methods.(ˆÊñ™ùÿÿÿÿ
+9csharpsquid:S3626é"Remove this redundant jump.(ûÁİ…
+<csharpsquid:S125´"Remove this commented out code.(Ú°à¬

@@ -1,0 +1,7 @@
+
+Ccsharpsquid:S3903"&Move 'MonType' into a named namespace.(Á¥ÊÒ
+Lcsharpsquid:S3903"*Move 'MonsterPool' into a named namespace.(’Ç¹½úÿÿÿÿ
+Gcsharpsquid:S2933"%Make '_poolingObjectList' 'readonly'.(™œóÃýÿÿÿÿ
+acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(šçüÓ
+bcsharpsquid:S2223"EChange the visibility of 'Instance' or make it 'const' or 'readonly'.(šçüÓ
+rcsharpsquid:S2696"UMake the enclosing instance method 'static' or remove this set on the 'static' field.(Ä“±Ï
