@@ -50,14 +50,16 @@ public class Idle : PlayerState
         if (!player.isDashing && !player.isParrying)
         {
             player.SetMoveState();
-            if (player.rigid.velocity.y != 0)
-            {
-                player.JumpAttack();
-            }
-            else
-            {
-                player.Attack();
-            }
+            // if (player.rigid.velocity.y != 0)
+            // {
+            //     player.JumpAttack();
+            // }
+            // else
+            // {
+            //     player.Attack();
+            // }
+            player.JumpAttack();
+            player.Attack();
             player.Jump();
             player.Stamp();
         }
@@ -94,14 +96,16 @@ public class Move : PlayerState
         {
             player.SetMoveState();
             player.Move();
-            if (player.rigid.velocity.y != 0)
-            {
-                player.JumpAttack();
-            }
-            else
-            {
-                player.Attack();
-            }
+            // if (player.rigid.velocity.y != 0)
+            // {
+            //     player.JumpAttack();
+            // }
+            // else
+            // {
+            //     player.Attack();
+            // }
+            player.JumpAttack();
+            player.Attack();
             player.Jump();
             player.Stamp();
         }

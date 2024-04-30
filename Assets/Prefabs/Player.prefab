@@ -10020,7 +10020,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: cc0c1a354f45d4db4bb7368cc314787a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15758,7 +15758,6 @@ MonoBehaviour:
   jumpAndLandDust: {fileID: 83912137}
   pos: {fileID: 0}
   boxSize: {x: 2.07, y: 0.93}
-  playerAttackCollider: {fileID: 0}
   slashTime: 0.1
   slashPow: 50
   len: 5.2
@@ -15873,7 +15872,7 @@ MonoBehaviour:
   - {x: 0.22665024, y: -0.6301193, z: 0}
   m_ShapePathHash: 957763861
   m_Mesh: {fileID: 0}
-  m_InstanceId: -98166
+  m_InstanceId: -1721530
 --- !u!50 &7853180448714999194
 Rigidbody2D:
   serializedVersion: 4

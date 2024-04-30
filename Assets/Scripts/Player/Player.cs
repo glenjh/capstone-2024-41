@@ -146,6 +146,9 @@ public class Player : MonoBehaviour, IDamageAble
         _stateMachine.AddState(PlayerStates.DASH);
         _stateMachine.AddState(PlayerStates.DEAD);
         
+        _stateMachine.AddState(PlayerStates.WALLSLIDING);
+        _stateMachine.AddState(PlayerStates.WALLJUMPING);
+        
         isHit = false;
     }
 
@@ -411,7 +414,7 @@ public class Player : MonoBehaviour, IDamageAble
     
     public void Attack()
     {
-        if (Input.GetKeyDown(KeyCode.Z) && !isWallSliding)
+        if (Input.GetKeyDown(KeyCode.Z) && !isWallSliding && isGround)
         {
             _stateMachine.ChangeState(PlayerStates.ATTACK);
         }
@@ -469,7 +472,7 @@ public class Player : MonoBehaviour, IDamageAble
 
     public void JumpAttack()
     {
-        if (Input.GetKeyDown(KeyCode.Z) && !isWallSliding && (PS == PlayerStates.JUMP || PS == PlayerStates.JUMPATTACK))
+        if (Input.GetKeyDown(KeyCode.Z) && !isWallSliding && !isGround)
         {
             _stateMachine.ChangeState(PlayerStates.JUMPATTACK);
         }
