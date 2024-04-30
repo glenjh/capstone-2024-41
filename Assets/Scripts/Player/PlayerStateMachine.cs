@@ -68,6 +68,9 @@ public static class StateManager
                 case PlayerStates.ATTACK:
                     return new Attack(ps);
                 
+                case PlayerStates.SLASHATTACK:
+                    return new SlashAttack(ps);
+                
                 case PlayerStates.JUMPATTACK:
                     return new JumpAttack(ps);
 

@@ -5,6 +5,7 @@ using Cinemachine;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public enum PlayerStates
 {
@@ -12,6 +13,7 @@ public enum PlayerStates
     MOVE,
     JUMP,
     ATTACK,
+    SLASHATTACK,
     JUMPATTACK,
     STAMPING,
     DASH,
@@ -23,7 +25,8 @@ public enum PlayerStates
 
 public class Player : MonoBehaviour, IDamageAble
 {
-    [Header ("Player Setting")]
+    [Header("Player Setting")] 
+    public BoxCollider2D playerCol;
     public Rigidbody2D rigid;
     public PlayerStates PS;
     public PlayerStateMachine _stateMachine;
@@ -33,6 +36,10 @@ public class Player : MonoBehaviour, IDamageAble
     public ParticleSystem walkingDust;
     public int life = 10;
     public int maxLife = 10;
+    [HideInInspector]
+    public bool controlAble = true;
+    public HitPauser _pauser;
+    public ChangePostProcess sceneEffector;
 
     public bool isHit;
     public float normalGravity = 1f;
@@ -40,8 +47,9 @@ public class Player : MonoBehaviour, IDamageAble
     public Ghost ghost;
 
     public bool isGround = true;
-    
-    [Header ("Player Move")]
+
+    [Header("Player Move")] 
+    public float moveSpeed = 7f;
     public Vector2 move;
     
     [Header ("Jump")]
@@ -55,7 +63,9 @@ public class Player : MonoBehaviour, IDamageAble
     [Header ("Attack")]
     public Transform pos;
     public Vector2 boxSize;
-    [SerializeField] private Collider2D playerAttackCollider;
+    public float slashTime = 0.5f;
+    public float slashPow = 30f;
+    public float len = 10f;
     
     [Header ("Stamp Attack")]
     public GameObject stampEffect;
@@ -89,10 +99,8 @@ public class Player : MonoBehaviour, IDamageAble
     private float parryingTime = 3f;
     private float parryingCoolDown = 1f;
 
-
-    [Header ("Layer Ignore")]
-    public bool fallFromHoverGround;
-    private int hoverGroundLayer, playerLayer;
+    [Header("Layer Ignore")] 
+    public GameObject hoverGround;
 
     [Header("Player Hit")] 
     public GameObject hitEffect;
@@ -109,29 +117,36 @@ public class Player : MonoBehaviour, IDamageAble
     public bool isWallJumping;
     public LayerMask wallLayer;
 
+    [Header("Rage Mode")] 
+    public bool isRage = false;
+    [SerializeField] public TrailRenderer eyeLight;
+    public float maxCharge = 100;
+    public float currCharge = 0;
+    public float rageSpeed = 8.5f;
+
     CinemachineImpulseSource impulseSource;
+    [SerializeField]ShockWave shockWave;
 
     void Init()
     {
+        playerCol = GetComponent<BoxCollider2D>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         playerFeet = GetComponent<GameObject>();
         sprite = GetComponent<SpriteRenderer>();
+        
         _stateMachine = new PlayerStateMachine(PlayerStates.IDLE, this);
         _stateMachine.AddState(PlayerStates.MOVE);
         _stateMachine.AddState(PlayerStates.JUMP);
         _stateMachine.AddState(PlayerStates.ATTACK);
+        _stateMachine.AddState(PlayerStates.SLASHATTACK);
         _stateMachine.AddState(PlayerStates.JUMPATTACK);
         _stateMachine.AddState(PlayerStates.STAMPING);
         _stateMachine.AddState(PlayerStates.DASH);
         _stateMachine.AddState(PlayerStates.DEAD);
         
         isHit = false;
-
-        hoverGroundLayer = LayerMask.NameToLayer("HoverGround");
-        playerLayer = LayerMask.NameToLayer("Player");
-        
     }
 
     void Start()
@@ -191,6 +206,8 @@ public class Player : MonoBehaviour, IDamageAble
 
     void Update()
     {
+        ZoomTest();
+        
         UsePulseAttack();
         
         JumpBufferCount();
@@ -198,28 +215,35 @@ public class Player : MonoBehaviour, IDamageAble
         
         FallingAnim();
 
-        if (PS == PlayerStates.DEAD)
+        if (PS == PlayerStates.DEAD || !controlAble)
         {
             return;
         }
         
         _stateMachine.Action();
-
-
-        if (rigid.velocity.y > 0)
-        {
-            IgnoreLayerON();
-        }
-        else if(rigid.velocity.y <= 0 && !fallFromHoverGround)
-        {
-            IgnoreLayerOFF();
-        }
-
+        
         isWall = Physics2D.Raycast(wallChk.position,
                  Vector2.right * transform.localScale.x,
                  wallChkDistance, wallLayer);
 
         Debug.DrawRay(wallChk.position, Vector2.right * transform.localScale.x * wallChkDistance, Color.cyan);
+        Debug.DrawRay(transform.position, Vector2.right * -transform.localScale.x * len, Color.yellow);
+    }
+
+    void ZoomTest()
+    {
+        if(Input.GetKeyDown(KeyCode.R))
+            CameraManager.instance.ChangeZoom(2f);
+        if(Input.GetKeyDown(KeyCode.T))
+            CameraManager.instance.ChangeZoom(-2f);
+        
+        if (Input.GetKeyDown(KeyCode.P))
+            if (currCharge == maxCharge)
+            {
+                StartCoroutine(ChargeDown());
+                sceneEffector.RageMode();
+            }
+        
     }
 
     public void SetWallsliding()
@@ -258,7 +282,6 @@ public class Player : MonoBehaviour, IDamageAble
             ParticleON(slideDust);
             isWallJumping = false;
             isWallSliding = true;
-            // anim.SetBool("isJumping", false);
             anim.SetBool("wallSliding", true);
             rigid.velocity = new Vector2(rigid.velocity.x, rigid.velocity.y * slideSpeed);
             WallJump();
@@ -274,9 +297,6 @@ public class Player : MonoBehaviour, IDamageAble
     {
         if (Input.GetAxis("Jump") != 0 && isWallSliding)
         {
-            // isWallJumping = true;
-            // anim.SetBool("isJumping", true);
-            // anim.SetBool("isFalling", false);
             Invoke("MoveLock", 0.3f);
             rigid.velocity = new Vector2(-transform.localScale.x * wallJumpPower * 0.7f, wallJumpPower);
             transform.localScale = new Vector2(-Mathf.Sign(transform.localScale.x), 1);
@@ -287,6 +307,7 @@ public class Player : MonoBehaviour, IDamageAble
     {
         isWallJumping = false;
     }
+    
     public void ParticleON(ParticleSystem particleName)
     {
         particleName.Play();
@@ -304,44 +325,56 @@ public class Player : MonoBehaviour, IDamageAble
         }
     }
 
-    public void IgnoreLayerON()
+    public void OnCollisionEnter2D(Collision2D collision)
     {
-        Physics2D.IgnoreLayerCollision(playerLayer, hoverGroundLayer, true);
+        if (collision.gameObject.CompareTag("HoverGround"))
+        {
+            hoverGround = collision.gameObject;
+        }
     }
 
-    public void IgnoreLayerOFF()
+    public void OnCollisionExit2D(Collision2D other)
     {
-        Physics2D.IgnoreLayerCollision(playerLayer, hoverGroundLayer, false);
+        if (other.gameObject.CompareTag("HoverGround"))
+        {
+            hoverGround = null;
+        }
     }
 
     public IEnumerator LayerOpenClose()
     {
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S) && hoverGround != null)
         {
-            fallFromHoverGround = true;
-            IgnoreLayerON();
-            yield return new WaitForSecondsRealtime(0.3f);
-            IgnoreLayerOFF();
-            fallFromHoverGround = false;
+            CompositeCollider2D hoverCol = hoverGround.GetComponent<CompositeCollider2D>();
+            
+            Physics2D.IgnoreCollision(playerCol, hoverCol, true);
+            yield return new WaitForSecondsRealtime(0.25f);
+            Physics2D.IgnoreCollision(playerCol, hoverCol, false);
         }
     }
 
     public void TakeHit(int damage, Transform other)
     {
-        if (life >= 1)
+        if (life > 0 && !isHit)
         {
             GameObject newHitEffect = Instantiate(hitEffect, hitEffectPos.position, Quaternion.identity);
             newHitEffect.transform.localScale = transform.localScale;
             anim.SetTrigger("doDamage");
             life--;
+            CameraManager.instance.CamShake();
+            sceneEffector.ChromaticScreen();
+            sceneEffector.VignetteScreen();
+            sceneEffector.GlitchScreen();
+            StartCoroutine(Freeze(0.35f));
             StartCoroutine(OnDamage(1f));
+            _pauser.HitStop(0.2f); 
         }
         
-        if(life < 1)
+        if(life <= 0)
         {
+            StopAllCoroutines();
             PS = PlayerStates.DEAD;
-            _stateMachine.Action();
-            return;
+            _stateMachine.ChangeState(PlayerStates.DEAD);
         }
     }
 
@@ -350,10 +383,19 @@ public class Player : MonoBehaviour, IDamageAble
         sprite.color = new Color(1, 1, 1, 0.9f);
         isHit = true;
         
-        yield return new WaitForSeconds(invincibleTime);
+        yield return new WaitForSecondsRealtime(invincibleTime);
         
         sprite.color = new Color(1, 1, 1, 1);
         isHit = false;
+    }
+
+    public IEnumerator Freeze(float duration)
+    {
+        anim.SetBool("canMove", false);
+        
+        yield return new WaitForSecondsRealtime(duration);
+        
+        anim.SetBool("canMove", true);
     }
 
     public void Idle()
@@ -361,17 +403,7 @@ public class Player : MonoBehaviour, IDamageAble
         _stateMachine.ChangeState(PlayerStates.IDLE);
     }
 
-    public void OnAttack()
-    {
-        playerAttackCollider.enabled = true;
-    }
-
-    public void OffAttack()
-    {
-        playerAttackCollider.enabled = false;
-    }
-
-    public void TirggerReset()
+    public void TriggerReset()
     {
         anim.ResetTrigger("doAttack");
         anim.ResetTrigger("doJumpAttack");
@@ -385,12 +417,86 @@ public class Player : MonoBehaviour, IDamageAble
         }
     }
 
+    public void Slash()
+    {
+        if (Input.GetKeyDown(KeyCode.X) && !isWallSliding)
+        {
+            if (!isRage)
+            {
+                if (currCharge < 20f)
+                {
+                    return;
+                }
+                else
+                {
+                    currCharge -= 20;
+                    _stateMachine.ChangeState(PlayerStates.SLASHATTACK);
+                }
+            }
+            else if (isRage)
+            {
+                _stateMachine.ChangeState(PlayerStates.SLASHATTACK);
+            }
+        }
+    }
+
+    public void DoSalsh()
+    {
+        StartCoroutine("SlashMove");
+    }
+
+    public IEnumerator SlashMove()
+    {
+        rigid.velocity = new Vector2(transform.localScale.x * slashPow, 0);
+        
+        yield return new WaitForSecondsRealtime(slashTime);
+        
+        rigid.velocity = new Vector2(0, 0);
+    }
+    
+    public void SlashRay()
+    {
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, Vector2.right * -transform.localScale.x * len);
+        for (int i = 0; i < hits.Length; i++)
+        {
+            if (hits[i].collider.gameObject.CompareTag("Enemy") || hits[i].collider.gameObject.CompareTag("Boss"))
+            {
+                hits[i].collider.gameObject.GetComponent<IDamageAble>()?.TakeHit(1, null);
+            }
+        }
+        shockWave.CallShockWave(transform.position);
+    }
+
     public void JumpAttack()
     {
-        if (Input.GetKeyDown(KeyCode.Z) && !isWallSliding)
+        if (Input.GetKeyDown(KeyCode.Z) && !isWallSliding && (PS == PlayerStates.JUMP || PS == PlayerStates.JUMPATTACK))
         {
             _stateMachine.ChangeState(PlayerStates.JUMPATTACK);
         }
+    }
+
+    public void Charge()
+    {
+        currCharge += 5;
+        if (currCharge > maxCharge)
+        {
+            currCharge = maxCharge;
+        }
+    }
+
+    public IEnumerator ChargeDown()
+    {
+        float elapsedTime = 0f;
+        float duration = 5f;
+
+        while (elapsedTime < duration)
+        {
+            currCharge = (Mathf.RoundToInt(Mathf.Lerp(maxCharge, 0f, elapsedTime / duration)));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        currCharge = 0;
     }
 
     public void HalfGravity()
@@ -432,7 +538,7 @@ public class Player : MonoBehaviour, IDamageAble
         if (!isWallJumping)
         {
             horizontalMove = Input.GetAxisRaw("Horizontal");
-            move = new Vector2(horizontalMove * 7, rigid.velocity.y);
+            move = new Vector2(horizontalMove * moveSpeed, rigid.velocity.y);
 
             rigid.velocity = new Vector2(move.x, rigid.velocity.y);
             if (rigid.velocity.x != 0)
@@ -482,7 +588,7 @@ public class Player : MonoBehaviour, IDamageAble
 
     public void Stamp()
     {
-        if (Input.GetKey(KeyCode.DownArrow) && anim.GetBool("isFalling") && !isWallSliding)
+        if (Input.GetKey(KeyCode.DownArrow) && !isGround && !isWallSliding)
         {
             _stateMachine.ChangeState(PlayerStates.STAMPING);
         }
@@ -491,9 +597,10 @@ public class Player : MonoBehaviour, IDamageAble
     public void StampAttack()
     {
         Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(stampPos.position, stampBoxSize, 0);
+        CameraManager.instance.CamShake();
         foreach (Collider2D collider in collider2Ds)
         {
-            if (collider.gameObject.tag == "Ground")
+            if (collider.gameObject.tag == "Ground" || collider.gameObject.tag == "HoverGround")
             {
                 GameObject newStampEffect = Instantiate(stampEffect, stampEffectPos.position, Quaternion.identity);
                 newStampEffect.transform.localScale = transform.localScale * 0.3f;
@@ -514,7 +621,7 @@ public class Player : MonoBehaviour, IDamageAble
 
     public void SetDash()
     {
-        if (Input.GetKeyDown(KeyCode.C) && canDash)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
             _stateMachine.ChangeState(PlayerStates.DASH);
         }
@@ -541,7 +648,7 @@ public class Player : MonoBehaviour, IDamageAble
 
     public void SetParrying()
     {
-        if (Input.GetKeyDown(KeyCode.X) && canParrying)
+        if (Input.GetKeyDown(KeyCode.C) && canParrying)
         {
             _stateMachine.ChangeState(PlayerStates.PARRYING);
         }
@@ -555,11 +662,16 @@ public class Player : MonoBehaviour, IDamageAble
         anim.SetBool("canMove", false);
         parryingCol.enabled = true;
         yield return new WaitForSecondsRealtime(parryingTime);
-        ParryingSuccess();
+        if (isParrying)
+        {
+            ParryingSuccess();
+        }
     }
 
     public void ParryingSuccess()
     {
+        StopCoroutine("ParryingStart");
+        shockWave.CallShockWave(transform.position);
         anim.SetBool("isParrying", false);
         anim.SetBool("canMove", true);
         parryingCol.enabled = false;
@@ -575,11 +687,28 @@ public class Player : MonoBehaviour, IDamageAble
         canParrying = true;
     }
     
-    public void OnTriggerEnter2D(Collider2D col)
+    public void OnTriggerStay2D(Collider2D col)
     {
         if (col.gameObject.CompareTag("Enemy") || col.gameObject.CompareTag("Boss"))
         {
+            if (isHit||isParrying) return;
+            CameraManager.instance.CamShake();
             TakeHit(1,null);
         }
+    }
+    
+    public void EnablePlayerControlSignal()
+    {
+        controlAble = true;
+    }
+
+    public void DisablePlayerControlSignal()
+    {
+        controlAble = false;
+    }
+
+    public void FlipControlSignal()
+    {
+        transform.localScale = new Vector2(-transform.localScale.x, 1);
     }
 }

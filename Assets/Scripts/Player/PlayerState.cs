@@ -59,6 +59,7 @@ public class Idle : PlayerState
                 player.Attack();
             }
             player.Jump();
+            player.Stamp();
         }
     }
 
@@ -180,6 +181,7 @@ public class Attack : PlayerState
         if (!player.isDashing && !player.isParrying) 
         {
             player.Attack();
+            player.Slash();
         }
     }
 
@@ -187,6 +189,35 @@ public class Attack : PlayerState
     {
         player.anim.SetBool("canMove", true);
         player.anim.SetBool("isAttacking", false);
+    }
+}
+
+public class SlashAttack : PlayerState
+{
+    public SlashAttack() {}
+
+    public SlashAttack(PlayerStates ps)
+    {
+        ps = PlayerStates.SLASHATTACK;
+        stateType = ps;
+    }
+
+    public override void Enter(Player player)
+    {
+        player.ghost.makeGhost = true;
+        player.anim.SetTrigger("doHeavyAttack");
+    }
+
+    public override void Update(Player player)
+    {
+    }
+
+    public override void Exit(Player player)
+    {
+        if (!player.isRage)
+        {
+            player.ghost.makeGhost = false;
+        }
     }
 }
 
@@ -236,14 +267,17 @@ public class Stamping : PlayerState
 
     public override void Enter(Player player)
     {
-        player.rigid.AddForce(Vector2.down * player.stampingPower);
+        player.rigid.velocity = new Vector2(0,  -player.stampingPower);
     }
 
     public override void Update(Player player)
     {
     }
-    
-    public override void Exit(Player player) {}
+
+    public override void Exit(Player player)
+    {
+        player.StampAttack();
+    }
 }
 
 public class Dash : PlayerState
@@ -268,7 +302,10 @@ public class Dash : PlayerState
 
     public override void Exit(Player player)
     {
-        player.ghost.makeGhost = false;
+        if (!player.isRage)
+        {
+            player.ghost.makeGhost = false;
+        }
         player.anim.SetBool("isDashing", false);
         player.anim.SetBool("canMove", true);
         player.isDashing = false;
@@ -291,7 +328,7 @@ public class Parry : PlayerState
         player.rigid.velocity = new Vector2(0, 0);
         player.StartCoroutine("ParryingStart");
     }
-    
+
     public override void Update(Player player) {}
     
     public override void Exit(Player player) {}
@@ -380,9 +417,8 @@ public class Dead : PlayerState
 
     public override void Enter(Player player)
     {
+        player.controlAble = false;
         player.anim.SetTrigger("isDead");
-        player.rigid.velocity = new Vector2(0, player.rigid.velocity.y);
-        player.rigid.constraints = RigidbodyConstraints2D.FreezeAll;
     }
     
     public override void Update(Player player) {}

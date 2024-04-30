@@ -77,7 +77,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0
-    functionName: TirggerReset
+    functionName: TriggerReset
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

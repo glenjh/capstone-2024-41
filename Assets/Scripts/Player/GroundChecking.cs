@@ -33,7 +33,7 @@ public class GroundChecking : MonoBehaviour
             layerMask
         );
 
-        // Draw the ray
+        ///////////////////////////////////////////// Draw the ray
         
         // Vector2 halfSize = rayBoxSize * 0.5f;
         // Vector2 topLeft = raycastOrigin + new Vector2(-halfSize.x, halfSize.y);
@@ -61,18 +61,6 @@ public class GroundChecking : MonoBehaviour
             _player.anim.SetBool("isFalling", false);
             _player.anim.SetBool("isJumping", false);
             _player.anim.SetBool("wallSliding", false);
-        }
-    }
-
-    public void OnTriggerStay2D(Collider2D col)
-    {
-        if (col.gameObject.CompareTag("Ground"))
-        {
-            if (_player.PS == PlayerStates.STAMPING)
-            {
-                _player.StampAttack();
-            }
-            // _player.Idle();
         }
     }
 }

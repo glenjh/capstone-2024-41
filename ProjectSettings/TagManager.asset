@@ -11,6 +11,7 @@ TagManager:
   - NarrationObject
   - EnemyBullet
   - Door
+  - HoverGround
   layers:
   - Default
   - TransparentFX
@@ -47,4 +48,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: CameraSortingLayer
+    uniqueID: 2457692467
     locked: 0

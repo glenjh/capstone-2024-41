@@ -7,15 +7,26 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance = null;
     public Player _player;
-    public TextMeshProUGUI playerHealthText;
 
     public GameObject qSkillImage;
+    
+    public void Start()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(instance);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
     void LateUpdate()
     {
-        playerHealthText.text = _player.life + " / " + _player.maxLife;
-
         if (_player.pulseUnlocked)
         {
             qSkillImage.SetActive(true);
