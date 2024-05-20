@@ -11,7 +11,7 @@ public class Parrying : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Enemy"))
         {
-            var effect = ObjectPoolManager.instance.GetObject("Parrying_Effect");
+            var effect = PoolManager.Instance.GetFromPool<Effects>("Parrying_Effect");
             effect.transform.localScale = _player.transform.localScale;
             effect.transform.position = col.transform.position;
             StartCoroutine(ParryingSys(1.0f));
@@ -22,6 +22,7 @@ public class Parrying : MonoBehaviour
     public IEnumerator ParryingSys(float time)
     {
         CameraManager.instance.CamShake();
+        _player.shockWave.CallShockWave(_player.transform.position);
         _player.isHit = true;
         
         yield return new WaitForSeconds(time);

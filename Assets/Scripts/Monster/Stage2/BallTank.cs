@@ -11,11 +11,12 @@ public class BallTank : Monster {
     // Start is called before the first frame update
     public override void Start()
     {
-        Init();
+        //Init();
     }
     
-    public override void Init()
+    public override void Init(string name)
     {
+        base.Init(name);
         health = maxHealth;
         StateMachine.SetState(MonStateType.Idle);
     }
@@ -25,7 +26,6 @@ public class BallTank : Monster {
 
     // Update is called once per frame
     public override void FixedUpdate() {
-        base.FixedUpdate();
         if (StateMachine.currentState.StateType == MonStateType.Die)
             return;
         //공격 범위 내로 플레이어가 들어오면 공격

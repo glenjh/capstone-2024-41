@@ -24,12 +24,13 @@ public class Ghost : MonoBehaviour
             }
             else
             {
-                GameObject currGhost = Instantiate(ghost, transform.position, transform.rotation);
-                Sprite currSprite = GetComponent<SpriteRenderer>().sprite;
+                var currGhost = PoolManager.Instance.GetFromPool<Effects>("Ghost");
+                currGhost.transform.position = this.transform.position;
                 currGhost.transform.localScale = this.transform.localScale;
+                
+                Sprite currSprite = GetComponent<SpriteRenderer>().sprite;
                 currGhost.GetComponent<SpriteRenderer>().sprite = currSprite;
                 ghostDelay = ghostDelaySeconds;
-                Destroy(currGhost, 1f);
             }
         }
     }

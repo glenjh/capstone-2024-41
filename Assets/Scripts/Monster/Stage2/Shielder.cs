@@ -6,6 +6,8 @@ public class Shielder : Monster {
     //근접공격 범위
     public float meleeRange;
     private static readonly int ChoiseAttack = Animator.StringToHash("choiceAttack");
+    public GameObject bullet;
+    public float bulletSpeed;
 
     public override void Awake()
     {
@@ -15,11 +17,13 @@ public class Shielder : Monster {
     // Start is called before the first frame update
     public override void Start()
     {
-        Init();
+        //Init();
     }
     
-    public override void Init()
+    public override void Init(string name)
     {
+        base.Init(name);
+    
         health = maxHealth;
         StateMachine.SetState(MonStateType.Idle);
     }
@@ -28,15 +32,18 @@ public class Shielder : Monster {
         base.FixedUpdate();
         if (StateMachine.currentState.StateType == MonStateType.Die)
             return;
-        DecideAttack();
     }
 
-    private void DecideAttack()
+    public override bool DecideAttack()
     {
+        if (!attackable)
+            return false;
         //공격 범위 내로 플레이어가 들어오면 공격
         RaycastHit2D rayRange = Physics2D.Raycast(rb.position + Vector2.down, (moveSpeed >0 ? Vector3.right: Vector3.left), attackRange, LayerMask.GetMask("Player"));
         if (rayRange.collider != null && StateMachine.currentState.StateType != MonStateType.Attack)
         {
+            if (bullet.activeSelf)
+                return false;
             //meleeRange 내로 플레이어가 들어오면 근접공격
             RaycastHit2D rayMelee = Physics2D.Raycast(rb.position + Vector2.down, (moveSpeed >0 ? Vector3.right: Vector3.left),
                 meleeRange, LayerMask.GetMask("Player"));
@@ -50,6 +57,18 @@ public class Shielder : Monster {
             }
 
             StateMachine.SetState(MonStateType.Attack);
+            return true;
         }
+
+        return false;
+    }
+
+    public void Fire()
+    {
+        // 총알을 생성하고 발사할 방향 설정
+        bullet.SetActive(true);
+        Vector3 bulletDirection = ((player.position+Vector3.up/2) - transform.position).normalized;
+        bullet.transform.position = transform.position;
+        bullet.GetComponent<Bullet>().Fire(bulletDirection, bulletSpeed);
     }
 }

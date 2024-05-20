@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 public enum BossStateType
@@ -117,6 +116,7 @@ public class BossStateMove :IBossState
     BossStateType _stateType;
     bool _dirRight = true;
     public BossStateType StateType => _stateType;
+    private bool haveTurn = false;
     //생성자
     public BossStateMove()
     {
@@ -125,25 +125,40 @@ public class BossStateMove :IBossState
     
     public void Enter(Boss boss)
     {
-        boss.animator.SetBool("isMove", true);   
+        boss.animator.SetBool("isMove", true);
+        _dirRight = boss.transform.localScale.x > 0;
+        foreach (var parm in boss.animator.parameters)
+        {
+            if (parm.name == "DoTurn")
+            {
+                haveTurn = true;
+                break;
+            }
+        }
     }
     
     public void Action(Boss boss)
     {
         // 플레이어와 보스의 위치 비교하여 방향 설정
-        bool isPlayerOnRight = boss.player.position.x < boss.transform.position.x;
+        bool isPlayerOnRight = boss.player.position.x > boss.transform.position.x;
 
         // 플레이어의 방향과 보스의 현재 방향이 다를 때만 방향 전환 처리
         if (_dirRight != isPlayerOnRight)
         {
             _dirRight = isPlayerOnRight;
-            boss.transform.localScale = new Vector3(-boss.transform.localScale.x, boss.transform.localScale.y, boss.transform.localScale.z);
-            boss.animator.SetTrigger("DoTurn");
-            boss.moveSpeed *= -1;
-            boss.rb.velocity = new Vector2(boss.moveSpeed, boss.rb.velocity.y);
+            boss.transform.localScale = new Vector3(-1*boss.transform.localScale.x, boss.transform.localScale.y, boss.transform.localScale.z);
+            if(haveTurn == true)
+                boss.animator.SetTrigger("DoTurn");
         }
 
-        boss.rb.velocity = new Vector2(boss.moveSpeed, boss.rb.velocity.y);
+        if (boss.minAttackRange == 0 || Mathf.Abs(boss.player.position.x - boss.transform.position.x) < boss.minAttackRange)
+        {
+            boss.rb.velocity = new Vector2(0, boss.rb.velocity.y);
+            boss.StateMachine.SetState(BossStateType.Attack);
+            return;
+        }
+
+        boss.rb.velocity = new Vector2(_dirRight ? boss.moveSpeed : -boss.moveSpeed, boss.rb.velocity.y);
     }
     
     public void Exit(Boss boss)
@@ -162,7 +177,7 @@ public class BossStateAttack : IBossState
     public void Enter(Boss boss)
     {
         boss.rb.velocity = Vector3.zero;
-        boss.animator.SetBool("isAttack", true);
+        boss.animator.SetTrigger("DoAttack");
         boss.OnAttack();
     }
     
@@ -174,7 +189,6 @@ public class BossStateAttack : IBossState
     public void Exit(Boss boss)
     {
         // 상태가 종료될 때 동작 구현
-        boss.animator.SetBool("isAttack", false);
         boss.attackCollider.enabled = false;
     }
 }
@@ -190,8 +204,10 @@ public class BossStateDead : IBossState
 
     public void Enter(Boss boss)
     {
-        boss.animator.SetTrigger("DoDie");
+        // boss.animator.SetTrigger("DoDie");
         boss.attackCollider.enabled = false;
+        boss.dieTimeLine.Play();
+        boss.Dead();
     }
 
     public void Action(Boss boss)

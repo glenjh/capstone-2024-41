@@ -10,6 +10,7 @@ public class AncientBoss : Boss
     [SerializeField] private GameObject _rangeAttack;
     [SerializeField] private GameObject _arms;
     [SerializeField] private GameObject _body;
+    public Action attackAction;
     
     bool isBuffed = false;
     
@@ -19,6 +20,8 @@ public class AncientBoss : Boss
     protected override void Start()
     {
         base.Start();
+        
+        StateMachine.SetState(BossStateType.Sleep);
 
         // 각 델리게이트에 메서드 연결
         attackActions.Add(MeleeAttack);
@@ -28,13 +31,13 @@ public class AncientBoss : Boss
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        if(Input.GetKeyDown(KeyCode.T))
+        if(Input.GetKeyDown(KeyCode.M))
             WakeUp();
     }
 
     public override void OnAttack()
     {
-        var playerDistance = Vector2.Distance(transform.position, player.transform.position);
+        var m = Vector2.Distance(transform.position, player.transform.position);
         
         //리스트내에 있는 함수를 임의로 실행
         attackActions[UnityEngine.Random.Range(0, attackActions.Count)]();
@@ -105,6 +108,7 @@ public class AncientBoss : Boss
     
     public void OnSpinAttack()
     {
+        print("SpinAttack");
         _arms.SetActive(true);
         _arms.transform.position = this.transform.position;
         _body.SetActive(true);
@@ -130,12 +134,26 @@ public class AncientBoss : Boss
             yield return null;
         }
     }
-    
+
+    public override void OffAttack()
+    {
+        base.OffAttack();
+        OffSpinAttack();
+    }
+
     public void OffSpinAttack()
     {
         _arms.SetActive(false);
         _body.SetActive(false);
+        animator.SetBool("isDead",true);
         isSuperArmor = false;
         spriteRenderer.color = new Color(1f, 0.6f, 0.4f);
+    }
+    
+    public override void Dead()
+    {
+        OffAttack();
+        //attackAction();
+        base.Dead();
     }
 }

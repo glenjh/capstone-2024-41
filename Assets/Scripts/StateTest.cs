@@ -17,7 +17,12 @@ public class StateTest : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            // DataManager.instance.storyData.additionalStates[0] = true;
+            player._playerData.additionalStates[0] = true;
             player._stateMachine.AddState(PlayerStates.PARRYING);
+            
+            // DataManager.instance.storyData.additionalStates[1] = true;
+            player._playerData.additionalStates[1] = true;
             player._stateMachine.AddState(PlayerStates.WALLSLIDING);
             player._stateMachine.AddState(PlayerStates.WALLJUMPING);
             

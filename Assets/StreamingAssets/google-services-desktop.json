@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1021251790351",
+    "project_id": "database-8393b",
+    "storage_bucket": "database-8393b.appspot.com",
+    "firebase_url": "https://database-8393b-default-rtdb.firebaseio.com/"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021251790351:android:193e4e2e76a988cfcfa57a",
+        "android_client_info": {
+          "package_name": "com.simpleneeds.database"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpNNzCLcPB5obYW1nty5axfQlF865gPFY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

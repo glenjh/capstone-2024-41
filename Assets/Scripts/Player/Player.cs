@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.VFX;
 
 public enum PlayerStates
 {
@@ -26,6 +27,8 @@ public enum PlayerStates
 public class Player : MonoBehaviour, IDamageAble
 {
     [Header("Player Setting")] 
+    public static Player player;
+    public PlayerUI ui;
     public BoxCollider2D playerCol;
     public Rigidbody2D rigid;
     public PlayerStates PS;
@@ -40,6 +43,7 @@ public class Player : MonoBehaviour, IDamageAble
     public bool controlAble = true;
     public HitPauser _pauser;
     public ChangePostProcess sceneEffector;
+    public PlayerData _playerData;
 
     public bool isHit;
     public float normalGravity = 1f;
@@ -51,8 +55,9 @@ public class Player : MonoBehaviour, IDamageAble
     [Header("Player Move")] 
     public float moveSpeed = 7f;
     public Vector2 move;
-    
-    [Header ("Jump")]
+
+    [Header("Jump")] 
+    public bool groundCheckAble = true;
     public float jumpForce = 7;
     public float coyoteTime = 0.2f;
     public float coyoteTimeCounter;
@@ -74,7 +79,7 @@ public class Player : MonoBehaviour, IDamageAble
     public Transform stampPos;
     public Vector2 stampBoxSize;
 
-    [Header("Pulse Attack")] 
+    [Header("Q Skill")] 
     public GameObject pulseEffect;
     public Transform pulseEffectPos;
     public bool pulseAttackAble = true;
@@ -82,6 +87,23 @@ public class Player : MonoBehaviour, IDamageAble
     public bool pulseUnlocked = false;
     public float pulseAttackCoolDown = 1f;
     private float pulseAttackTime = 0.5f;
+
+    [Header("W Skill")] 
+    public bool wUnlocked = false;
+    public bool wAble = true;
+    public float wCoolTime = 5f;
+
+    [Header("E Skill")] 
+    public GameObject projectile;
+    public Transform firePos;
+    public bool eUnlocked = false;
+    public bool eAble = true;
+    public float eCoolTime = 10f;
+
+    [Header("R Skill")] 
+    public bool rUnlocked = false;
+    public bool rAble = true;
+    public float rCoolTime = 15f;
     
     [Header ("Dash")]
     public GameObject dashEffect;
@@ -99,7 +121,7 @@ public class Player : MonoBehaviour, IDamageAble
     private float parryingTime = 3f;
     private float parryingCoolDown = 1f;
 
-    [Header("Layer Ignore")] 
+    [Header("Layer")] 
     public GameObject hoverGround;
 
     [Header("Player Hit")] 
@@ -124,17 +146,23 @@ public class Player : MonoBehaviour, IDamageAble
     public float currCharge = 0;
     public float rageSpeed = 8.5f;
 
+    [Header("VFX")] 
+    public VisualEffect vfxRenderer;
+
     CinemachineImpulseSource impulseSource;
-    [SerializeField]ShockWave shockWave;
+    [SerializeField]BezierMissileShooter missileShooter;
+    [SerializeField] public ShockWave shockWave;
 
     void Init()
     {
+        player = this;
         playerCol = GetComponent<BoxCollider2D>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         playerFeet = GetComponent<GameObject>();
         sprite = GetComponent<SpriteRenderer>();
+        missileShooter = GetComponent<BezierMissileShooter>();
         
         _stateMachine = new PlayerStateMachine(PlayerStates.IDLE, this);
         _stateMachine.AddState(PlayerStates.MOVE);
@@ -146,15 +174,51 @@ public class Player : MonoBehaviour, IDamageAble
         _stateMachine.AddState(PlayerStates.DASH);
         _stateMachine.AddState(PlayerStates.DEAD);
         
-        _stateMachine.AddState(PlayerStates.WALLSLIDING);
-        _stateMachine.AddState(PlayerStates.WALLJUMPING);
-        
         isHit = false;
     }
 
     void Start()
     {
         Init();
+        SetPlayerData();
+    }
+
+    void SetPlayerData()
+    {
+        if (DataManager.instance.currMode == GameMode.StoryMode)
+        {
+            _playerData = DataManager.instance.storyData;
+        }
+        else if (DataManager.instance.currMode == GameMode.BossRushMode)
+        {
+            _playerData = DataManager.instance.rushData;
+        }
+        
+        ApplyData();
+    }
+
+    void ApplyData()
+    {
+        if (_playerData.additionalStates[0])
+        {
+            _stateMachine.AddState(PlayerStates.WALLSLIDING);
+            _stateMachine.AddState(PlayerStates.WALLJUMPING);
+        }
+
+        if (_playerData.additionalStates[1])
+        {
+            _stateMachine.AddState(PlayerStates.PARRYING);
+        }
+
+        _playerData.currStage = MySceneManager.instance.GetCurrentScene();
+        life = _playerData.life;
+        currCharge = _playerData.charge;
+        MySceneManager.instance.timer = _playerData.playTime;
+
+        pulseUnlocked = _playerData.skillUnlock[0];
+        wUnlocked = _playerData.skillUnlock[1];
+        eUnlocked = _playerData.skillUnlock[2];
+        rUnlocked = _playerData.skillUnlock[3];
     }
 
      void OnEnable()
@@ -171,57 +235,118 @@ public class Player : MonoBehaviour, IDamageAble
      {
          switch (bossType)
          {
-             case "Dummy":
+             case "AncientBoss":
                  pulseUnlocked = true;
+                 _playerData.skillUnlock[0] = true;
+                 break;
+             
+             case "TheWidow":
+                 wUnlocked = true;
+                 _playerData.skillUnlock[1] = true;
+                 break;
+             
+             case "ShadowOfStorms":
+                 eUnlocked = true;
+                 _playerData.skillUnlock[2] = true;
+                 break;
+             
+             case "HeartHolder":
+                 rUnlocked = true;
+                 _playerData.skillUnlock[3] = true;
                  break;
          }
      }
 
-     public void UsePulseAttack()
+     public void UseSkills()
      {
-         if (!pulseUnlocked)
-             return;
-         if (Input.GetKeyDown(KeyCode.Q))
+         if (Input.GetKeyDown(KeyCode.Q) && pulseUnlocked && pulseAttackAble)
          {
-             if (pulseAttackAble)
-             {
-                 StartCoroutine("PulseAttack");
-             }
+             StartCoroutine("PulseAttack");
+             StartCoroutine(ui.SkillDown(ui.qImage, 1.5f));
+         }
+         
+         if (Input.GetKeyDown(KeyCode.W) && wUnlocked && wAble)
+         {
+             StartCoroutine("UseW");
+             StartCoroutine(ui.SkillDown(ui.wImage, wCoolTime));
+         }
+
+         if (Input.GetKeyDown(KeyCode.E) && eUnlocked && eAble)
+         {
+             StartCoroutine("UseE");
+             StartCoroutine(ui.SkillDown(ui.eImage, eCoolTime));
+         }
+         
+         if (Input.GetKeyDown(KeyCode.R) && rUnlocked && rAble && currCharge == maxCharge)
+         {
+             StartCoroutine(ChargeDown());
+             sceneEffector.RageMode();
+             StartCoroutine(ui.SkillDown(ui.rImage, rCoolTime));
          }
      }
      
      public IEnumerator PulseAttack()
      {
-        
-         GameObject newPulseEffect = Instantiate(pulseEffect, pulseEffectPos.position, Quaternion.identity);
-         newPulseEffect.transform.localScale = transform.localScale * 7f;
+         var pulse = PoolManager.Instance.GetFromPool<Effects>("Pulse Effect");
+         pulse.transform.position = pulseEffectPos.position;
+         pulse.transform.localScale = transform.localScale * 1.1f;
 
          isPulseAttacking = true;
          pulseAttackAble = false;
          rigid.velocity = new Vector2(0, 0);
          yield return new WaitForSecondsRealtime(pulseAttackTime);
         
+         
          isPulseAttacking = false;
          yield return new WaitForSecondsRealtime(pulseAttackCoolDown);
 
          pulseAttackAble = true;
      }
 
+     public IEnumerator UseW()
+     {
+         wAble = false;
+         
+         missileShooter.Fire();
+         yield return new WaitForSecondsRealtime(wCoolTime);
+
+         wAble = true;
+     }
+
+     public IEnumerator UseE()
+     {
+         eAble = false;
+         
+         var bullet = Instantiate(projectile, firePos.position, firePos.rotation);
+         bullet.GetComponent<Rigidbody2D>().AddForce(firePos.right * transform.localScale.x * 15f, ForceMode2D.Impulse);
+         
+         yield return new WaitForSecondsRealtime(eCoolTime);
+
+         eAble = true;
+     }
+
     void Update()
     {
-        ZoomTest();
-        
-        UsePulseAttack();
+        FallingAnim();
+        if (GameManager.instance.isPaused || PS == PlayerStates.DEAD || !controlAble)
+        {
+            return;
+        }
+
+        if (vfxRenderer != null)
+        {
+            vfxRenderer.SetVector3("ColliderPos", transform.position);
+        }
         
         JumpBufferCount();
         CoyoteCount();
         
-        FallingAnim();
 
-        if (PS == PlayerStates.DEAD || !controlAble)
-        {
-            return;
-        }
+        // if (!controlAble)
+        // {
+        //     return;
+        // }
+        UseSkills();
         
         _stateMachine.Action();
         
@@ -231,22 +356,43 @@ public class Player : MonoBehaviour, IDamageAble
 
         Debug.DrawRay(wallChk.position, Vector2.right * transform.localScale.x * wallChkDistance, Color.cyan);
         Debug.DrawRay(transform.position, Vector2.right * -transform.localScale.x * len, Color.yellow);
-    }
 
-    void ZoomTest()
-    {
-        if(Input.GetKeyDown(KeyCode.R))
-            CameraManager.instance.ChangeZoom(2f);
-        if(Input.GetKeyDown(KeyCode.T))
-            CameraManager.instance.ChangeZoom(-2f);
-        
-        if (Input.GetKeyDown(KeyCode.P))
-            if (currCharge == maxCharge)
-            {
-                StartCoroutine(ChargeDown());
-                sceneEffector.RageMode();
-            }
-        
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            MySceneManager.instance.ChangeScene("Stage 0");
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            MySceneManager.instance.ChangeScene("Stage 1");
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            MySceneManager.instance.ChangeScene("Stage 2");
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            MySceneManager.instance.ChangeScene("Stage 3");
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            MySceneManager.instance.ChangeScene("Stage 4");
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            MySceneManager.instance.ChangeScene("Rush 1");
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            MySceneManager.instance.ChangeScene("Rush 2");
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            MySceneManager.instance.ChangeScene("Rush 3");
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            MySceneManager.instance.ChangeScene("Rush 4");
+        }
     }
 
     public void SetWallsliding()
@@ -302,7 +448,7 @@ public class Player : MonoBehaviour, IDamageAble
         {
             Invoke("MoveLock", 0.3f);
             rigid.velocity = new Vector2(-transform.localScale.x * wallJumpPower * 0.7f, wallJumpPower);
-            transform.localScale = new Vector2(-Mathf.Sign(transform.localScale.x), 1);
+            transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x), 1, transform.localScale.z);
         }
     }
 
@@ -360,17 +506,29 @@ public class Player : MonoBehaviour, IDamageAble
     {
         if (life > 0 && !isHit)
         {
-            GameObject newHitEffect = Instantiate(hitEffect, hitEffectPos.position, Quaternion.identity);
+            isHit = true;
+            var newHitEffect = PoolManager.Instance.GetFromPool<Effects>("Hit Effect");
+            newHitEffect.transform.position = hitEffectPos.position;
             newHitEffect.transform.localScale = transform.localScale;
-            anim.SetTrigger("doDamage");
-            life--;
-            CameraManager.instance.CamShake();
-            sceneEffector.ChromaticScreen();
-            sceneEffector.VignetteScreen();
-            sceneEffector.GlitchScreen();
-            StartCoroutine(Freeze(0.35f));
+            
+            // anim.SetTrigger("doDamage");
             StartCoroutine(OnDamage(1f));
-            _pauser.HitStop(0.2f); 
+            
+            if(other.position.x < transform.position.x)
+            {
+                rigid.AddForce(new Vector2(6f, 6f), ForceMode2D.Impulse);
+            }
+            else
+            {
+                rigid.AddForce(new Vector2(-6f, 6f), ForceMode2D.Impulse);
+            }
+            
+            life--;
+            _playerData.life = life;
+            CameraManager.instance.CamShake();
+            sceneEffector.HitEffect();
+            _pauser.HitStop(0.2f);
+
         }
         
         if(life <= 0)
@@ -384,21 +542,12 @@ public class Player : MonoBehaviour, IDamageAble
     public IEnumerator OnDamage(float invincibleTime)
     {
         sprite.color = new Color(1, 1, 1, 0.9f);
-        isHit = true;
+        // isHit = true;
         
         yield return new WaitForSecondsRealtime(invincibleTime);
         
         sprite.color = new Color(1, 1, 1, 1);
         isHit = false;
-    }
-
-    public IEnumerator Freeze(float duration)
-    {
-        anim.SetBool("canMove", false);
-        
-        yield return new WaitForSecondsRealtime(duration);
-        
-        anim.SetBool("canMove", true);
     }
 
     public void Idle()
@@ -433,6 +582,7 @@ public class Player : MonoBehaviour, IDamageAble
                 else
                 {
                     currCharge -= 20;
+                    _playerData.charge = currCharge;
                     _stateMachine.ChangeState(PlayerStates.SLASHATTACK);
                 }
             }
@@ -464,7 +614,7 @@ public class Player : MonoBehaviour, IDamageAble
         {
             if (hits[i].collider.gameObject.CompareTag("Enemy") || hits[i].collider.gameObject.CompareTag("Boss"))
             {
-                hits[i].collider.gameObject.GetComponent<IDamageAble>()?.TakeHit(1, null);
+                hits[i].collider.gameObject.GetComponent<IDamageAble>()?.TakeHit(3, this.transform);
             }
         }
         shockWave.CallShockWave(transform.position);
@@ -481,6 +631,7 @@ public class Player : MonoBehaviour, IDamageAble
     public void Charge()
     {
         currCharge += 5;
+        _playerData.charge = currCharge;
         if (currCharge > maxCharge)
         {
             currCharge = maxCharge;
@@ -546,7 +697,7 @@ public class Player : MonoBehaviour, IDamageAble
             rigid.velocity = new Vector2(move.x, rigid.velocity.y);
             if (rigid.velocity.x != 0)
             {
-                transform.localScale = new Vector2(Math.Sign(rigid.velocity.x), 1);
+                transform.localScale = new Vector3(Math.Sign(rigid.velocity.x), 1, transform.localScale.z);
             }
         }
     }
@@ -583,10 +734,14 @@ public class Player : MonoBehaviour, IDamageAble
             _stateMachine.ChangeState(PlayerStates.JUMP);
         }
     }
-    
-    public void ReturnJump()
+
+    public IEnumerator GroundChecking()
     {
-        _stateMachine.ChangeState(PlayerStates.JUMP);
+        groundCheckAble = false;
+        
+        yield return new WaitForSecondsRealtime(0.1f);
+        
+        groundCheckAble = true;
     }
 
     public void Stamp()
@@ -600,18 +755,18 @@ public class Player : MonoBehaviour, IDamageAble
     public void StampAttack()
     {
         Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(stampPos.position, stampBoxSize, 0);
-        CameraManager.instance.CamShake();
         foreach (Collider2D collider in collider2Ds)
         {
             if (collider.gameObject.tag == "Ground" || collider.gameObject.tag == "HoverGround")
             {
-                GameObject newStampEffect = Instantiate(stampEffect, stampEffectPos.position, Quaternion.identity);
-                newStampEffect.transform.localScale = transform.localScale * 0.3f;
+                var stampEffect = PoolManager.Instance.GetFromPool<Effects>("Stamp Effect");
+                stampEffect.transform.position = stampEffectPos.position;
+                CameraManager.instance.CamShake();
             }
             
             if (collider.gameObject.tag == "Enemy" && isGround && PS == PlayerStates.STAMPING)
             {
-                collider.GetComponent<IDamageAble>()?.TakeHit(1,null);
+                collider.GetComponent<IDamageAble>()?.TakeHit(1,this.transform);
             }
         }
     }
@@ -632,7 +787,8 @@ public class Player : MonoBehaviour, IDamageAble
     
     public IEnumerator Dash()
     {
-        GameObject newDashEffect = Instantiate(dashEffect, dashEffectPos.position, Quaternion.identity);
+        var newDashEffect = PoolManager.Instance.GetFromPool<Effects>("Dash Effect");
+        newDashEffect.transform.position = dashEffectPos.position;
         newDashEffect.transform.localScale = transform.localScale * 0.5f;
         
         canDash = false;
@@ -640,7 +796,11 @@ public class Player : MonoBehaviour, IDamageAble
         rigid.velocity = new Vector2(transform.localScale.x * dashSpeed, 0);
         isHit = true;
         yield return new WaitForSecondsRealtime(dashingTime);
-        _stateMachine.ChangeState(PlayerStates.IDLE);
+        // 대쉬 도중에 바로 벽타기로 넘어가는 경우 오류 방지를 위함
+        if (_stateMachine.GetCurrState().stateType != PlayerStates.WALLSLIDING)
+        {
+            _stateMachine.ChangeState(PlayerStates.IDLE);
+        }
         
         isHit = false;
         rigid.gravityScale = normalGravity;
@@ -674,7 +834,6 @@ public class Player : MonoBehaviour, IDamageAble
     public void ParryingSuccess()
     {
         StopCoroutine("ParryingStart");
-        shockWave.CallShockWave(transform.position);
         anim.SetBool("isParrying", false);
         anim.SetBool("canMove", true);
         parryingCol.enabled = false;
@@ -690,13 +849,17 @@ public class Player : MonoBehaviour, IDamageAble
         canParrying = true;
     }
     
-    public void OnTriggerStay2D(Collider2D col)
+    public void OnTriggerEnter2D(Collider2D col)
     {
+        if (GameManager.instance.isPaused || !controlAble)
+        {
+            return;
+        }
+        
         if (col.gameObject.CompareTag("Enemy") || col.gameObject.CompareTag("Boss"))
         {
             if (isHit||isParrying) return;
-            CameraManager.instance.CamShake();
-            TakeHit(1,null);
+            TakeHit(1,col.transform);
         }
     }
     
@@ -712,6 +875,21 @@ public class Player : MonoBehaviour, IDamageAble
 
     public void FlipControlSignal()
     {
-        transform.localScale = new Vector2(-transform.localScale.x, 1);
+        transform.localScale = new Vector3(-transform.localScale.x, 1, transform.localScale.z);
+    }
+
+    public void SpriteSignal()
+    {
+        sprite.enabled = !sprite.enabled;
+    }
+
+    public void TimeSlowSignal(float t)
+    {
+        Time.timeScale = t;
+    }
+    
+    public void TimeOriginSignal()
+    {
+        Time.timeScale = 1f;
     }
 }

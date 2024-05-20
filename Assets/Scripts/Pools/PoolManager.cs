@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -26,7 +27,7 @@ internal struct PoolData
     public Transform Container => _container;
 }
 
-public class PoolManager : MonoBehaviour
+public class PoolManager : MonoSingleton<PoolManager>
 {
     [SerializeField] private List<PoolData> _pools;
 
@@ -34,18 +35,20 @@ public class PoolManager : MonoBehaviour
 
     private void Awake()
     {
-        var genericPoolType = typeof(Pool<>);
+        var namesGroups = _pools.Select(p => p.Name).GroupBy(n => n).Where(g => g.Count() > 1);
 
+        var poolsType = typeof(List<IPool<Component>>);
+        var poolsAddMethod = poolsType.GetMethod("Add");
+        var genericPoolType = typeof(Pool<>);
+        
         foreach (var poolData in _pools)
         {
-            // var poolType = genericPoolType.MakeGenericType(poolData.Component.GetType());
-            // var createMethod = poolType.GetMethod("Create", BindingFlags.Static | BindingFlags.NonPublic);
-            
-            // var pool = createMethod.Invoke(null,
-            //     new object[] { poolData.Component, poolData.Count, poolData.Container });
-            
-            var pool = Pool<Component>.Create(poolData.Component, poolData.Count, poolData.Container);
-            _poolsObjects.Add(pool);
+            var poolType = genericPoolType.MakeGenericType(poolData.Component.GetType());
+            var createMethod = poolType.GetMethod("Create", BindingFlags.Static | BindingFlags.NonPublic);
+
+            var pool = createMethod.Invoke(null, new object[] { poolData.Component, poolData.Count, poolData.Container });
+
+            poolsAddMethod.Invoke(_poolsObjects, new object[] { pool });
         }
     }
 

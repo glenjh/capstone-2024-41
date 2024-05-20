@@ -1,0 +1,324 @@
+fileFormatVersion: 2
+guid: 22fc7963fa7c2394c8461e3a010ac695
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 20
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Shielder Fragments_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 276
+        width: 129
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 2.5, y: -9}
+        - {x: -1.5, y: -7}
+        - {x: -7.5, y: -15}
+        - {x: -6.5, y: -20}
+        - {x: -2.5, y: -23}
+        - {x: -0.5, y: -23}
+        - {x: 2.5, y: -17}
+        - {x: 3.5, y: -13}
+      tessellationDetail: 0
+      bones: []
+      spriteID: e275f9a5d398a32469dc89bd230f0923
+      internalID: -1398447977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shielder Fragments_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 230
+        width: 129
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -10.5, y: -13}
+        - {x: -14.5, y: -13}
+        - {x: -15.5, y: -14}
+        - {x: -14.5, y: -20}
+        - {x: -11.5, y: -23}
+        - {x: -9.5, y: -23}
+        - {x: -6.5, y: -20}
+        - {x: -6.5, y: -16}
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1e120fb0e8ff2546bce06b6b295a642
+      internalID: 1084414089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shielder Fragments_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 184
+        width: 129
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -11.5, y: -3}
+        - {x: -11.5, y: -8}
+        - {x: -12.5, y: -9}
+        - {x: -13.5, y: -12}
+        - {x: -8.5, y: -15}
+        - {x: -6.5, y: -15}
+        - {x: -0.5, y: -7}
+        - {x: -0.5, y: -3}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2227ac7c9a14a654d82bacc27abf61d2
+      internalID: 1318520341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shielder Fragments_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 138
+        width: 129
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 9.5, y: 0}
+        - {x: -2.5, y: -3}
+        - {x: -2.5, y: -8}
+        - {x: -1.5, y: -18}
+        - {x: -0.5, y: -18}
+        - {x: 13.5, y: -7}
+        - {x: 13.5, y: -3}
+        - {x: 12.5, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d1145cf72accf048916fb3f8999f2c6
+      internalID: 268560651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shielder Fragments_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 92
+        width: 129
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 11.5, y: -23}
+        - {x: 11.5, y: -19}
+        - {x: 10.5, y: -15}
+        - {x: 8.5, y: -12}
+        - {x: -0.5, y: -17}
+        - {x: -0.5, y: -23}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d6349121d8536a419d6a294ced7b9c3
+      internalID: -319294740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shielder Fragments_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 46
+        width: 129
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 12.5, y: -7}
+        - {x: 8.5, y: -11}
+        - {x: 11.5, y: -23}
+        - {x: 17.5, y: -23}
+        - {x: 14.5, y: -7}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 489ad451543afb14e9be3f623fde8202
+      internalID: 1111812020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shielder Fragments_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 129
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -10.5, y: -3}
+        - {x: -0.5, y: -3}
+        - {x: -0.5, y: 3}
+        - {x: -9.5, y: 3}
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad56f435abc3d8542ada2cd7ed0fb927
+      internalID: -509144068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Shielder Fragments_6: -509144068
+      Shielder Fragments_4: -319294740
+      Shielder Fragments_3: 268560651
+      Shielder Fragments_1: 1084414089
+      Shielder Fragments_2: 1318520341
+      Shielder Fragments_5: 1111812020
+      Shielder Fragments_0: -1398447977
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

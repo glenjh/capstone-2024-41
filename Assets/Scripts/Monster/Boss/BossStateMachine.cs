@@ -18,6 +18,7 @@ public class BossStateMachine
 
     public void SetState(BossStateType stateType)
     {
+        if(_boss.stateType==BossStateType.Dead) return;
         if (_boss.gameObject.activeSelf == false) return;
         if (currentState != null)
         {

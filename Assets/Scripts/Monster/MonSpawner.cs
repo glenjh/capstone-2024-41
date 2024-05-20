@@ -6,6 +6,7 @@ using UnityEngine;
 public class MonSpawner : MonoBehaviour {
     // 몬스터 타입
     public MonType monType;
+    public String monName;
     
     // 몬스터 수
     public int monCount = 0;
@@ -14,12 +15,13 @@ public class MonSpawner : MonoBehaviour {
     // 몬스터 스폰
     public void Spawn(Transform player)
     {
-        Monster monster = MonsterPool.GetObject(monType);
+        var monster = PoolManager.Instance.GetFromPool<Monster>(monName);
+        //Monster monster = MonsterPool.GetObject(monType);
         monster.transform.position = transform.position;
         monster.player = player;
-        monster.Init();
+        monster.Init(monName);
+        monster.OnDieCallBack = ReSpawn;
         
-        monster.transform.SetParent(transform);
         monCount++;
     }
     

@@ -1,0 +1,607 @@
+fileFormatVersion: 2
+guid: e04e53c482532f942b3b0c605a7da00b
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 8
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 3
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: TheWidowSuperRangeAttack_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 214
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.57}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1eaeedfa5cf90b42b443ff550a54c09
+      internalID: 1193824259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TheWidowSuperRangeAttack_1
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 0
+        width: 214
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.57}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05dd488744ae60b46b013c130a6640ad
+      internalID: 1554521834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TheWidowSuperRangeAttack_2
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 0
+        width: 214
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.57}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25ea4301a6829f642a77c2a15382b66e
+      internalID: 1734706511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TheWidowSuperRangeAttack_3
+      rect:
+        serializedVersion: 2
+        x: 642
+        y: 0
+        width: 214
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.57}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5584fdce53c31bf48b6defdb631c77a2
+      internalID: -984049910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TheWidowSuperRangeAttack_4
+      rect:
+        serializedVersion: 2
+        x: 856
+        y: 0
+        width: 214
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.57}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e09f570052e25484f8f37cb7930b2f0e
+      internalID: 1339228705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TheWidowSuperRangeAttack_5
+      rect:
+        serializedVersion: 2
+        x: 1070
+        y: 0
+        width: 214
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.57}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 074414f3ab9a452438171c3b75015526
+      internalID: 500359130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TheWidowSuperRangeAttack_6
+      rect:
+        serializedVersion: 2
+        x: 1284
+        y: 0
+        width: 214
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.57}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 433a04fd7122ec74eb39c5284744e3cc
+      internalID: 729208033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TheWidowSuperRangeAttack_7
+      rect:
+        serializedVersion: 2
+        x: 1498
+        y: 0
+        width: 214
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.57}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fada4b9198363c245b7a4f655b80096b
+      internalID: -1657572258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TheWidowSuperRangeAttack_8
+      rect:
+        serializedVersion: 2
+        x: 1712
+        y: 0
+        width: 214
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.57}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1dec97644d625174bba8dbd670f29ae0
+      internalID: -1012595279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TheWidowSuperRangeAttack_9
+      rect:
+        serializedVersion: 2
+        x: 1926
+        y: 0
+        width: 214
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.57}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de8fd18ab126c154ca25f51d5ab11c1f
+      internalID: -1948169301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TheWidowSuperRangeAttack_10
+      rect:
+        serializedVersion: 2
+        x: 2140
+        y: 0
+        width: 214
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.57}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 878262b07ed63174ca06906c13142345
+      internalID: -147992862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TheWidowSuperRangeAttack_11
+      rect:
+        serializedVersion: 2
+        x: 2354
+        y: 0
+        width: 214
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.57}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96027c0443a4248419c5b3a882fd18fe
+      internalID: 467314532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TheWidowSuperRangeAttack_12
+      rect:
+        serializedVersion: 2
+        x: 2568
+        y: 0
+        width: 214
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.57}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 649fc6bcef5f71d4ab7c06586b2fede5
+      internalID: 2072489780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TheWidowSuperRangeAttack_13
+      rect:
+        serializedVersion: 2
+        x: 2782
+        y: 0
+        width: 214
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.57}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6863e7fc01bca0a4ea64197e579e1c4d
+      internalID: -1416335683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TheWidowSuperRangeAttack_14
+      rect:
+        serializedVersion: 2
+        x: 2996
+        y: 0
+        width: 214
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.57}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8161f2ca02c2f441987cb93726f8a74
+      internalID: -835643134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TheWidowSuperRangeAttack_15
+      rect:
+        serializedVersion: 2
+        x: 3210
+        y: 0
+        width: 214
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.57}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 514c7a5be17227441a803961f8cc7e62
+      internalID: -171593867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TheWidowSuperRangeAttack_16
+      rect:
+        serializedVersion: 2
+        x: 3424
+        y: 0
+        width: 214
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.57}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a309f5c44bb0ae42afdb304cd665ebc
+      internalID: 1048210658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TheWidowSuperRangeAttack_17
+      rect:
+        serializedVersion: 2
+        x: 3638
+        y: 0
+        width: 214
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.57}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09f3f279f00208a43878b98aef328716
+      internalID: 614971246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TheWidowSuperRangeAttack_18
+      rect:
+        serializedVersion: 2
+        x: 3852
+        y: 0
+        width: 214
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.57}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71799dd98c9171c4f8c5e44fed6f7c8d
+      internalID: 1236005558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TheWidowSuperRangeAttack_19
+      rect:
+        serializedVersion: 2
+        x: 4066
+        y: 0
+        width: 214
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.57}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a363bc99bcb98f7469e2de1f203fb4eb
+      internalID: -740951595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TheWidowSuperRangeAttack_20
+      rect:
+        serializedVersion: 2
+        x: 4280
+        y: 0
+        width: 214
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.57}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da01a7c6aff95e44e83e33ed82d58159
+      internalID: -331258643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TheWidowSuperRangeAttack_21
+      rect:
+        serializedVersion: 2
+        x: 4494
+        y: 0
+        width: 214
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.57}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb20916b33a24ec4aa3aed511e5e242f
+      internalID: 537889439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      TheWidowSuperRangeAttack_4: 1339228705
+      TheWidowSuperRangeAttack_20: -331258643
+      TheWidowSuperRangeAttack_11: 467314532
+      TheWidowSuperRangeAttack_19: -740951595
+      TheWidowSuperRangeAttack_8: -1012595279
+      TheWidowSuperRangeAttack_16: 1048210658
+      TheWidowSuperRangeAttack_2: 1734706511
+      TheWidowSuperRangeAttack_1: 1554521834
+      TheWidowSuperRangeAttack_10: -147992862
+      TheWidowSuperRangeAttack_12: 2072489780
+      TheWidowSuperRangeAttack_17: 614971246
+      TheWidowSuperRangeAttack_3: -984049910
+      TheWidowSuperRangeAttack_18: 1236005558
+      TheWidowSuperRangeAttack_13: -1416335683
+      TheWidowSuperRangeAttack_9: -1948169301
+      TheWidowSuperRangeAttack_14: -835643134
+      TheWidowSuperRangeAttack_5: 500359130
+      TheWidowSuperRangeAttack_6: 729208033
+      TheWidowSuperRangeAttack_21: 537889439
+      TheWidowSuperRangeAttack_0: 1193824259
+      TheWidowSuperRangeAttack_7: -1657572258
+      TheWidowSuperRangeAttack_15: -171593867
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

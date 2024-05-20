@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 public interface IMonState {
@@ -39,7 +38,13 @@ public class MonStateIdle : IMonState
     }
     
     public void Action(Monster monster)
-    {
+    {        
+        if(monster.moveType != MoveType.Fly)
+        {
+            if(monster.DecideAttack())
+                return;
+        }
+        monster.DecideChase();
     }
     
     public void Exit(Monster monster)
@@ -68,17 +73,29 @@ public class MonStateMove :IMonState
     
     public void Action(Monster monster)
     {
+        if (monster.moveType == MoveType.Fly)
+        {
+            //x, y축 랜덤 이동
+            monster.rb.velocity = new Vector2(monster.moveSpeed*-1f, Random.Range(-1f, 1f));
+            monster.DecideChase();
+            return;
+        }
         // 다음 지형이 바닥인지 확인
         Vector2 frontVec = new Vector2(monster.rb.position.x + (monster.moveSpeed >0 ? 0.5f:-0.5f), monster.rb.position.y);
-        Debug.DrawRay(frontVec,Vector3.down, new Color(0, 1, 0));
-        RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down, monster.spriteRenderer.sprite.bounds.size.y/2+0.1f, LayerMask.GetMask("Ground"));
+        int layerMask = (1 << LayerMask.NameToLayer("Ground")) + (1 << LayerMask.NameToLayer("HoverGround"));
+        
+        RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down, monster.spriteRenderer.sprite.bounds.size.y/2+0.1f, layerMask);
         if (rayHit.collider == null)
         {
-            monster.moveSpeed *= -1;
-            monster.transform.localScale = new Vector3(-1 * monster.transform.localScale.x, monster.transform.localScale.y, monster.transform.localScale.z);
+            monster.Turn();
         }
         
         monster.rb.velocity = new Vector2(monster.moveSpeed, monster.rb.velocity.y);
+        if(monster.DecideAttack())
+        {
+            return;
+        }
+        monster.DecideChase();
     }
 
     //행동 결정 로직
@@ -88,8 +105,7 @@ public class MonStateMove :IMonState
         nextMove = Random.Range(0, 2);
         if (nextMove == 0)
         {
-            monster.moveSpeed *= -1;
-            monster.transform.localScale = new Vector3(-1 * monster.transform.localScale.x, monster.transform.localScale.y, monster.transform.localScale.z);
+            monster.Turn();
         }
     }
     
@@ -116,6 +132,7 @@ public class MonStateAttack : IMonState
         // 상태가 시작될 때 동작 구현
         monster.animator.SetBool("isAttack", true);
         monster.animator.SetTrigger("doAttack");
+        monster.rb.velocity = new Vector2(0, monster.rb.velocity.y);
     }
     
     public void Action(Monster monster)
@@ -126,6 +143,7 @@ public class MonStateAttack : IMonState
     public void Exit(Monster monster)
     {
         monster.animator.SetBool("isAttack", false);
+        monster.OnAttackDelay();
         // 상태가 종료될 때 동작 구현
     }
 }
@@ -141,7 +159,11 @@ public class MonStateDie : IMonState
     }
     public void Enter(Monster monster)
     {
-        monster.animator.SetTrigger("doDie");
+        //monster.animator.SetTrigger("doDie");
+        monster.spriteRenderer.color = new Color(1, 1, 1, 0.4f);
+        EffectSystem effect = PoolManager.Instance.GetFromPool<EffectSystem>("MonsterDeadEffect");
+        effect.transform.position = monster.transform.position;
+        monster.OnDieCallBack?.Invoke();
     }
     
     public void Action(Monster monster)
@@ -169,37 +191,75 @@ public class MonStateChase : IMonState
     {
         // 상태가 시작될 때 동작 구현
         monster.animator.SetBool("isMove", true);
+        if(monster.moveType == MoveType.Fly)
+        {
+            monster.moveSpeed*=2;
+        }
     }
     
     public void Action(Monster monster)
     {
         if(target == null)
             return;
+        float gap = target.position.x - monster.transform.position.x;
+        
         if (monster.moveType == MoveType.Fly)
         {
-            //target의 위치를 향해 날아감
-            monster.rb.velocity = new Vector2((target.position.x - monster.transform.position.x) * monster.moveSpeed,
-                (target.position.y - monster.transform.position.y) * monster.moveSpeed);
+            var dir = (target.position - monster.transform.position).normalized;
+            if (Mathf.Abs(gap) > 1f)
+            {
+                if (gap > 0 && monster.moveSpeed > 0)
+                {
+                    monster.Turn();
+                }
+                else if (gap < 0 && monster.moveSpeed < 0)
+                {
+                    monster.Turn();
+                }
+            }
+            monster.rb.velocity = dir * Mathf.Abs(monster.moveSpeed);
+            
+            if(!monster.DecideChase())
+                monster.StateMachine.SetState(MonStateType.Idle);
+            
             return;
         }
 
-        if (target.position.x < monster.transform.position.x && monster.moveSpeed > 0)
+        if (Mathf.Abs(gap) > monster.attackRange)
         {
-            monster.moveSpeed *= -1;
-            monster.transform.localScale = new Vector3(-1 * monster.transform.localScale.x, monster.transform.localScale.y, monster.transform.localScale.z);
+            if (gap > 0 && monster.moveSpeed < 0)
+            {
+                monster.Turn();
+            }
+            else if (gap < 0 && monster.moveSpeed > 0)
+            {
+                monster.Turn();
+            }
+            monster.rb.velocity = new Vector2(monster.moveSpeed, monster.rb.velocity.y);
         }
-        else if (target.position.x > monster.transform.position.x && monster.moveSpeed < 0)
+        else
         {
-            monster.moveSpeed *= -1;
-            monster.transform.localScale = new Vector3(-1 * monster.transform.localScale.x, monster.transform.localScale.y, monster.transform.localScale.z);
+            //monster.StateMachine.SetState(MonStateType.Idle);
+            monster.rb.velocity = new Vector2(0, monster.rb.velocity.y);
         }
-        
-        monster.rb.velocity = new Vector2(monster.moveSpeed, monster.rb.velocity.y);
+
+        if(monster.DecideAttack())
+        {
+            return;
+        }
+        if (!monster.DecideChase())
+        {
+            monster.StateMachine.SetState(MonStateType.Idle);
+        }
     }
     
     public void Exit(Monster monster)
     {
         // 상태가 종료될 때 동작 구현
         monster.animator.SetBool("isMove", false);
+        if(monster.moveType == MoveType.Fly)
+        {
+            monster.moveSpeed/=2;
+        }
     }
 }

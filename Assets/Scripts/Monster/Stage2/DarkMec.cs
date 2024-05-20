@@ -17,10 +17,14 @@ public class DarkMec : Monster {
         base.Start();
     }
     
-    public override void Init()
+    public override void Init(string name)
     {
+        monsterName = name;
+        //attackCollider.enabled = false;
         health = maxHealth;
         StateMachine.SetState(MonStateType.Idle);
+        attackable = true;
+        spriteRenderer.color = new Color(1, 1, 1, 1);
     }
 
     // Update is called once per frame
@@ -28,20 +32,20 @@ public class DarkMec : Monster {
         base.FixedUpdate();
         if (StateMachine.currentState.StateType == MonStateType.Die)
             return;
-        //공격 범위 내로 플레이어가 들어오면 공격
-        RaycastHit2D rayRange = Physics2D.Raycast(rb.position, (moveSpeed >0 ? Vector3.right: Vector3.left), attackRange, LayerMask.GetMask("Player"));
-        if (rayRange.collider != null && StateMachine.currentState.StateType != MonStateType.Attack)
-        {
-            if(bullet.gameObject.activeSelf == false)
-                StateMachine.SetState(MonStateType.Attack);
-        }
     }
 
     public override void TakeDamage(int damage)
     {
         base.TakeDamage(damage);
     }
-    
+
+    public override bool DecideAttack()
+    {
+        if (bullet.activeSelf)
+            return false;
+        return base.DecideAttack();
+    }
+
     public override void OnAttack()
     {
         bullet.gameObject.SetActive(true);

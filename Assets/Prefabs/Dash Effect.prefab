@@ -118,4 +118,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9af0d56aa669f41a68a6f368c1a11f80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectName: Dash Effect
   deleteTime: 0.317

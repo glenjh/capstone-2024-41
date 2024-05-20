@@ -17,7 +17,6 @@ public class LightingTrap : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Player") && !_player.isHit)
         {
-            Debug.Log("Hit");
             _player.TakeHit(1, null);
         }
     }
@@ -26,7 +25,6 @@ public class LightingTrap : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player")&& !_player.isHit)
         {
-            Debug.Log("Hit");
             _player.TakeHit(1, null);
         }
     }

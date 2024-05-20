@@ -1,0 +1,21 @@
+
+Dcsharpsquid:S3903"'Move 'GameMode' into a named namespace.(Ô‹Ë¯
+Kcsharpsquid:S3903")Move 'PlayerData' into a named namespace.(«‚Šûÿÿÿÿ
+Lcsharpsquid:S3903"*Move 'DataManager' into a named namespace.(ñ”•ûÿÿÿÿÿ
+fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(ë©¤øıÿÿÿÿ
+fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(š•¦²ÿÿÿÿÿ
+acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(÷–éö
+fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(ì©ëüÿÿÿÿ
+fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(ä€Æ³ùÿÿÿÿ
+acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(óÃ¤ş
+acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(š£Ş
+fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(ìªÌ°üÿÿÿÿ
+acsharpsquid:S1104 "DMake this field 'private' and encapsulate it in a 'public' property.(íàØ‡
+fcsharpsquid:S1104!"DMake this field 'private' and encapsulate it in a 'public' property.(Éşçôûÿÿÿÿ
+acsharpsquid:S1104""DMake this field 'private' and encapsulate it in a 'public' property.(˜´©‡
+fcsharpsquid:S1104#"DMake this field 'private' and encapsulate it in a 'public' property.(¢ì´˜ùÿÿÿÿ
+`csharpsquid:S1104$"DMake this field 'private' and encapsulate it in a 'public' property.(ò¼÷Q
+qcsharpsquid:S3604"TRemove the member initializer, all constructors set an initial value for the member.(÷–éö
+pcsharpsquid:S4144˜"MUpdate this method so that its implementation is not identical to 'InitData'.(ïÅº÷øÿÿÿÿ
+bcsharpsquid:S2223 "EChange the visibility of 'instance' or make it 'const' or 'readonly'.(íàØ‡
+wcsharpsquid:S2696+"UMake the enclosing instance method 'static' or remove this set on the 'static' field.(ñõîÙşÿÿÿÿ

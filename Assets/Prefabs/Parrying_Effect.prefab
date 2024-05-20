@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9112919808908778783}
   - component: {fileID: 3790997791747260306}
   - component: {fileID: 3717101565832050534}
-  - component: {fileID: -6261907342757782286}
+  - component: {fileID: 5571707968027545089}
   m_Layer: 0
   m_Name: Parrying_Effect
   m_TagString: Untagged
@@ -106,7 +106,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-6261907342757782286
+--- !u!114 &5571707968027545089
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,8 +115,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 892443715552827056}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf80a89461cd04f48ae220fdd2685967, type: 3}
+  m_Script: {fileID: 11500000, guid: 9af0d56aa669f41a68a6f368c1a11f80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToReturn: 0.15
   effectName: Parrying_Effect
+  deleteTime: 0.1

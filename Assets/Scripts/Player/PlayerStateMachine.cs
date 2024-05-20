@@ -17,7 +17,10 @@ public class PlayerStateMachine
 
     public void AddState(PlayerStates ps)
     {
-        states.Add(ps, StateManager.GetState(ps));
+        if (!states.ContainsKey(ps))
+        {
+            states.Add(ps, StateManager.GetState(ps));
+        }
     }
     
     public void ChangeState(PlayerStates ps)
@@ -52,50 +55,46 @@ public static class StateManager
 {
     public static PlayerState GetState(PlayerStates ps)
     {
-        if (ps != null)
+        switch (ps)
         {
-            switch (ps)
-            {
-                case PlayerStates.IDLE:
-                    return new Idle(ps);
-                
-                case PlayerStates.MOVE:
-                    return new Move(ps);
-                
-                case PlayerStates.JUMP:
-                    return new Jump(ps);
-                
-                case PlayerStates.ATTACK:
-                    return new Attack(ps);
-                
-                case PlayerStates.SLASHATTACK:
-                    return new SlashAttack(ps);
-                
-                case PlayerStates.JUMPATTACK:
-                    return new JumpAttack(ps);
+            case PlayerStates.IDLE:
+                return new Idle(ps);
+            
+            case PlayerStates.MOVE:
+                return new Move(ps);
+            
+            case PlayerStates.JUMP:
+                return new Jump(ps);
+            
+            case PlayerStates.ATTACK:
+                return new Attack(ps);
+            
+            case PlayerStates.SLASHATTACK:
+                return new SlashAttack(ps);
+            
+            case PlayerStates.JUMPATTACK:
+                return new JumpAttack(ps);
 
-                case PlayerStates.STAMPING:
-                    return new Stamping(ps);
-                
-                case PlayerStates.DASH:
-                    return new Dash(ps);
-                
-                case PlayerStates.PARRYING: // 추후에 픽업
-                    return new Parry(ps);
-                
-                case PlayerStates.WALLSLIDING: // 추후에 픽업
-                    return new Wallsliding(ps);
-                
-                case PlayerStates.WALLJUMPING:  // 추후에 픽업
-                    return new Walljumping(ps);
+            case PlayerStates.STAMPING:
+                return new Stamping(ps);
+            
+            case PlayerStates.DASH:
+                return new Dash(ps);
+            
+            case PlayerStates.PARRYING: // 추후에 픽업
+                return new Parry(ps);
+            
+            case PlayerStates.WALLSLIDING: // 추후에 픽업
+                return new Wallsliding(ps);
+            
+            case PlayerStates.WALLJUMPING:  // 추후에 픽업
+                return new Walljumping(ps);
 
-                case PlayerStates.DEAD:
-                    return new Dead(ps);
-                
-                default:
-                    return null;
-            }
+            case PlayerStates.DEAD:
+                return new Dead(ps);
+            
+            default:
+                return null;
         }
-        return null;
     }
 }

@@ -1,0 +1,141 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8346164725818362507
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8346164725818362505}
+  - component: {fileID: 8346164725818362506}
+  - component: {fileID: 8346164725818362504}
+  m_Layer: 0
+  m_Name: PoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8346164725818362505
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8346164725818362507}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8346164725818362506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8346164725818362507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa8ceee99b7a34e56a419dc2f52fb740, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolPerfabs:
+  - {fileID: 892443715552827056, guid: e54bb1d1c6b8a497cb9aaf9b0b9ef5c0, type: 3}
+  - {fileID: 892443715552827056, guid: e54bb1d1c6b8a497cb9aaf9b0b9ef5c0, type: 3}
+  - {fileID: 892443715552827056, guid: e54bb1d1c6b8a497cb9aaf9b0b9ef5c0, type: 3}
+  poolingCnt: 10
+--- !u!114 &8346164725818362504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8346164725818362507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac54a1a9fbd52d14f82f92226e53f096, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pools:
+  - _name: Mecha
+    _component: {fileID: 7788437064091679161, guid: eae0c570643a0d5478c28408942bf24a, type: 3}
+    _count: 5
+    _container: {fileID: 8346164725818362505}
+  - _name: DroidZapper
+    _component: {fileID: 5037272086281506390, guid: e95a789e6c6d99c489faf161f618c1e2, type: 3}
+    _count: 5
+    _container: {fileID: 8346164725818362505}
+  - _name: DroneZapper
+    _component: {fileID: 1207212245809347044, guid: c92367d5790cc114b82954572c7f703a, type: 3}
+    _count: 5
+    _container: {fileID: 8346164725818362505}
+  - _name: MonsterHitEffect
+    _component: {fileID: 7959713294495365635, guid: fc08afbe18ab62543a654ba3f1844c29, type: 3}
+    _count: 5
+    _container: {fileID: 8346164725818362505}
+  - _name: MonsterDeadEffect
+    _component: {fileID: 512945395466440194, guid: c16f37002075f0647bc6015e47bede72, type: 3}
+    _count: 5
+    _container: {fileID: 8346164725818362505}
+  - _name: Shielder
+    _component: {fileID: 2634951575610640468, guid: d21be013043a5e84d987c9c9f5d21f4e, type: 3}
+    _count: 5
+    _container: {fileID: 8346164725818362505}
+  - _name: Dark Mec
+    _component: {fileID: 5853484805444251457, guid: eb94d83c749e17c4796a4e296c5cb837, type: 3}
+    _count: 5
+    _container: {fileID: 8346164725818362505}
+  - _name: Ball Tank
+    _component: {fileID: 7032387265356960691, guid: 3ff6d7de36e517d4a80d79cdc02fe0ae, type: 3}
+    _count: 5
+    _container: {fileID: 8346164725818362505}
+  - _name: The Hive
+    _component: {fileID: 1183712635700109837, guid: 00c016ef86f63464d95248b41fa5535c, type: 3}
+    _count: 5
+    _container: {fileID: 8346164725818362505}
+  - _name: Wasp
+    _component: {fileID: 6684391806255623486, guid: 8356a82fe0de290499d99e732161c311, type: 3}
+    _count: 5
+    _container: {fileID: 8346164725818362505}
+  - _name: Caged Shocker
+    _component: {fileID: 233963078177354582, guid: 145dfcd4ee9cb1045b0d5d1bc56e051d, type: 3}
+    _count: 5
+    _container: {fileID: 8346164725818362505}
+  - _name: The Dark Warden
+    _component: {fileID: 8221766641919365457, guid: 090f173cc893fcd4fbd08e6121c0d3de, type: 3}
+    _count: 5
+    _container: {fileID: 8346164725818362505}
+  - _name: Warning Line
+    _component: {fileID: 6925173688216650949, guid: fc5d9ec6d71dd4942b34f9c7bf5f93f6, type: 3}
+    _count: 5
+    _container: {fileID: 8346164725818362505}
+  - _name: Stamp Effect
+    _component: {fileID: 6014665227137768150, guid: b5f66bcea1e1040769c9e8578941dfe9, type: 3}
+    _count: 5
+    _container: {fileID: 8346164725818362505}
+  - _name: Pulse Effect
+    _component: {fileID: 1869771438, guid: 813a3c5dead5f4314ac3c8f1c23e4765, type: 3}
+    _count: 5
+    _container: {fileID: 8346164725818362505}
+  - _name: Dash Effect
+    _component: {fileID: 2406519722942906230, guid: 083092265f0e049b6a29ff322993ec11, type: 3}
+    _count: 5
+    _container: {fileID: 8346164725818362505}
+  - _name: Ghost
+    _component: {fileID: 6051254050889794491, guid: eeb927a50654c4695ac14e21d7d38e02, type: 3}
+    _count: 100
+    _container: {fileID: 8346164725818362505}
+  - _name: Parrying_Effect
+    _component: {fileID: 5571707968027545089, guid: e54bb1d1c6b8a497cb9aaf9b0b9ef5c0, type: 3}
+    _count: 5
+    _container: {fileID: 8346164725818362505}
+  - _name: Hit Effect
+    _component: {fileID: 3310163704867146072, guid: 4b7702857e3104167bb8d48263df4e69, type: 3}
+    _count: 5
+    _container: {fileID: 8346164725818362505}

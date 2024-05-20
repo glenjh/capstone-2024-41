@@ -37,7 +37,14 @@ public class ChangePostProcess : MonoBehaviour
         }
 
         player = GetComponent<Player>();
-    }   
+    }
+
+    public void HitEffect()
+    {
+        StartCoroutine(ChromaticAberrationEffect());
+        StartCoroutine(VignetteEffect());
+        StartCoroutine(GlithEffect());
+    }
     
     public void ChromaticScreen()
     {

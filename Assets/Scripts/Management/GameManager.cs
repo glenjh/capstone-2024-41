@@ -8,9 +8,8 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
-    public Player _player;
-
-    public GameObject qSkillImage;
+    public bool isPaused = false;
+    public bool isClear = false;
     
     public void Start()
     {
@@ -22,14 +21,6 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(this.gameObject);
-        }
-    }
-
-    void LateUpdate()
-    {
-        if (_player.pulseUnlocked)
-        {
-            qSkillImage.SetActive(true);
         }
     }
 }

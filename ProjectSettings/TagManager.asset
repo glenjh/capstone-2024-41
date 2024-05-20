@@ -12,6 +12,8 @@ TagManager:
   - EnemyBullet
   - Door
   - HoverGround
+  - InterCol
+  - Projectile
   layers:
   - Default
   - TransparentFX
@@ -25,8 +27,8 @@ TagManager:
   - BackGround
   - Boss
   - HoverGround
-  - 
-  - 
+  - Fragment
+  - Projectile
   - 
   - 
   - 

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4655339638948521913}
   - component: {fileID: 5550356791718910565}
   - component: {fileID: 5450420210455482671}
+  - component: {fileID: 6051254050889794491}
   m_Layer: 0
   m_Name: Ghost
   m_TagString: Untagged
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: -1146169989, guid: 79eb0243ce65b45d28a1d21bc7b1530b, type: 3}
   m_Color: {r: 0.36912602, g: 0.6965219, b: 0.745283, a: 1}
   m_FlipX: 0
@@ -105,3 +106,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &6051254050889794491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3750707407989076503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9af0d56aa669f41a68a6f368c1a11f80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectName: Ghost
+  deleteTime: 1

@@ -10,10 +10,6 @@ public class CameraManager : MonoBehaviour
     
     [Header("Shake")]
     CinemachineImpulseSource impulseSource;
-    
-    [Header("Zoom In / Out")]
-    [SerializeField] 
-    CinemachineStateDrivenCamera cvCam;
 
     public void Init()
     {
@@ -34,19 +30,12 @@ public class CameraManager : MonoBehaviour
     public void Awake()
     {
         Init(); 
+        //_poolManager = GetComponent<PoolManager>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     public void CamShake()
     {
         impulseSource.GenerateImpulse();
-    }
-
-    public void ChangeZoom(float zoomAmount)
-    {
-        foreach (CinemachineVirtualCamera virtualCamera in cvCam.ChildCameras)
-        {
-            virtualCamera.m_Lens.OrthographicSize += zoomAmount;
-        }
     }
 }

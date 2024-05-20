@@ -14,28 +14,21 @@ public class Pool<T> : IPool<T> where T : Component
     #region Fields and properties
 
     private T _source;
-
     Component IPool.Source => _source;
-
     public T Source => _source;
 
     private int _count;
-
     public int Count => _count;
 
     private Transform _container;
-
     public Transform Container => _container;
 
     private List<T> _clones;
-
     private readonly List<T> _busyObjects = new();
 
     #endregion
 
-    private Pool()
-    {
-    }
+    private Pool() { }
 
     internal static Pool<T> Create(T source, int count, Transform container)
     {
@@ -53,7 +46,6 @@ public class Pool<T> : IPool<T> where T : Component
     #region SetCount
 
     IPool IPool.SetCount(int count, bool destroyClones) => SetCount(count, destroyClones);
-
     IPool<T> IPool<T>.SetCount(int count, bool destroyClones) => SetCount(count, destroyClones);
 
     public Pool<T> SetCount(int count, bool destroyClones = true)
@@ -108,7 +100,6 @@ public class Pool<T> : IPool<T> where T : Component
     #region Clear
 
     IPool IPool.Clear(bool destroyClones) => Clear(destroyClones);
-
     IPool<T> IPool<T>.Clear(bool destroyClones) => Clear(destroyClones);
 
     public Pool<T> Clear(bool destroyClones = true)
@@ -134,7 +125,6 @@ public class Pool<T> : IPool<T> where T : Component
     #region Get
 
     Component IPool.Get() => Get();
-
     public T Get()
     {
         T clone = null;
@@ -173,7 +163,6 @@ public class Pool<T> : IPool<T> where T : Component
     #region Take
 
     void IPool.Take(Component clone) => Take((T)clone);
-
     public void Take(T clone)
     {
         if (!_clones.Contains(clone))

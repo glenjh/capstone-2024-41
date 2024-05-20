@@ -1,22 +1,0 @@
-
-ncsharpsquid:S3903"+Move 'PlayerStates' into a named namespace.(ïÖ½¾J$5c021423-4c4b-4acf-a096-00f7159eafd3
-mcsharpsquid:S3903"%Move 'Player' into a named namespace.(¹Ç‹òøÿÿÿÿJ$560faddc-6798-48ce-a304-67b0019a31af
-_csharpsquid:S2933!"Make 'jumpTimer' 'readonly'.(‹›ØJ$e7341be1-33e4-4bef-9a66-01442c2bf972
-gcsharpsquid:S2933""Make 'jumpTimerMax' 'readonly'.(íİ…ŸüÿÿÿÿJ$a7cfd076-5ad8-4932-b865-b15c9719a404
-†csharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(“ÆıYJ$481f7e5f-f89b-4301-a54d-952acfe48d1e
-‡csharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(¤Ô”™J$5cfa41bc-4deb-47e5-b038-fb917f200541
-Œcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(¨£’ÀşÿÿÿÿJ$39ad045d-d375-40f3-9c10-ffa163f83abc
-Œcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(·åÀıÿÿÿÿJ$b3685e68-6149-4bd9-9e58-4a32f9c9f33e
-Œcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(­ŸøÓüÿÿÿÿJ$42cd8dc0-4e4d-44b5-9fa9-8a3f2a6690ba
-Œcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(Áàá¢øÿÿÿÿJ$98eab15a-df6a-4c80-a4f3-39bb74fd13ec
-‡csharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(æ»’ºJ$43511523-51b2-47d8-a4cc-2001363bf5bb
-‡csharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(¢ÈÈèJ$a9879ea7-481b-43cf-a8d6-f1b69bc04565
-‡csharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(áÍÜêJ$aebaf00c-bb6c-4d72-b63a-3b020dfdc0e7
-Œcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(œÁœÕşÿÿÿÿJ$df71beda-6042-48cd-99b7-a63952872a40
-‡csharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(»ÑÖ—J$36e7b74d-09df-4a26-a726-ebe5fe6b97dd
-‡csharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(ıóåôJ$941d6392-e2ab-4b19-9e2a-8dc4d7291281
-Œcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(³Â¬ßùÿÿÿÿJ$b0147eff-996b-40a3-a956-07075c0ecc7f
-¥csharpsquid:S1450 "]Remove the field 'horizontalMove' and declare it as a local variable in the relevant methods.(ˆÊñ™ùÿÿÿÿJ$98b09890-f871-4f97-a09e-2c5bc7c1557d
-^csharpsquid:S3626J"Remove this redundant jump.(ûÁİ…J$810b2d7c-0ac7-4a10-954d-dcf2b24e2098
-hcsharpsquid:S125h"Remove this commented out code.(Ú°à¬8È±™è1J$028f9762-15c3-43d2-8294-f356e3b46fb2
-bcsharpsquid:S125"Remove this commented out code.(Ïá¦§J$ae01fb04-72e7-40e0-ac1c-4c0584c95d7c

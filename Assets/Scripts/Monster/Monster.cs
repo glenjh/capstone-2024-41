@@ -10,12 +10,13 @@ public enum MoveType
     Fly,
 }
 
-public abstract class Monster : MonoBehaviour, IDamageAble {
-    public MonType monsterType;
+public abstract class Monster : MonoBehaviour, IDamageAble{
+    public string monsterName;
     public int health;
     public int maxHealth;
     public int attackDamage;
     public float attackRange;
+    public float chaseRange;
     public float moveSpeed;
     public MonStateType stateType;
     public MoveType moveType = MoveType.Walk;
@@ -29,9 +30,18 @@ public abstract class Monster : MonoBehaviour, IDamageAble {
     
     public Transform player;
 
+    [SerializeField] private Collider2D ChaseCollider;
     [SerializeField] private Collider2D attackCollider;
     //죽었을때 사용할 콜백
     public Action OnDieCallBack;
+    
+    [SerializeField]private FragmentsSystem fS;
+    private Transform impactPos;
+    
+    [SerializeField] private BezierMissileShooter missileShooter;
+    
+    [SerializeField] private bool isActor = false;
+    public bool isActing = false;
 
     public virtual void Awake()
     {
@@ -40,25 +50,32 @@ public abstract class Monster : MonoBehaviour, IDamageAble {
         spriteRenderer = GetComponent<SpriteRenderer>();
         StateMachine = new MonStateMachine();
         StateMachine.Init(this);
+
+        Init("");
+        isActing = isActor;
     }
 
     public virtual void Start()
     {
-        Init();
     }
 
     public virtual void FixedUpdate()
     {
-        StateMachine.Action(this);
-        if(StateMachine.currentState.StateType == MonStateType.Die)
+        if(Input.GetKeyDown(KeyCode.A))
+            EnableChase();
+        if(isActing)
             return;
+        StateMachine.Action(this);
     }
 
-    public virtual void Init()
+    public virtual void Init(String name)
     {
+        monsterName = name;
         attackCollider.enabled = false;
         health = maxHealth;
         StateMachine.SetState(MonStateType.Idle);
+        attackable = true;
+        spriteRenderer.color = new Color(1, 1, 1, 1);
     }
 
     public virtual void TakeDamage(int damage)
@@ -103,10 +120,7 @@ public abstract class Monster : MonoBehaviour, IDamageAble {
 
     public virtual void Die()
     {
-        OnDieCallBack?.Invoke();
-        transform.parent.GetComponent<MonSpawner>()?.ReSpawn();
-        // 몬스터가 죽을 때 동작 구현
-        MonsterPool.ReturnObject(this);
+        TakeHit(100, transform);
     }
     
     public virtual void ToIdle()
@@ -126,19 +140,47 @@ public abstract class Monster : MonoBehaviour, IDamageAble {
 
     public void TakeHit(int damage, Transform target)
     {
-        if(StateMachine.currentState.StateType == MonStateType.Die)
+        if(health<=0)
             return;
         
-        var effect = ObjectPoolManager.instance.GetObject("Hit_Effect");
-        effect.transform.position = transform.position;
-        effect.transform.localScale = transform.localScale;
-        
         health -= damage;
-        StartCoroutine(OnDamage());
+        EffectSystem effect;
         if(health <= 0)
         {
+            if(missileShooter!=null)
+                missileShooter.Fire(3);
+            fS.InstantiateFragment(target,transform,damage);
             StateMachine.SetState(MonStateType.Die);
+            //effect = CameraManager.instance._poolManager.GetFromPool<EffectSystem>("MonsterDeadEffect");
+            //effect.transform.position = transform.position;
+            
+            if(!isActor)
+                PoolManager.Instance.TakeToPool<Monster>(monsterName,this);
+            else
+                gameObject.SetActive(false);
+            return;
         }
+        effect = PoolManager.Instance.GetFromPool<EffectSystem>("MonsterHitEffect");
+        if(missileShooter!=null)
+            missileShooter.Fire();
+        //W스킬 간혹 에러 발생 수정 요함
+        effect.transform.position = transform.position;
+        
+        //좌우 판단 후 넉백
+        if(target.position.x < transform.position.x)
+        {
+            rb.AddForce(new Vector2(damage*1.5f, 1.5f), ForceMode2D.Impulse);
+            if(moveSpeed > 0)
+                Turn();
+        }
+        else
+        {
+            rb.AddForce(new Vector2(-damage*1.5f, 1.5f), ForceMode2D.Impulse);
+            if(moveSpeed < 0)
+                Turn();
+        }
+        
+        StartCoroutine(OnDamage());
     }
     IEnumerator OnDamage()
     {
@@ -149,17 +191,36 @@ public abstract class Monster : MonoBehaviour, IDamageAble {
         spriteRenderer.color = new Color(1, 1, 1, 1);
     }
 
-    public virtual void DecideAttack()
+    public virtual bool DecideAttack()
     {
         if (!attackable)
-            return;
-        var rayRange = Physics2D.Raycast(rb.position + new Vector2(0,-spriteRenderer.size.y/2), (moveSpeed > 0 ? Vector3.right : Vector3.left),
+            return false;
+        Debug.DrawRay(rb.position + new Vector2(0,-spriteRenderer.size.y), (moveSpeed > 0 ? Vector3.right : Vector3.left) * attackRange, Color.red);
+        var rayRange = Physics2D.Raycast(rb.position + new Vector2(0,-spriteRenderer.size.y), (moveSpeed > 0 ? Vector3.right : Vector3.left),
             attackRange, LayerMask.GetMask("Player"));
         if (rayRange.collider && StateMachine.currentState.StateType != MonStateType.Attack)
         {
             StateMachine.SetState(MonStateType.Attack);
             attackable = false;
+            return true;
         }
+
+        return false;
+    }
+
+    public virtual bool DecideChase()
+    {
+        var rayRange = Physics2D.Raycast(rb.position + new Vector2(0,-spriteRenderer.size.y), (moveSpeed > 0 ? Vector3.right : Vector3.left),
+            chaseRange, LayerMask.GetMask("Player"));
+        if (rayRange.collider)
+        {
+            if(StateMachine.currentState.StateType != MonStateType.Chase)
+                StateMachine.SetState(MonStateType.Chase);
+            ((MonStateChase)StateMachine.currentState).target = rayRange.collider.transform;
+            return true;
+        }
+
+        return false;
     }
     
     //어택 딜레이
@@ -171,7 +232,19 @@ public abstract class Monster : MonoBehaviour, IDamageAble {
     IEnumerator AttackDelayCoroutine()
     {
         yield return new WaitForSeconds(attackDelay);
-        Debug.Log("attackable");
         attackable = true;
+    }
+
+    public void Turn()
+    {
+        moveSpeed *= -1;
+        transform.localScale = new Vector3(-1 * transform.localScale.x,
+            transform.localScale.y, transform.localScale.z);
+    }
+
+    public void EnableChase()
+    {
+        isActing = false;
+        Chase(player);
     }
 }

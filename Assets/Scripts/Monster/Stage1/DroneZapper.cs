@@ -30,11 +30,11 @@ public class DroneZapper : Monster {
         base.TakeDamage(damage);
     }
 
-    public override void DecideAttack()
+    public override bool DecideAttack()
     {
         if (!attackable)
         {
-            return;
+            return false;
         }
         RaycastHit2D rayRange = Physics2D.Raycast(rb.position, (moveSpeed > 0 ? Vector3.right : Vector3.left),
             attackRange, LayerMask.GetMask("Player"));
@@ -42,7 +42,9 @@ public class DroneZapper : Monster {
         {
             StateMachine.SetState(MonStateType.Attack);
             attackable = false;
+            return true;
         }
+        return false;
     }
 
     public void ReadyAttack()

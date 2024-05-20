@@ -15,6 +15,7 @@ public class MonStateMachine {
     public void SetState(MonStateType stateType)
     {
         if(_mon.gameObject.activeSelf == false) return;
+        if(_mon.isActing) return;
         if (currentState != null)
             currentState.Exit(_mon);
         

@@ -21,7 +21,7 @@ public class GroundChecking : MonoBehaviour
         Vector2 raycastOrigin = feet.bounds.center;
         Vector2 raycastDirection = Vector2.down;
         float raycastDistance = 0.01f;
-        LayerMask layerMask = LayerMask.GetMask("Ground", "HoverGround");
+        LayerMask layerMask = LayerMask.GetMask("Ground", "HoverGround","Fragment");
 
         // Perform the BoxCast
         RaycastHit2D raycastHit2D = Physics2D.BoxCast(
@@ -55,7 +55,7 @@ public class GroundChecking : MonoBehaviour
             _player.isGround = false;
         }
 
-        if (_player.isGround)
+        if (_player.isGround && _player.groundCheckAble)
         {
             _player.rigid.gravityScale = _player.normalGravity;
             _player.anim.SetBool("isFalling", false);

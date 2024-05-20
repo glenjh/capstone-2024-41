@@ -16,8 +16,11 @@ public class Boomarang : MonoBehaviour {
     
     private void OnEnable()
     {
-        if(_boss == null)
+        if (_boss == null)
+        {
             _boss = GetComponentInParent<AncientBoss>();
+            _boss.attackAction = BoomarangOff;
+        }
         if(_player == null)
             _player = _boss.player;
         StartCoroutine(BoomarangOn());
@@ -66,5 +69,16 @@ public class Boomarang : MonoBehaviour {
         transform.position = _originPos;
         _boss.OffSpinAttack();
         _boss.OnIdle();
+    }
+
+    private void OnDisable()
+    {
+        print("Disable");
+        BoomarangOff();
+    }
+
+    void BoomarangOff()
+    {
+        StopAllCoroutines();
     }
 }

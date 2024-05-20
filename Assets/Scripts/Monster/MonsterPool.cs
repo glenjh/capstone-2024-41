@@ -12,7 +12,10 @@ public enum MonType
     BallTank,
     Shielder,
     TheHive,
-    Wasp
+    Wasp,
+    TheDarkWarden,
+    CagedShocker,
+    CagedSpider
 }
 
 public class MonsterPool : MonoBehaviour
@@ -48,7 +51,7 @@ public class MonsterPool : MonoBehaviour
         var newObj = Instantiate(poolingObjectPrefabList[index]).GetComponent<Monster>();
         newObj.gameObject.SetActive(false);
         newObj.transform.SetParent(transform);
-        newObj.monsterType = (MonType)index;
+        //newObj.monsterType = (MonType)index;
         return newObj;
     }
 
@@ -56,19 +59,19 @@ public class MonsterPool : MonoBehaviour
     {
         foreach (var obj in Instance._poolingObjectList)
         {
-            if (obj.monsterType == type)
-            {
-                obj.transform.SetParent(null);
-                obj.gameObject.SetActive(true);
-                obj.Init();
-                Instance._poolingObjectList.Remove(obj);
-                return obj;
-            }
+            // if (obj.monsterType == type)
+            // {
+            //     obj.transform.SetParent(null);
+            //     obj.gameObject.SetActive(true);
+            //     obj.Init();
+            //     Instance._poolingObjectList.Remove(obj);
+            //     return obj;
+            // }
         }
         var newObj = Instance.CreateNewObject((int)type);
         newObj.gameObject.SetActive(true);
         newObj.transform.SetParent(null);
-        newObj.Init();
+        //newObj.Init();
         return newObj;
     }
 

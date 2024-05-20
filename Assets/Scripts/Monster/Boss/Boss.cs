@@ -2,10 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public enum BossType
 {
-    AncientBoss
+    AncientBoss,
+    TheWidow,
+    ShadowOfStorms,
 }
 
 public abstract class Boss : MonoBehaviour, IDamageAble {
@@ -16,16 +19,21 @@ public abstract class Boss : MonoBehaviour, IDamageAble {
     public float moveSpeed;
     public BossStateType stateType;
     public BossHealthBar healthBar;
+    public float minAttackRange = 1f;
+    [SerializeField] 
+    public PlayableDirector dieTimeLine;
     
-    public bool isSuperArmor;
+    public bool isSuperArmor = true;
 
     public Rigidbody2D rb;
     public Animator animator;
     public SpriteRenderer spriteRenderer;
     public BossStateMachine StateMachine;
     public BoxCollider2D attackCollider;
+    private BoxCollider2D bossCollider;
     
     public Transform player;
+    public bool isDonMove = true;
 
     protected virtual void Awake()
     {
@@ -33,6 +41,7 @@ public abstract class Boss : MonoBehaviour, IDamageAble {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         StateMachine = new BossStateMachine();
+        bossCollider = GetComponent<BoxCollider2D>();
     }
 
     // Start is called before the first frame update
@@ -56,8 +65,6 @@ public abstract class Boss : MonoBehaviour, IDamageAble {
         StateMachine.addState(BossStateType.Attack, new BossStateAttack());
         StateMachine.addState(BossStateType.Dead, new BossStateDead());
         StateMachine.addState(BossStateType.Buff, new BossStateBuff());
-
-        StateMachine.SetState(BossStateType.Sleep);
     }
     
     public virtual void TakeHit(int damage, Transform transform)
@@ -67,9 +74,8 @@ public abstract class Boss : MonoBehaviour, IDamageAble {
         // 몬스터가 피해를 받을 때 동작 구현
         health-=damage;
         // healthBar.SetHealth(health);
-        var effect = ObjectPoolManager.instance.GetObject("Hit_Effect");
+        var effect = PoolManager.Instance.GetFromPool<EffectSystem>("MonsterHitEffect");
         effect.transform.position = this.transform.position;
-        effect.transform.localScale = -this.transform.localScale;
         if(health <= 0)
         {
             StateMachine.SetState(BossStateType.Dead);
@@ -85,7 +91,9 @@ public abstract class Boss : MonoBehaviour, IDamageAble {
     {
         yield return new WaitForSeconds(2f);
         attackCollider.enabled = true;
-        StateMachine.SetState(BossStateType.Move);
+        
+        if(!isDonMove)
+            StateMachine.SetState(BossStateType.Move);
     }
     
     public void OnMove() => StartCoroutine(OnTimer());
@@ -97,5 +105,20 @@ public abstract class Boss : MonoBehaviour, IDamageAble {
     public void WakeUp()
     {
         StateMachine.SetState(BossStateType.Wake);
+    }
+
+    public virtual void Dead()
+    {
+        bossCollider.enabled = false;
+        //AchiveManager.BossDefeated(monsterType.ToString());
+    }
+    
+    public virtual void OffAttack()
+    { }
+    
+    public void AbleMove()
+    {
+        isDonMove = false;
+        StateMachine.SetState(BossStateType.Move);
     }
 }

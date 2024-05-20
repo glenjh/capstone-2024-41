@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro.EditorUtilities;
 using Unity.VisualScripting;
-using UnityEditor.UI;
 using UnityEngine;
 
 public class PlayerState
@@ -50,14 +48,6 @@ public class Idle : PlayerState
         if (!player.isDashing && !player.isParrying)
         {
             player.SetMoveState();
-            // if (player.rigid.velocity.y != 0)
-            // {
-            //     player.JumpAttack();
-            // }
-            // else
-            // {
-            //     player.Attack();
-            // }
             player.JumpAttack();
             player.Attack();
             player.Jump();
@@ -96,14 +86,6 @@ public class Move : PlayerState
         {
             player.SetMoveState();
             player.Move();
-            // if (player.rigid.velocity.y != 0)
-            // {
-            //     player.JumpAttack();
-            // }
-            // else
-            // {
-            //     player.Attack();
-            // }
             player.JumpAttack();
             player.Attack();
             player.Jump();
@@ -129,9 +111,10 @@ public class Jump : PlayerState
 
     public override void Enter(Player player)
     {
+        player.StartCoroutine(player.GroundChecking());
+        player.anim.SetBool("isJumping", true);
         player.ParticleON(player.jumpAndLandDust);
         player.rigid.velocity = new Vector2(player.rigid.velocity.x, player.jumpForce);
-        player.anim.SetBool("isJumping", true);
     }
 
     public override void Update(Player player)
@@ -271,15 +254,15 @@ public class Stamping : PlayerState
 
     public override void Enter(Player player)
     {
+        player.anim.SetBool("isFalling", true);
         player.rigid.velocity = new Vector2(0,  -player.stampingPower);
     }
 
-    public override void Update(Player player)
-    {
-    }
+    public override void Update(Player player) {}
 
     public override void Exit(Player player)
     {
+        player.anim.SetBool("isFalling", false);
         player.StampAttack();
     }
 }
@@ -302,7 +285,10 @@ public class Dash : PlayerState
         player.ghost.makeGhost = true;
     }
 
-    public override void Update(Player player) {}
+    public override void Update(Player player)
+    {
+        player.SetWallsliding();
+    }
 
     public override void Exit(Player player)
     {
@@ -386,7 +372,7 @@ public class Walljumping : PlayerState
         player.anim.SetBool("isJumping", true);
         player.anim.SetBool("isFalling", false);
         player.rigid.velocity = new Vector2(-player.transform.localScale.x * player.wallJumpPower * 0.7f, player.wallJumpPower);
-        player.transform.localScale = new Vector2(-Mathf.Sign(player.transform.localScale.x), 1);
+        player.transform.localScale = new Vector3(-Mathf.Sign(player.transform.localScale.x), 1, player.transform.localScale.z);
         player.Invoke("MoveLock", 0.3f);
     }
 
@@ -422,6 +408,8 @@ public class Dead : PlayerState
     public override void Enter(Player player)
     {
         player.controlAble = false;
+        player.rigid.velocity = Vector2.zero;
+        MySceneManager.instance.GameOver();
         player.anim.SetTrigger("isDead");
     }
     
