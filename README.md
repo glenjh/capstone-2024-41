@@ -14,7 +14,7 @@
 
 개발현황 : [Google Drive](https://drive.google.com/drive/folders/1PLdymtSjLYZg932usjZbjHqhsccBn9oi?usp=drive_link)
 ### 2. 소개 영상
-![sample](https://github.com/kookmin-sw/capstone-2024-41/assets/21676370/85ec4410-1ded-49ac-8cff-4f7e34c78297)
+https://drive.google.com/file/d/1QePBBb-dwJlE-fLp8zePX7vVrYkRuq5k/view?usp=drive_link
 
 ### 3. 포스터
 ![2024_41팀_포스터 pptx](https://github.com/kookmin-sw/capstone-2024-41/assets/21676370/1e317750-47f6-4848-9d8d-739800c15b4f)
