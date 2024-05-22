@@ -1,6 +1,6 @@
 # ADAM - 포스트아포칼립스 플랫포머 액션 게임
 
-### 1. 프로잭트 소개
+### 1. 프로젝트 소개
 ![image](https://github.com/kookmin-sw/capstone-2024-41/assets/21676370/b8ad8caf-4771-4d41-9b43-8f4ab54f19ca)
 
 본 프로젝트는 싱글 플레이로 진행된다.
@@ -14,24 +14,26 @@
 
 개발현황 : [Google Drive](https://drive.google.com/drive/folders/1PLdymtSjLYZg932usjZbjHqhsccBn9oi?usp=drive_link)
 ### 2. 소개 영상
-![sample](https://github.com/kookmin-sw/capstone-2024-41/assets/21676370/85ec4410-1ded-49ac-8cff-4f7e34c78297)
+https://drive.google.com/file/d/1QePBBb-dwJlE-fLp8zePX7vVrYkRuq5k/view?usp=drive_link
 
+### 3. 포스터
+![2024_41팀_포스터 pptx](https://github.com/kookmin-sw/capstone-2024-41/assets/21676370/1e317750-47f6-4848-9d8d-739800c15b4f)
 
-### 3. 팀 소개
+### 4. 팀 소개
 
 |이름|학번|역할|깃허브|
 |------|---|---|---|
 |최정훈|****1681|팀장, 플레이어 구현, UI, MAP|[링크](https://github.com/glenjh)|
 |서희영|****1609|팀원, 적 구현, 시스템 구현|[링크](https://github.com/shng6815)|
 
-### 4. 사용법
+### 5. 사용법
 
 |플랫폼|PC|
 |------|---|
 |해상도|16 : 9 (1920 : 1080)|
 |조작|키보드 입력|
 
-### 5. 기술 스택
+### 6. 기술 스택
 #### ✔️Client
 <img src="https://img.shields.io/badge/Unity-002244?style=for-the-badge&logo=unity&logoColor=White"><img src="https://img.shields.io/badge/csharp-262577?style=for-the-badge&logo=csharp&logoColor=512BD4">
 #### ✔️Collaboration
