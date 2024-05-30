@@ -28,7 +28,7 @@ https://drive.google.com/file/d/1QePBBb-dwJlE-fLp8zePX7vVrYkRuq5k/view?usp=drive
 
 ### 5. 사용법
 
-1. https://drive.google.com/drive/folders/1CnmOz2qzNYevITge8F4unQB_5P3UnDba?usp=drive_link 접속(구글 드라이브)
+1. [Google Drive](https://drive.google.com/drive/folders/1PLdymtSjLYZg932usjZbjHqhsccBn9oi?usp=drive_link) 접속(구글 드라이브)
 2. 운영체제에 맞게 다운로드
 3. Zip 파일을 압축해제
 4. Adam 실행
@@ -42,7 +42,7 @@ https://drive.google.com/file/d/1QePBBb-dwJlE-fLp8zePX7vVrYkRuq5k/view?usp=drive
 
 ### 7. 기술 스택
 #### ✔️Client
-<img src="https://img.shields.io/badge/Unity-002244?style=for-the-badge&logo=unity&logoColor=White"><img src="https://img.shields.io/badge/csharp-262577?style=for-the-badge&logo=csharp&logoColor=512BD4">
+<img src="https://img.shields.io/badge/Unity-002244?style=for-the-badge&logo=unity&logoColor=White"><img src="https://img.shields.io/badge/csharp-262577?style=for-the-badge&logo=csharp&logoColor=512BD4"><img src="https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white">
 #### ✔️Collaboration
 <img src="https://img.shields.io/badge/git-2E69AE?style=for-the-badge&logo=git&logoColor=F05032"><img src="https://img.shields.io/badge/notion-FFFFFF?style=for-the-badge&logo=notion&logoColor=000000"><img src="https://img.shields.io/badge/github-EA4AAA?style=for-the-badge&logo=github&logoColor=181717"><img src="https://img.shields.io/badge/slack-CC6699?style=for-the-badge&logo=slack&logoColor=4A154B">
 
