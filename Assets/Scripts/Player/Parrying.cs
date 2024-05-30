@@ -14,7 +14,7 @@ public class Parrying : MonoBehaviour
             var effect = PoolManager.Instance.GetFromPool<Effects>("Parrying_Effect");
             effect.transform.localScale = _player.transform.localScale;
             effect.transform.position = col.transform.position;
-            StartCoroutine(ParryingSys(1.0f));
+            StartCoroutine(ParryingSys(2.0f));
             _player.ParryingSuccess();
         }
     }
@@ -22,6 +22,7 @@ public class Parrying : MonoBehaviour
     public IEnumerator ParryingSys(float time)
     {
         CameraManager.instance.CamShake();
+        AudioManager.instance.PlaySFX("Parrying");
         _player.shockWave.CallShockWave(_player.transform.position);
         _player.isHit = true;
         

@@ -6,7 +6,7 @@ public class InteractionEvent : MonoBehaviour
     
     public Narration[] GetNarration()
     {
-        narration.narrations = DatabaseManager.instance.GetNarration((int)narration.line.x, (int)narration.line.y);
+        narration.narrations = DatabaseManager.Instance.GetNarration((int)narration.line.x, (int)narration.line.y);
         return narration.narrations;
     }
 }

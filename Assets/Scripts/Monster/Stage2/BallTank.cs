@@ -14,10 +14,10 @@ public class BallTank : Monster {
         //Init();
     }
     
-    public override void Init(string name)
+    public override void Init(string name, bool isActor = false)
     {
-        base.Init(name);
-        health = maxHealth;
+        base.Init(name,isActor);
+        health = monsterSO.maxHealth;
         StateMachine.SetState(MonStateType.Idle);
     }
 
@@ -29,10 +29,16 @@ public class BallTank : Monster {
         if (StateMachine.currentState.StateType == MonStateType.Die)
             return;
         //공격 범위 내로 플레이어가 들어오면 공격
-        RaycastHit2D rayRange = Physics2D.Raycast(rb.position - new Vector2(attackRange/2,0), Vector2.right, attackRange, LayerMask.GetMask("Player"));
-        if (rayRange.collider != null && StateMachine.currentState.StateType != MonStateType.Attack)
+        //RaycastHit2D rayRange = Physics2D.Raycast(rb.position - new Vector2(attackRange/2,0), Vector2.right, attackRange, LayerMask.GetMask("Player"));
+        Collider2D[] rayRange =
+            Physics2D.OverlapCircleAll((Vector2)transform.position, monsterSO.attackRange, LayerMask.GetMask("Player"));
+
+        foreach (var VARIABLE in rayRange)
         {
-            StateMachine.SetState(MonStateType.Attack);
+            if (VARIABLE != null && StateMachine.currentState.StateType != MonStateType.Attack)
+            {
+                StateMachine.SetState(MonStateType.Attack);
+            }
         }
     }
 

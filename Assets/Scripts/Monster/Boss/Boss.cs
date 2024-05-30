@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -30,10 +31,11 @@ public abstract class Boss : MonoBehaviour, IDamageAble {
     public SpriteRenderer spriteRenderer;
     public BossStateMachine StateMachine;
     public BoxCollider2D attackCollider;
-    private BoxCollider2D bossCollider;
+    public BoxCollider2D bossCollider;
     
     public Transform player;
     public bool isDonMove = true;
+    [SerializeField]protected CinemachineImpulseSource impulseSource;
 
     protected virtual void Awake()
     {
@@ -76,6 +78,8 @@ public abstract class Boss : MonoBehaviour, IDamageAble {
         // healthBar.SetHealth(health);
         var effect = PoolManager.Instance.GetFromPool<EffectSystem>("MonsterHitEffect");
         effect.transform.position = this.transform.position;
+        
+        AudioManager.instance.PlaySFX("W");
         if(health <= 0)
         {
             StateMachine.SetState(BossStateType.Dead);
@@ -89,7 +93,7 @@ public abstract class Boss : MonoBehaviour, IDamageAble {
 
     IEnumerator OnTimer()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         attackCollider.enabled = true;
         
         if(!isDonMove)
@@ -110,15 +114,26 @@ public abstract class Boss : MonoBehaviour, IDamageAble {
     public virtual void Dead()
     {
         bossCollider.enabled = false;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
         //AchiveManager.BossDefeated(monsterType.ToString());
     }
     
     public virtual void OffAttack()
     { }
     
-    public void AbleMove()
+    public virtual void AbleMove()
     {
         isDonMove = false;
         StateMachine.SetState(BossStateType.Move);
+    }
+    
+    public void OnShakeCamera()
+    {
+        impulseSource.GenerateImpulse();
+    }
+    
+    public void PlaySFX(string cilp)
+    {
+        AudioManager.instance.PlaySFX(cilp);
     }
 }

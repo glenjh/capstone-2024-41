@@ -6,6 +6,7 @@ public class DarkMec : Monster {
     [SerializeField] Transform originBulletPos;
     [SerializeField] Bullet bullet;
     [SerializeField] float bulletSpeed;
+    [SerializeField] private float ySize;
     
     public override void Awake()
     {
@@ -17,11 +18,11 @@ public class DarkMec : Monster {
         base.Start();
     }
     
-    public override void Init(string name)
+    public override void Init(string name, bool isActor = false)
     {
         monsterName = name;
         //attackCollider.enabled = false;
-        health = maxHealth;
+        health = monsterSO.maxHealth;
         StateMachine.SetState(MonStateType.Idle);
         attackable = true;
         spriteRenderer.color = new Color(1, 1, 1, 1);
@@ -43,18 +44,43 @@ public class DarkMec : Monster {
     {
         if (bullet.activeSelf)
             return false;
-        return base.DecideAttack();
+        if (!attackable)
+            return false;
+        Debug.DrawRay(rb.position + new Vector2(0,-ySize), (moveSpeed > 0 ? Vector3.right : Vector3.left) * monsterSO.attackRange, Color.red);
+        var rayRange = Physics2D.Raycast(rb.position + new Vector2(0,-ySize), (moveSpeed > 0 ? Vector3.right : Vector3.left),
+            monsterSO.attackRange, LayerMask.GetMask("Player"));
+        if (rayRange.collider && StateMachine.currentState.StateType != MonStateType.Attack)
+        {
+            StateMachine.SetState(MonStateType.Attack);
+            attackable = false;
+            return true;
+        }
+
+        return false;
+    }
+
+    public override bool DecideChase()
+    {
+        var rayRange = Physics2D.Raycast(rb.position + new Vector2(0,-ySize), (moveSpeed > 0 ? Vector3.right : Vector3.left),
+            monsterSO.chaseRange, LayerMask.GetMask("Player"));
+        if (rayRange.collider)
+        {
+            if(StateMachine.currentState.StateType != MonStateType.Chase)
+                StateMachine.SetState(MonStateType.Chase);
+            ((MonStateChase)StateMachine.currentState).target = rayRange.collider.transform;
+            return true;
+        }
+
+        return false;
     }
 
     public override void OnAttack()
     {
-        bullet.gameObject.SetActive(true);
         // 총알을 생성하고 발사할 방향 설정
-        Vector3 bulletDirection = (player.position - originBulletPos.position).normalized;
-        bullet.transform.position = originBulletPos.position;
-        bullet.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(bulletDirection.y, bulletDirection.x) * Mathf.Rad2Deg);
+        Bullet _bullet = Instantiate(bullet).GetComponent<Bullet>();
         
-        // 총알 발사
-        bullet.Fire(bulletDirection, bulletSpeed);
+        _bullet.transform.position = originBulletPos.position;
+        //좌우 판단
+        _bullet.Fire(moveSpeed > 0 ? Vector2.right : Vector2.left, bulletSpeed);
     }
 }

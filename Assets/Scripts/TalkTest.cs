@@ -37,7 +37,7 @@ public class TalkTest : MonoBehaviour
     }
     public void GetNarration()
     {
-        narration.narrations = DatabaseManager.instance.GetNarration((int)narration.line.x, (int)narration.line.y);
+        narration.narrations = DatabaseManager.Instance.GetNarration((int)narration.line.x, (int)narration.line.y);
     }
     
     private void ShowNarration()
@@ -45,7 +45,7 @@ public class TalkTest : MonoBehaviour
         if (isTalk)
             return;
         
-        if(Input.GetKeyDown(KeyCode.T))
+        if(Input.GetKeyDown(KeyCode.F))
         {
             isTalk = true;
             talkIndex = 0;
@@ -78,8 +78,7 @@ public class TalkTest : MonoBehaviour
         }
         
 
-        narration.narrations = DatabaseManager.instance.GetNarration(start, end);
-        Debug.Log(narration.narrations);
+        narration.narrations = DatabaseManager.Instance.GetNarration(start, end);
         lastRoutine = StartCoroutine(ShowProduction());
     }
     
@@ -87,7 +86,7 @@ public class TalkTest : MonoBehaviour
     {
         if (isTalk && !isFinished)
         {
-            if (Input.GetKeyDown(KeyCode.T))
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 StopCoroutine(lastRoutine);
                 narrationText.text = narration.narrations[talkIndex].Contexts[talkCount];
@@ -108,7 +107,7 @@ public class TalkTest : MonoBehaviour
         
         if (isTalk&&isFinished)
         {
-            if (Input.GetKeyDown(KeyCode.T))
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 if(talkCount < narration.narrations[talkIndex].Contexts.Length - 1)
                 {

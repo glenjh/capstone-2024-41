@@ -54,6 +54,7 @@ public class AudioManager : MonoBehaviour
             if (BGM[i].name == bgmName)
             {
                 bgmPlayer.clip = BGM[i].clip;
+                bgmPlayer.volume = 0.4f;
                 bgmPlayer.Play();
             }
         }
@@ -62,6 +63,50 @@ public class AudioManager : MonoBehaviour
     public void StopBGM()
     {
         bgmPlayer.Stop();
+    }
+
+    public void FadeOut(float duration)
+    {
+        StartCoroutine(FadeOutCoroutine(duration));
+    }
+
+    private IEnumerator FadeOutCoroutine(float duration)
+    {
+        float startVolume = bgmPlayer.volume;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            bgmPlayer.volume = Mathf.Lerp(startVolume, 0f, elapsed / duration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        bgmPlayer.volume = 0f;
+        bgmPlayer.Stop();
+    }
+    
+    public void FadeIn(float duration)
+    {
+        StartCoroutine(FadeInCoroutine(duration));
+    }
+
+    private IEnumerator FadeInCoroutine(float duration)
+    {
+        float startVolume = 0f;
+        float endVolum = 0.4f;
+        bgmPlayer.volume = startVolume;
+        bgmPlayer.Play();
+
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            bgmPlayer.volume = Mathf.Lerp(startVolume, endVolum, elapsed / duration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        bgmPlayer.volume = endVolum;
     }
 
     public void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
@@ -87,20 +132,26 @@ public class AudioManager : MonoBehaviour
                 {
                     if (!sfxPlayer[j].isPlaying)
                     {
+                        sfxPlayer[j].volume = 0.5f;
                         sfxPlayer[j].clip = SFX[i].clip;
                         sfxPlayer[j].Play();
-                    }
-                    else
-                    {
                         return;
                     }
                 }
             }
-            else
-            {
-                return;
-            }
         }
+    }
+
+    public void DeadSound()
+    {
+        bgmPlayer.Pause();
+        StartCoroutine("Delay");
+        PlaySFX("Die");
+    }
+
+    public IEnumerator Delay()
+    {
+        yield return new WaitForSecondsRealtime(0.2f);
     }
     #endregion
 }

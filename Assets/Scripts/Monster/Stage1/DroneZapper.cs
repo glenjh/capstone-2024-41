@@ -37,7 +37,7 @@ public class DroneZapper : Monster {
             return false;
         }
         RaycastHit2D rayRange = Physics2D.Raycast(rb.position, (moveSpeed > 0 ? Vector3.right : Vector3.left),
-            attackRange, LayerMask.GetMask("Player"));
+            monsterSO.attackRange, LayerMask.GetMask("Player"));
         if (rayRange.collider != null && StateMachine.currentState.StateType != MonStateType.Attack)
         {
             StateMachine.SetState(MonStateType.Attack);

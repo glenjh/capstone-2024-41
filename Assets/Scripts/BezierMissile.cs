@@ -12,6 +12,8 @@ public class BezierMissile : MonoBehaviour
     private float m_timerCurrent = 0;
     private float m_speed;
     private string[] m_targetTag;
+    
+    Transform m_targetTr;
 
     public void Init(Transform _startTr, Transform _endTr, float _speed, float _newPointDistanceFromStartTr, float _newPointDistanceFromEndTr, string[] _targetTag)
     {
@@ -34,7 +36,8 @@ public class BezierMissile : MonoBehaviour
             (_newPointDistanceFromEndTr * Random.Range(-1.0f, 1.0f) * _endTr.up);
 
         // 도착 지점.
-        m_points[3] = _endTr.position;
+        //m_points[3] = _endTr.position;
+        m_targetTr = _endTr;
         
         m_targetTag = _targetTag;
 
@@ -54,8 +57,13 @@ public class BezierMissile : MonoBehaviour
 
         // 베지어 곡선으로 X,Y,Z 좌표 얻기.
         transform.position = new Vector2(
-            CubicBezierCurve(m_points[0].x, m_points[1].x, m_points[2].x, m_points[3].x),
-            CubicBezierCurve(m_points[0].y, m_points[1].y, m_points[2].y, m_points[3].y));
+            CubicBezierCurve(m_points[0].x, m_points[1].x, m_points[2].x, m_targetTr.position.x),
+            CubicBezierCurve(m_points[0].y, m_points[1].y, m_points[2].y, m_targetTr.position.y));
+        
+        //m_points[3]을 바라보도록 회전
+        Vector2 dir = (Vector2)m_targetTr.position - (Vector2)transform.position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
     /// <summary>
@@ -86,7 +94,7 @@ public class BezierMissile : MonoBehaviour
         {
             if (other.CompareTag(tag))
             {
-                other.GetComponent<IDamageAble>()?.TakeHit(1,this.transform);
+                other.GetComponent<IDamageAble>()?.TakeHit(2,this.transform);
                 Destroy(this.gameObject);
             }
         }

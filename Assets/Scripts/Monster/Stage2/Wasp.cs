@@ -15,10 +15,10 @@ public class Wasp : Monster
         //Init();
     }
     
-    public override void Init(string name)
+    public override void Init(string name, bool isActor = false)
     {
         monsterName = name;
-        health = maxHealth;
+        health = monsterSO.maxHealth;
         StateMachine.SetState(MonStateType.Idle);
         attackable = true;
         spriteRenderer.color = new Color(1, 1, 1, 1);
@@ -34,7 +34,7 @@ public class Wasp : Monster
     public override bool DecideChase()
     {
         //원 범위내에 플레이어가 있는지 확인
-        var rayRange = Physics2D.CircleCast(transform.position, chaseRange, 
+        var rayRange = Physics2D.CircleCast(transform.position, monsterSO.chaseRange, 
             Vector2.zero, 0, LayerMask.GetMask("Player"));
         if (rayRange.collider)
         {

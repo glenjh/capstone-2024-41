@@ -225,17 +225,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1187ffc9cc1b12a4fbb2a24e8effffad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterSO: {fileID: 11400000, guid: 19ed3e7d4d6a84842aa12b16e39f17c8, type: 2}
   monsterName: 
   health: 2
-  maxHealth: 2
-  attackDamage: 1
-  attackRange: 3
-  chaseRange: 0
-  moveSpeed: 0
   stateType: 0
-  moveType: 0
-  attackDelay: 1
   attackable: 1
+  moveSpeed: 0
   rb: {fileID: 0}
   animator: {fileID: 0}
   spriteRenderer: {fileID: 0}

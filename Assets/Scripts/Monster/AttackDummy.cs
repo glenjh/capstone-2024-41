@@ -16,6 +16,7 @@ public class AttackDummy : MonoBehaviour, IDamageAble
         animator.SetTrigger("Hit");
         if(missileShooter!=null)
             missileShooter.Fire();
-        effect.transform.position = transform.position;
+        if(effect!=null)
+            effect.transform.position = transform.position;
     }
 }

@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 8
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -112,15 +112,15 @@ TextureImporter:
         y: 0
         width: 50
         height: 51
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ed82fd3a7f4b5a4e8a2b102170a75a4
-      internalID: -1821178196
+      spriteID: a51a78b8374e4cd4290b6f0f2aa1980e
+      internalID: -1487829423
       vertices: []
       indices: 
       edges: []
@@ -133,15 +133,15 @@ TextureImporter:
         y: 0
         width: 50
         height: 51
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e627525d750e0e04d89e6316b4fadbf4
-      internalID: -1207560053
+      spriteID: b3e3eb75e73366d4f9f29d533d3b8e47
+      internalID: -1947706311
       vertices: []
       indices: 
       edges: []
@@ -154,15 +154,15 @@ TextureImporter:
         y: 0
         width: 50
         height: 51
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 80961287d39eba0439b9852b7729b3f7
-      internalID: -1912765395
+      spriteID: 114f43fe9c4509b4ba7f6cc76c359b71
+      internalID: 430123813
       vertices: []
       indices: 
       edges: []
@@ -175,15 +175,15 @@ TextureImporter:
         y: 0
         width: 50
         height: 51
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0ddc1fe6fca420d4f9b033710fef09b9
-      internalID: 580433324
+      spriteID: f0464a18c2d765743a3f15562a00dad5
+      internalID: 1020914466
       vertices: []
       indices: 
       edges: []
@@ -196,15 +196,15 @@ TextureImporter:
         y: 0
         width: 50
         height: 51
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 69a8eff7a90b0f84ab1cd181db7a4271
-      internalID: -409450869
+      spriteID: 1bb99e64873997e469977c8dd523f7c0
+      internalID: -31445834
       vertices: []
       indices: 
       edges: []
@@ -217,15 +217,15 @@ TextureImporter:
         y: 0
         width: 50
         height: 51
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 19f2cc43a135cb04eb9f034f95044bd9
-      internalID: -479768008
+      spriteID: 005e97405b836b14981ae2bd9dbe307e
+      internalID: -1362867967
       vertices: []
       indices: 
       edges: []
@@ -238,15 +238,15 @@ TextureImporter:
         y: 0
         width: 50
         height: 51
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0f77aab96d2b4ff499e8ee08fb9002c0
-      internalID: 1907963380
+      spriteID: 4b74a78b9aad536478500a0730df5779
+      internalID: 1756020565
       vertices: []
       indices: 
       edges: []
@@ -262,13 +262,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      50x51 Beam_3: 580433324
-      50x51 Beam_1: -1207560053
-      50x51 Beam_6: 1907963380
-      50x51 Beam_4: -409450869
-      50x51 Beam_5: -479768008
-      50x51 Beam_2: -1912765395
-      50x51 Beam_0: -1821178196
+      50x51 Beam_3: 1020914466
+      50x51 Beam_1: -1947706311
+      50x51 Beam_6: 1756020565
+      50x51 Beam_4: -31445834
+      50x51 Beam_5: -1362867967
+      50x51 Beam_2: 430123813
+      50x51 Beam_0: -1487829423
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

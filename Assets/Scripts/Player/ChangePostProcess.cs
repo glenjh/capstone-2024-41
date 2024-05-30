@@ -105,6 +105,7 @@ public class ChangePostProcess : MonoBehaviour
 
     private IEnumerator RageEffect()
     {
+        AudioManager.instance.PlaySFX("R");
         player.anim.SetFloat("attackSpeed", 1.2f);
         player.moveSpeed = player.rageSpeed;
         player.ghost.makeGhost = true;
@@ -148,6 +149,7 @@ public class ChangePostProcess : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+        AudioManager.instance.PlaySFX("R End");
         player.anim.SetFloat("attackSpeed", 1f);
         player.moveSpeed = 6f;
         player.ghost.makeGhost = false;

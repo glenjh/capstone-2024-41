@@ -87,6 +87,8 @@ public class MySceneManager : MonoBehaviour
     {
         fadeImg.DOFade(0, duration).OnStart(() =>
             {
+                AudioManager.instance.PlaySFX("TransitionEnd");
+                AudioManager.instance.FadeIn(3f);
                 countAble = false;
                 loadingUI.SetActive(false);
             })
@@ -109,6 +111,9 @@ public class MySceneManager : MonoBehaviour
         fadeImg.DOFade(1, duration)
         .OnStart( () =>
         {
+            PoolManager.Instance.ClearPool();
+            AudioManager.instance.PlaySFX("TransitionStart");
+            AudioManager.instance.FadeOut(3f);
             interactAble = false;
             fadeImg.blocksRaycasts = true;
         })
@@ -160,6 +165,8 @@ public class MySceneManager : MonoBehaviour
     #region Pause and Continue
     public void Pause()
     {
+        AudioManager.instance.PlaySFX("Paused");
+        AudioManager.instance.bgmPlayer.Pause();
         countAble = false;
         Time.timeScale = 0;
         GameManager.instance.isPaused = true;
@@ -168,6 +175,7 @@ public class MySceneManager : MonoBehaviour
 
     public void Continue()
     {
+        AudioManager.instance.bgmPlayer.Play();
         countAble = true;
         Time.timeScale = 1;
         GameManager.instance.isPaused = false;
@@ -206,7 +214,7 @@ public class MySceneManager : MonoBehaviour
     }
     #endregion
 
-    #region In-Game VolumSlider 
+    #region Sound
     public void SetMaster()
     {
         float volume = masterSlider.value;
@@ -223,6 +231,11 @@ public class MySceneManager : MonoBehaviour
     {
         float volume = sfxSlider.value;
         AudioManager.instance.audioMixer.SetFloat("sfxAudio", Mathf.Log10(volume)*20);
+    }
+
+    public void PlaySFX(string cilp)
+    {
+        AudioManager.instance.PlaySFX(cilp);
     }
     #endregion
 
@@ -247,13 +260,19 @@ public class MySceneManager : MonoBehaviour
     public void OverUI()
     {
         overUI.SetActive(true);
-        overUIRt.DOAnchorPosY(0, 2.5f).SetEase(Ease.OutBounce).SetDelay(1f);
+        overUIRt.DOAnchorPosY(0, 2.5f).SetEase(Ease.OutBounce).SetDelay(1f).OnStart((() =>
+        {
+            AudioManager.instance.PlaySFX("UIDown");
+        }));
     }
     
     public void RankingUI()
     {
         rankUI.SetActive(true);
-        rankUIRt.DOAnchorPosY(0, 2.5f).SetEase(Ease.OutBounce).SetDelay(1f).OnComplete(() =>
+        rankUIRt.DOAnchorPosY(0, 2.5f).SetEase(Ease.OutBounce).SetDelay(1f).OnStart(() =>
+        {
+            AudioManager.instance.PlaySFX("UIDown");
+        }).OnComplete(() =>
         {
             StartCoroutine(Counting(0, DataManager.instance.rushData.score, scoreText));
         });
@@ -266,6 +285,7 @@ public class MySceneManager : MonoBehaviour
 
         while (start < end)
         {
+            AudioManager.instance.PlaySFX("Count");
             start += offser * Time.deltaTime;
             word.text = "Your Score: " + ((int)start).ToString();
             yield return null;
@@ -316,7 +336,10 @@ public class MySceneManager : MonoBehaviour
     public void ClearUI()
     {
         clearUI.SetActive(true);
-        clearUIRt.DOAnchorPosY(0, 1f).SetEase(Ease.OutBounce).SetDelay(1.5f);
+        clearUIRt.DOAnchorPosY(0, 1f).SetEase(Ease.OutBounce).SetDelay(1.5f).OnStart((() =>
+        {
+            AudioManager.instance.PlaySFX("UIDown");
+        }));
     }
 
     public void ClearWindowUP()
@@ -326,8 +349,6 @@ public class MySceneManager : MonoBehaviour
             clearUI.SetActive(false);
         });
     }
-    #endregion
-
     public void ClearOrOver()
     {
         if (GameManager.instance.isClear)
@@ -340,7 +361,8 @@ public class MySceneManager : MonoBehaviour
             OverUI();
         }
     }
-
+    #endregion
+    
     public string GetCurrentScene()
     {
         return SceneManager.GetActiveScene().name;
@@ -353,6 +375,7 @@ public class MySceneManager : MonoBehaviour
         ChangeScene(GetCurrentScene());
     }
 
+    #region About Data
     public void DataSava()
     {
         DataManager.instance.SaveData();
@@ -367,4 +390,5 @@ public class MySceneManager : MonoBehaviour
     {
         DataManager.instance.ClearData();
     }
+    #endregion
 }

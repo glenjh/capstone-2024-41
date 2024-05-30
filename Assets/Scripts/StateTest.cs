@@ -17,6 +17,7 @@ public class StateTest : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            AudioManager.instance.PlaySFX("Upgrade");
             // DataManager.instance.storyData.additionalStates[0] = true;
             player._playerData.additionalStates[0] = true;
             player._stateMachine.AddState(PlayerStates.PARRYING);

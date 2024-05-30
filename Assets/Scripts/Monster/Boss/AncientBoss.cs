@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using System;
+using Cinemachine;
 
 public class AncientBoss : Boss
 {
@@ -13,9 +14,17 @@ public class AncientBoss : Boss
     public Action attackAction;
     
     bool isBuffed = false;
+    int currentAttackIndex = 0;
     
     // 근접 공격 델리게이트 인스턴스
     private List<Action> attackActions = new List<Action>();
+
+    protected override void Awake()
+    {
+        base.Awake();
+        
+        impulseSource = GetComponent<CinemachineImpulseSource>();
+    }
 
     protected override void Start()
     {
@@ -31,16 +40,28 @@ public class AncientBoss : Boss
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        if(Input.GetKeyDown(KeyCode.M))
-            WakeUp();
     }
 
     public override void OnAttack()
     {
+        bool _dirRight = true;
+        bool haveTurn = false;
+        _dirRight = transform.localScale.x > 0;
+        
+        bool isPlayerOnRight = player.position.x > transform.position.x;
+
+        if (_dirRight != isPlayerOnRight)
+        {
+            animator.SetTrigger("DoTurn");
+            _dirRight = isPlayerOnRight;
+            transform.localScale = new Vector3(-1*transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        }
+        
         var m = Vector2.Distance(transform.position, player.transform.position);
         
         //리스트내에 있는 함수를 임의로 실행
-        attackActions[UnityEngine.Random.Range(0, attackActions.Count)]();
+        attackActions[currentAttackIndex]();
+        currentAttackIndex = (currentAttackIndex + 1) % attackActions.Count;
     }
     
     public override void TakeHit(int damage, Transform transform)
@@ -108,7 +129,6 @@ public class AncientBoss : Boss
     
     public void OnSpinAttack()
     {
-        print("SpinAttack");
         _arms.SetActive(true);
         _arms.transform.position = this.transform.position;
         _body.SetActive(true);
@@ -139,13 +159,13 @@ public class AncientBoss : Boss
     {
         base.OffAttack();
         OffSpinAttack();
+        animator.SetBool("isDead",true);
     }
 
     public void OffSpinAttack()
     {
         _arms.SetActive(false);
         _body.SetActive(false);
-        animator.SetBool("isDead",true);
         isSuperArmor = false;
         spriteRenderer.color = new Color(1f, 0.6f, 0.4f);
     }

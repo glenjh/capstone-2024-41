@@ -25,6 +25,7 @@ public class DoorOpen : MonoBehaviour
             buttonImg.SetActive(true);
             if (Input.GetKeyDown(KeyCode.F))
             {
+                AudioManager.instance.PlaySFX("DoorOpen");
                 col.enabled = false;
                 anim.SetBool("isOpening", true);
             }

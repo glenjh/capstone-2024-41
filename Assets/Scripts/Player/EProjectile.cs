@@ -32,7 +32,7 @@ public class EProjectile : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Boss"))
         {
-            other.GetComponent<IDamageAble>()?.TakeHit(2,this.transform);
+            other.GetComponent<IDamageAble>()?.TakeHit(7,this.transform);
             var player = FindObjectOfType<Player>();
             player.transform.position = other.transform.position;
         }

@@ -92,6 +92,7 @@ public class Player : MonoBehaviour, IDamageAble
     public bool wUnlocked = false;
     public bool wAble = true;
     public float wCoolTime = 5f;
+    public bool isFind = false;
 
     [Header("E Skill")] 
     public GameObject projectile;
@@ -115,10 +116,10 @@ public class Player : MonoBehaviour, IDamageAble
     private float dashCoolDown = 1f;
 
     [Header(("Parrying"))] 
-    [SerializeField] public Collider2D parryingCol;
+    [SerializeField] public CircleCollider2D parryingCol;
     public bool canParrying = true;
     public bool isParrying;
-    private float parryingTime = 3f;
+    private float parryingTime = 0.65f;
     private float parryingCoolDown = 1f;
 
     [Header("Layer")] 
@@ -268,7 +269,8 @@ public class Player : MonoBehaviour, IDamageAble
          if (Input.GetKeyDown(KeyCode.W) && wUnlocked && wAble)
          {
              StartCoroutine("UseW");
-             StartCoroutine(ui.SkillDown(ui.wImage, wCoolTime));
+             if(isFind)
+                StartCoroutine(ui.SkillDown(ui.wImage, wCoolTime));
          }
 
          if (Input.GetKeyDown(KeyCode.E) && eUnlocked && eAble)
@@ -287,6 +289,7 @@ public class Player : MonoBehaviour, IDamageAble
      
      public IEnumerator PulseAttack()
      {
+         AudioManager.instance.PlaySFX("Q");
          var pulse = PoolManager.Instance.GetFromPool<Effects>("Pulse Effect");
          pulse.transform.position = pulseEffectPos.position;
          pulse.transform.localScale = transform.localScale * 1.1f;
@@ -307,14 +310,16 @@ public class Player : MonoBehaviour, IDamageAble
      {
          wAble = false;
          
-         missileShooter.Fire();
-         yield return new WaitForSecondsRealtime(wCoolTime);
+         isFind = missileShooter.Fire();
+         if(isFind)
+            yield return new WaitForSecondsRealtime(wCoolTime);
 
          wAble = true;
      }
 
      public IEnumerator UseE()
      {
+         AudioManager.instance.PlaySFX("E");
          eAble = false;
          
          var bullet = Instantiate(projectile, firePos.position, firePos.rotation);
@@ -340,12 +345,6 @@ public class Player : MonoBehaviour, IDamageAble
         
         JumpBufferCount();
         CoyoteCount();
-        
-
-        // if (!controlAble)
-        // {
-        //     return;
-        // }
         UseSkills();
         
         _stateMachine.Action();
@@ -354,45 +353,8 @@ public class Player : MonoBehaviour, IDamageAble
                  Vector2.right * transform.localScale.x,
                  wallChkDistance, wallLayer);
 
-        Debug.DrawRay(wallChk.position, Vector2.right * transform.localScale.x * wallChkDistance, Color.cyan);
-        Debug.DrawRay(transform.position, Vector2.right * -transform.localScale.x * len, Color.yellow);
-
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            MySceneManager.instance.ChangeScene("Stage 0");
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            MySceneManager.instance.ChangeScene("Stage 1");
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            MySceneManager.instance.ChangeScene("Stage 2");
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            MySceneManager.instance.ChangeScene("Stage 3");
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            MySceneManager.instance.ChangeScene("Stage 4");
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            MySceneManager.instance.ChangeScene("Rush 1");
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha6))
-        {
-            MySceneManager.instance.ChangeScene("Rush 2");
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha7))
-        {
-            MySceneManager.instance.ChangeScene("Rush 3");
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha8))
-        {
-            MySceneManager.instance.ChangeScene("Rush 4");
-        }
+        // Debug.DrawRay(wallChk.position, Vector2.right * transform.localScale.x * wallChkDistance, Color.cyan);
+        // Debug.DrawRay(transform.position, Vector2.right * -transform.localScale.x * len, Color.yellow);
     }
 
     public void SetWallsliding()
@@ -504,6 +466,10 @@ public class Player : MonoBehaviour, IDamageAble
 
     public void TakeHit(int damage, Transform other)
     {
+        if (PS == PlayerStates.DEAD)
+        {
+            return;
+        }
         if (life > 0 && !isHit)
         {
             isHit = true;
@@ -511,16 +477,19 @@ public class Player : MonoBehaviour, IDamageAble
             newHitEffect.transform.position = hitEffectPos.position;
             newHitEffect.transform.localScale = transform.localScale;
             
-            // anim.SetTrigger("doDamage");
+            AudioManager.instance.PlaySFX("Damaged");
             StartCoroutine(OnDamage(1f));
-            
-            if(other.position.x < transform.position.x)
+
+            if (PS != PlayerStates.SLASHATTACK)
             {
-                rigid.AddForce(new Vector2(6f, 6f), ForceMode2D.Impulse);
-            }
-            else
-            {
-                rigid.AddForce(new Vector2(-6f, 6f), ForceMode2D.Impulse);
+                if(other.position.x < transform.position.x)
+                {
+                    rigid.AddForce(new Vector2(6f, 6f), ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rigid.AddForce(new Vector2(-6f, 6f), ForceMode2D.Impulse);
+                }
             }
             
             life--;
@@ -541,11 +510,13 @@ public class Player : MonoBehaviour, IDamageAble
 
     public IEnumerator OnDamage(float invincibleTime)
     {
+        AudioManager.instance.bgmPlayer.Pause();
         sprite.color = new Color(1, 1, 1, 0.9f);
         // isHit = true;
         
         yield return new WaitForSecondsRealtime(invincibleTime);
         
+        AudioManager.instance.FadeIn(1f);
         sprite.color = new Color(1, 1, 1, 1);
         isHit = false;
     }
@@ -609,12 +580,12 @@ public class Player : MonoBehaviour, IDamageAble
     
     public void SlashRay()
     {
-        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, Vector2.right * -transform.localScale.x * len);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, Vector2.right * -transform.localScale.x, len);
         for (int i = 0; i < hits.Length; i++)
         {
             if (hits[i].collider.gameObject.CompareTag("Enemy") || hits[i].collider.gameObject.CompareTag("Boss"))
             {
-                hits[i].collider.gameObject.GetComponent<IDamageAble>()?.TakeHit(3, this.transform);
+                hits[i].collider.gameObject.GetComponent<IDamageAble>()?.TakeHit(8, this.transform);
             }
         }
         shockWave.CallShockWave(transform.position);
@@ -631,11 +602,11 @@ public class Player : MonoBehaviour, IDamageAble
     public void Charge()
     {
         currCharge += 5;
-        _playerData.charge = currCharge;
-        if (currCharge > maxCharge)
+        if (currCharge >= maxCharge)
         {
             currCharge = maxCharge;
         }
+        _playerData.charge = currCharge;
     }
 
     public IEnumerator ChargeDown()
@@ -762,11 +733,12 @@ public class Player : MonoBehaviour, IDamageAble
                 var stampEffect = PoolManager.Instance.GetFromPool<Effects>("Stamp Effect");
                 stampEffect.transform.position = stampEffectPos.position;
                 CameraManager.instance.CamShake();
+                AudioManager.instance.PlaySFX("Stamping");
             }
             
             if (collider.gameObject.tag == "Enemy" && isGround && PS == PlayerStates.STAMPING)
             {
-                collider.GetComponent<IDamageAble>()?.TakeHit(1,this.transform);
+                collider.GetComponent<IDamageAble>()?.TakeHit(5,this.transform);
             }
         }
     }
@@ -862,7 +834,22 @@ public class Player : MonoBehaviour, IDamageAble
             TakeHit(1,col.transform);
         }
     }
-    
+
+    public void Heal()
+    {
+        _playerData.life = maxLife;
+    }
+
+    public void PlaySFX(string cilp)
+    {
+        AudioManager.instance.PlaySFX(cilp);
+    }
+
+    public void BGMSignal()
+    {
+        AudioManager.instance.FadeIn(2f);
+    }
+
     public void EnablePlayerControlSignal()
     {
         controlAble = true;

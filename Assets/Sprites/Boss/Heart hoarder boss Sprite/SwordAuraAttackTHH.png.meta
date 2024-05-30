@@ -1,0 +1,607 @@
+fileFormatVersion: 2
+guid: 551836411e22a87439469b4ec8d11275
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SwordAuraAttackTHH_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 222
+        height: 119
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac50492ff9c7970439ec014d5a2d080c
+      internalID: 1452667271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordAuraAttackTHH_1
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 0
+        width: 222
+        height: 119
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91491ce5e99d1f140a7576d2c277e993
+      internalID: 182634527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordAuraAttackTHH_2
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 0
+        width: 222
+        height: 119
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78aab68ec1bb2f348ae4d615d5dcf48d
+      internalID: -1469202230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordAuraAttackTHH_3
+      rect:
+        serializedVersion: 2
+        x: 666
+        y: 0
+        width: 222
+        height: 119
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0da33e5a9a1bb741b954d0ddfd40cc0
+      internalID: 223191641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordAuraAttackTHH_4
+      rect:
+        serializedVersion: 2
+        x: 888
+        y: 0
+        width: 222
+        height: 119
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 997e01b9ed0460d4384a4cea516f2865
+      internalID: 43038521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordAuraAttackTHH_5
+      rect:
+        serializedVersion: 2
+        x: 1110
+        y: 0
+        width: 222
+        height: 119
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5732b74aa2e9ed5478dadf944cf87f65
+      internalID: -1924955524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordAuraAttackTHH_6
+      rect:
+        serializedVersion: 2
+        x: 1332
+        y: 0
+        width: 222
+        height: 119
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5709135ba1d64964f9e72bb05ff575b1
+      internalID: 1102052165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordAuraAttackTHH_7
+      rect:
+        serializedVersion: 2
+        x: 1554
+        y: 0
+        width: 222
+        height: 119
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e9ca5b4416d4444e9a40c709fdf5849
+      internalID: -1033309946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordAuraAttackTHH_8
+      rect:
+        serializedVersion: 2
+        x: 1776
+        y: 0
+        width: 222
+        height: 119
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3b29f7bded578e4795004bb98ec6609
+      internalID: -679789583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordAuraAttackTHH_9
+      rect:
+        serializedVersion: 2
+        x: 1998
+        y: 0
+        width: 222
+        height: 119
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dded142b99cbfd9429641c8aa7e007e6
+      internalID: 6649584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordAuraAttackTHH_10
+      rect:
+        serializedVersion: 2
+        x: 2220
+        y: 0
+        width: 222
+        height: 119
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7aef5bb2f8ad4884082c4b9eb623b12a
+      internalID: -576308097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordAuraAttackTHH_11
+      rect:
+        serializedVersion: 2
+        x: 2442
+        y: 0
+        width: 222
+        height: 119
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b3b2489a43aacd4fb5e8259c09c1c79
+      internalID: 1137319174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordAuraAttackTHH_12
+      rect:
+        serializedVersion: 2
+        x: 2664
+        y: 0
+        width: 222
+        height: 119
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90b439d60b66ad8438690b026a17998d
+      internalID: 258992444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordAuraAttackTHH_13
+      rect:
+        serializedVersion: 2
+        x: 2886
+        y: 0
+        width: 222
+        height: 119
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f1b93be496b8f94a862950dbb6109fa
+      internalID: 472329125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordAuraAttackTHH_14
+      rect:
+        serializedVersion: 2
+        x: 3108
+        y: 0
+        width: 222
+        height: 119
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9077dbd7af96881498a11c2cd7e5be0b
+      internalID: -539692737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordAuraAttackTHH_15
+      rect:
+        serializedVersion: 2
+        x: 3330
+        y: 0
+        width: 222
+        height: 119
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c8ab96600dacef4b99c42ac8bd869b3
+      internalID: -649423118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordAuraAttackTHH_16
+      rect:
+        serializedVersion: 2
+        x: 3552
+        y: 0
+        width: 222
+        height: 119
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8675eaaafbc73349a818763015398cf
+      internalID: 224312801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordAuraAttackTHH_17
+      rect:
+        serializedVersion: 2
+        x: 3774
+        y: 0
+        width: 222
+        height: 119
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86302bf6ea8d1424ca255e04e1e2beae
+      internalID: 412131076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordAuraAttackTHH_18
+      rect:
+        serializedVersion: 2
+        x: 3996
+        y: 0
+        width: 222
+        height: 119
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bee61fbf1cd73454e8aa63907fcb1b5e
+      internalID: -1795189105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordAuraAttackTHH_19
+      rect:
+        serializedVersion: 2
+        x: 4218
+        y: 0
+        width: 222
+        height: 119
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2824608d2e67d5249b04986a91ca70fa
+      internalID: 683369652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordAuraAttackTHH_20
+      rect:
+        serializedVersion: 2
+        x: 4440
+        y: 0
+        width: 222
+        height: 119
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27d45d9f3b42ff648bbc7863419a250c
+      internalID: 43652845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordAuraAttackTHH_21
+      rect:
+        serializedVersion: 2
+        x: 4662
+        y: 0
+        width: 222
+        height: 119
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 954150f070d3b1d4e9e12cd15fe90cb7
+      internalID: 1319837249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      SwordAuraAttackTHH_0: 1452667271
+      SwordAuraAttackTHH_7: -1033309946
+      SwordAuraAttackTHH_17: 412131076
+      SwordAuraAttackTHH_14: -539692737
+      SwordAuraAttackTHH_2: -1469202230
+      SwordAuraAttackTHH_6: 1102052165
+      SwordAuraAttackTHH_18: -1795189105
+      SwordAuraAttackTHH_10: -576308097
+      SwordAuraAttackTHH_11: 1137319174
+      SwordAuraAttackTHH_3: 223191641
+      SwordAuraAttackTHH_19: 683369652
+      SwordAuraAttackTHH_15: -649423118
+      SwordAuraAttackTHH_9: 6649584
+      SwordAuraAttackTHH_5: -1924955524
+      SwordAuraAttackTHH_16: 224312801
+      SwordAuraAttackTHH_12: 258992444
+      SwordAuraAttackTHH_13: 472329125
+      SwordAuraAttackTHH_21: 1319837249
+      SwordAuraAttackTHH_20: 43652845
+      SwordAuraAttackTHH_8: -679789583
+      SwordAuraAttackTHH_1: 182634527
+      SwordAuraAttackTHH_4: 43038521
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

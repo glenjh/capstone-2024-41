@@ -10,6 +10,7 @@ public interface IPool
     IPool Clear(bool destroyClones = true);
     Component Get();
     void Take(Component clone);
+    void TakeAll();
     CustomYieldInstruction WaitForFreeObject();
 }
 

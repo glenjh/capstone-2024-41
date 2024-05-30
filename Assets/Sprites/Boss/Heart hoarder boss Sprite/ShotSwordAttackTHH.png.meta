@@ -1,0 +1,783 @@
+fileFormatVersion: 2
+guid: 9ee3a09c4463104438bdb879aa2fec04
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ShotSwordAttackTHH_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1
+        width: 222
+        height: 118
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81ac03cabc8c9144c82a383e212ec520
+      internalID: 532664333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShotSwordAttackTHH_1
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 1
+        width: 222
+        height: 118
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d71284c431b3f7f4eb2d2bbc4e6cd5db
+      internalID: 1661941800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShotSwordAttackTHH_2
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 1
+        width: 222
+        height: 118
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 269501a18c3f0f249a29ee7a591141ff
+      internalID: 342532562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShotSwordAttackTHH_3
+      rect:
+        serializedVersion: 2
+        x: 666
+        y: 1
+        width: 222
+        height: 118
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca8438649c9fe9b4580a6bec867d3ac8
+      internalID: -1735911156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShotSwordAttackTHH_4
+      rect:
+        serializedVersion: 2
+        x: 888
+        y: 1
+        width: 222
+        height: 118
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94835daaea5892e41bc6f662f405c975
+      internalID: -855096999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShotSwordAttackTHH_5
+      rect:
+        serializedVersion: 2
+        x: 1110
+        y: 1
+        width: 222
+        height: 118
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 506741680f995aa489b5687b535542c5
+      internalID: 1604996500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShotSwordAttackTHH_6
+      rect:
+        serializedVersion: 2
+        x: 1332
+        y: 1
+        width: 222
+        height: 118
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89bafec1c18ed2c4c9bef41768a00eeb
+      internalID: -1591150674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShotSwordAttackTHH_7
+      rect:
+        serializedVersion: 2
+        x: 1554
+        y: 1
+        width: 222
+        height: 118
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41548dab42bc08f4488c4f604a3e4d67
+      internalID: -668427152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShotSwordAttackTHH_8
+      rect:
+        serializedVersion: 2
+        x: 1776
+        y: 1
+        width: 222
+        height: 118
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8dd19dfbffc0254c9b2455ccf3da434
+      internalID: 791672071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShotSwordAttackTHH_9
+      rect:
+        serializedVersion: 2
+        x: 1998
+        y: 1
+        width: 222
+        height: 118
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 680038db0021e3648acb08f08ede25c6
+      internalID: -1761336914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShotSwordAttackTHH_10
+      rect:
+        serializedVersion: 2
+        x: 2220
+        y: 1
+        width: 222
+        height: 118
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a440d042fa185fd4eaa7cc261e152b73
+      internalID: 1594595610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShotSwordAttackTHH_11
+      rect:
+        serializedVersion: 2
+        x: 2442
+        y: 1
+        width: 222
+        height: 118
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 156630de57212d447aa682681dafab36
+      internalID: -1418174222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShotSwordAttackTHH_12
+      rect:
+        serializedVersion: 2
+        x: 2664
+        y: 1
+        width: 222
+        height: 118
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5cbbd3c5f9f2cda4cb1ecc1a60ff607f
+      internalID: 1243776756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShotSwordAttackTHH_13
+      rect:
+        serializedVersion: 2
+        x: 2886
+        y: 1
+        width: 222
+        height: 118
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 485ae2f6d12707a48a318122410b502e
+      internalID: 776984333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShotSwordAttackTHH_14
+      rect:
+        serializedVersion: 2
+        x: 3108
+        y: 1
+        width: 222
+        height: 118
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8965e32fd1bba74891f79d2ed7fdc76
+      internalID: 225603824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShotSwordAttackTHH_15
+      rect:
+        serializedVersion: 2
+        x: 3330
+        y: 1
+        width: 222
+        height: 118
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08359be373faeda468906936b6dd7e84
+      internalID: 1866665474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShotSwordAttackTHH_16
+      rect:
+        serializedVersion: 2
+        x: 3552
+        y: 1
+        width: 222
+        height: 118
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84609b555abfb954b8ad33c16f0bad76
+      internalID: -1492409396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShotSwordAttackTHH_17
+      rect:
+        serializedVersion: 2
+        x: 3774
+        y: 1
+        width: 222
+        height: 118
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05f67eb23600fc340a55516c49a64725
+      internalID: -1366809185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShotSwordAttackTHH_18
+      rect:
+        serializedVersion: 2
+        x: 3996
+        y: 1
+        width: 222
+        height: 118
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81e722e4ffab16c438b07d0f64d2e5ee
+      internalID: 648952446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShotSwordAttackTHH_19
+      rect:
+        serializedVersion: 2
+        x: 4218
+        y: 1
+        width: 222
+        height: 118
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d183ff094738a349b05e1a6c50296fd
+      internalID: 646262267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShotSwordAttackTHH_20
+      rect:
+        serializedVersion: 2
+        x: 4440
+        y: 1
+        width: 222
+        height: 118
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7311bc28ec889f0468256eb8559c4868
+      internalID: -574924850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShotSwordAttackTHH_21
+      rect:
+        serializedVersion: 2
+        x: 4662
+        y: 1
+        width: 222
+        height: 118
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 158c7d51e8235954a85e1bad9691aed4
+      internalID: -903165904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShotSwordAttackTHH_22
+      rect:
+        serializedVersion: 2
+        x: 4884
+        y: 1
+        width: 222
+        height: 118
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3182c492ea61dc240a408487a76715a0
+      internalID: 555857435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShotSwordAttackTHH_23
+      rect:
+        serializedVersion: 2
+        x: 5106
+        y: 1
+        width: 222
+        height: 118
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc6b8493fdb74214d9780fe28fb0904e
+      internalID: -332807291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShotSwordAttackTHH_24
+      rect:
+        serializedVersion: 2
+        x: 5328
+        y: 1
+        width: 222
+        height: 118
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d363c8b10ca698a4eaec92a42be0c7c9
+      internalID: -702375523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShotSwordAttackTHH_25
+      rect:
+        serializedVersion: 2
+        x: 5550
+        y: 1
+        width: 222
+        height: 118
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5996f2e9723388047b0ebc37e3e4f148
+      internalID: 852477387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShotSwordAttackTHH_26
+      rect:
+        serializedVersion: 2
+        x: 5772
+        y: 1
+        width: 222
+        height: 118
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 448f51d93cc9f54418bd2e6da0d49997
+      internalID: -667633464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShotSwordAttackTHH_27
+      rect:
+        serializedVersion: 2
+        x: 5994
+        y: 1
+        width: 222
+        height: 118
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c3161fb9b89e894283bdcb9569410db
+      internalID: 1598196490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShotSwordAttackTHH_28
+      rect:
+        serializedVersion: 2
+        x: 6216
+        y: 1
+        width: 222
+        height: 118
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46e8b5253097ce74baacb0a5d5659fd8
+      internalID: 957561693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShotSwordAttackTHH_29
+      rect:
+        serializedVersion: 2
+        x: 6438
+        y: 1
+        width: 222
+        height: 118
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4af37a6d0cd233746ba8a92e16fcbce8
+      internalID: -709057557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      ShotSwordAttackTHH_19: 646262267
+      ShotSwordAttackTHH_1: 1661941800
+      ShotSwordAttackTHH_17: -1366809185
+      ShotSwordAttackTHH_5: 1604996500
+      ShotSwordAttackTHH_21: -903165904
+      ShotSwordAttackTHH_15: 1866665474
+      ShotSwordAttackTHH_11: -1418174222
+      ShotSwordAttackTHH_27: 1598196490
+      ShotSwordAttackTHH_29: -709057557
+      ShotSwordAttackTHH_0: 532664333
+      ShotSwordAttackTHH_24: -702375523
+      ShotSwordAttackTHH_2: 342532562
+      ShotSwordAttackTHH_23: -332807291
+      ShotSwordAttackTHH_6: -1591150674
+      ShotSwordAttackTHH_9: -1761336914
+      ShotSwordAttackTHH_14: 225603824
+      ShotSwordAttackTHH_26: -667633464
+      ShotSwordAttackTHH_22: 555857435
+      ShotSwordAttackTHH_28: 957561693
+      ShotSwordAttackTHH_12: 1243776756
+      ShotSwordAttackTHH_25: 852477387
+      ShotSwordAttackTHH_13: 776984333
+      ShotSwordAttackTHH_16: -1492409396
+      ShotSwordAttackTHH_8: 791672071
+      ShotSwordAttackTHH_3: -1735911156
+      ShotSwordAttackTHH_7: -668427152
+      ShotSwordAttackTHH_10: 1594595610
+      ShotSwordAttackTHH_20: -574924850
+      ShotSwordAttackTHH_4: -855096999
+      ShotSwordAttackTHH_18: 648952446
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

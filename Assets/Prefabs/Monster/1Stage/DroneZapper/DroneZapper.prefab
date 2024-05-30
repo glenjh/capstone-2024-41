@@ -80,7 +80,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 9
+  m_SortingOrder: 8
   m_Sprite: {fileID: 1738358153, guid: 94d29c420bada68409465c9f353ccea1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -171,17 +171,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8c25715d76442b44b208d3244b1fc9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterSO: {fileID: 11400000, guid: c2c2e361a198fac4aa49a0cba72765fa, type: 2}
   monsterName: 
   health: 3
-  maxHealth: 3
-  attackDamage: 0
-  attackRange: 1.2
-  chaseRange: 3
-  moveSpeed: 1
   stateType: 0
-  moveType: 0
-  attackDelay: 1
   attackable: 1
+  moveSpeed: 1
   rb: {fileID: 0}
   animator: {fileID: 0}
   spriteRenderer: {fileID: 0}
@@ -192,6 +187,8 @@ MonoBehaviour:
   missileShooter: {fileID: -6767451593233905864}
   isActor: 0
   isActing: 0
+  isDamaged: 0
+  isLeft: 0
 --- !u!114 &1207212245809347045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_missilePrefab: {fileID: 7943136771063449228, guid: 75183118636989c41acf4b26ecb954cc, type: 3}
+  findTarget: 0
   targetLayer:
   - Player
   targetTag: []

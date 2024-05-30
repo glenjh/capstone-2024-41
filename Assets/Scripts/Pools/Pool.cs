@@ -184,6 +184,12 @@ public class Pool<T> : IPool<T> where T : Component
         clone.gameObject.SetActive(false);
     }
 
+    public void TakeAll()
+    {
+        while (_busyObjects.Count != 0)
+            Take(_busyObjects[0]);
+    }
+
     #endregion
 
     public CustomYieldInstruction WaitForFreeObject() => new WaitWhile(() => _busyObjects.Count == _clones.Count);

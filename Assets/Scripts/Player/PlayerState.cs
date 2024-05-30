@@ -315,6 +315,7 @@ public class Parry : PlayerState
 
     public override void Enter(Player player)
     {
+        AudioManager.instance.PlaySFX("ParryingOn");
         player.rigid.velocity = new Vector2(0, 0);
         player.StartCoroutine("ParryingStart");
     }
@@ -409,6 +410,7 @@ public class Dead : PlayerState
     {
         player.controlAble = false;
         player.rigid.velocity = Vector2.zero;
+        AudioManager.instance.DeadSound();
         MySceneManager.instance.GameOver();
         player.anim.SetTrigger("isDead");
     }

@@ -59,7 +59,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 400
   m_TargetDisplay: 0
 --- !u!114 &6573390918414480111
 MonoBehaviour:
@@ -310,7 +310,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.98
+  m_Radius: 0.1
 --- !u!1 &6573390919842136634
 GameObject:
   m_ObjectHideFlags: 0

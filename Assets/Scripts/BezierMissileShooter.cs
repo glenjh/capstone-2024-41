@@ -6,6 +6,7 @@ using UnityEngine;
 public class BezierMissileShooter : MonoBehaviour
 {
     public GameObject m_missilePrefab; // 미사일 프리팹.
+    public bool findTarget = false;
 
     public String[] targetLayer; // 타겟 레이어.
     public String[] targetTag; // 타겟 태그.
@@ -38,19 +39,27 @@ public class BezierMissileShooter : MonoBehaviour
             }
         }
         
+        if(m_target.Length == 0)
+            findTarget = false;
+        else
+            findTarget = true;
+        
         return m_target;
     }
 
-    public void Fire()
+    public bool Fire()
     { 
         StartCoroutine(CreateMissile(FindTarget()));
+        return findTarget;
     }
     
-    public void Fire(int _shotCount)
+    public bool Fire(int _shotCount)
     {
         m_shotCount = _shotCount;
         m_shotCountEveryInterval = _shotCount;
         StartCoroutine(CreateMissile(FindTarget()));
+        
+        return findTarget;
     }
 
     IEnumerator CreateMissile(Transform[] m_target)
@@ -62,9 +71,13 @@ public class BezierMissileShooter : MonoBehaviour
             {
                 foreach (var pos in m_target)
                 {
+                    if(pos == null)
+                        continue;
+                        
                     if (_shotCount > 0)
                     {
                         GameObject missile = Instantiate(m_missilePrefab);
+                        AudioManager.instance.PlaySFX("W");
                         missile.GetComponent<BezierMissile>().Init(this.gameObject.transform, pos.transform,
                             m_speed, m_distanceFromStart, m_distanceFromEnd, targetTag);
 

@@ -11,18 +11,14 @@ public enum MoveType
 }
 
 public abstract class Monster : MonoBehaviour, IDamageAble{
+    public MonsterSO monsterSO;
+
     public string monsterName;
     public int health;
-    public int maxHealth;
-    public int attackDamage;
-    public float attackRange;
-    public float chaseRange;
-    public float moveSpeed;
     public MonStateType stateType;
-    public MoveType moveType = MoveType.Walk;
-    public float attackDelay = 1;
     public bool attackable = true;
-
+    public float moveSpeed;
+    
     public Rigidbody2D rb;
     public Animator animator;
     public SpriteRenderer spriteRenderer;
@@ -42,6 +38,8 @@ public abstract class Monster : MonoBehaviour, IDamageAble{
     
     [SerializeField] private bool isActor = false;
     public bool isActing = false;
+    public bool isDamaged = false;
+    public bool isLeft = false;
 
     public virtual void Awake()
     {
@@ -61,21 +59,31 @@ public abstract class Monster : MonoBehaviour, IDamageAble{
 
     public virtual void FixedUpdate()
     {
-        if(Input.GetKeyDown(KeyCode.A))
-            EnableChase();
         if(isActing)
             return;
         StateMachine.Action(this);
     }
 
-    public virtual void Init(String name)
+    public virtual void Init(string name, bool isActor = false)
     {
+        moveSpeed = monsterSO.maxMoveSpeed;
         monsterName = name;
         attackCollider.enabled = false;
-        health = maxHealth;
+        health = monsterSO.maxHealth;
         StateMachine.SetState(MonStateType.Idle);
         attackable = true;
         spriteRenderer.color = new Color(1, 1, 1, 1);
+        missileShooter.m_shotCount = 1;
+        isDamaged = false;
+
+        if (this.isActor)
+            return;
+        else
+        {
+            this.isActor = isActor;
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+            
     }
 
     public virtual void TakeDamage(int damage)
@@ -120,7 +128,7 @@ public abstract class Monster : MonoBehaviour, IDamageAble{
 
     public virtual void Die()
     {
-        TakeHit(100, transform);
+        TakeHit(1000, transform);
     }
     
     public virtual void ToIdle()
@@ -163,19 +171,19 @@ public abstract class Monster : MonoBehaviour, IDamageAble{
         effect = PoolManager.Instance.GetFromPool<EffectSystem>("MonsterHitEffect");
         if(missileShooter!=null)
             missileShooter.Fire();
-        //W스킬 간혹 에러 발생 수정 요함
-        effect.transform.position = transform.position;
+        if(effect!=null)
+            effect.transform.position = transform.position;
         
         //좌우 판단 후 넉백
         if(target.position.x < transform.position.x)
         {
-            rb.AddForce(new Vector2(damage*1.5f, 1.5f), ForceMode2D.Impulse);
+            rb.velocity =new Vector2(1.5f, 1.5f);
             if(moveSpeed > 0)
                 Turn();
         }
         else
         {
-            rb.AddForce(new Vector2(-damage*1.5f, 1.5f), ForceMode2D.Impulse);
+            rb.velocity =new Vector2(-1.5f, 1.5f);
             if(moveSpeed < 0)
                 Turn();
         }
@@ -185,19 +193,19 @@ public abstract class Monster : MonoBehaviour, IDamageAble{
     IEnumerator OnDamage()
     {
         spriteRenderer.color = new Color(1, 1, 1, 0.4f);
-        
+        isDamaged = true;
         yield return new WaitForSeconds(0.1f);
-        
+        isDamaged = false;
         spriteRenderer.color = new Color(1, 1, 1, 1);
     }
 
     public virtual bool DecideAttack()
     {
-        if (!attackable)
+        if (!attackable||isActing)
             return false;
-        Debug.DrawRay(rb.position + new Vector2(0,-spriteRenderer.size.y), (moveSpeed > 0 ? Vector3.right : Vector3.left) * attackRange, Color.red);
+        Debug.DrawRay(rb.position + new Vector2(0,-spriteRenderer.size.y), (moveSpeed > 0 ? Vector3.right : Vector3.left) * monsterSO.attackRange, Color.red);
         var rayRange = Physics2D.Raycast(rb.position + new Vector2(0,-spriteRenderer.size.y), (moveSpeed > 0 ? Vector3.right : Vector3.left),
-            attackRange, LayerMask.GetMask("Player"));
+            monsterSO.attackRange, LayerMask.GetMask("Player"));
         if (rayRange.collider && StateMachine.currentState.StateType != MonStateType.Attack)
         {
             StateMachine.SetState(MonStateType.Attack);
@@ -211,7 +219,8 @@ public abstract class Monster : MonoBehaviour, IDamageAble{
     public virtual bool DecideChase()
     {
         var rayRange = Physics2D.Raycast(rb.position + new Vector2(0,-spriteRenderer.size.y), (moveSpeed > 0 ? Vector3.right : Vector3.left),
-            chaseRange, LayerMask.GetMask("Player"));
+            monsterSO.chaseRange, LayerMask.GetMask("Player"));
+        Debug.DrawRay(rb.position + new Vector2(0,-spriteRenderer.size.y), (moveSpeed > 0 ? Vector3.right : Vector3.left) * monsterSO.chaseRange, Color.green);
         if (rayRange.collider)
         {
             if(StateMachine.currentState.StateType != MonStateType.Chase)
@@ -231,7 +240,7 @@ public abstract class Monster : MonoBehaviour, IDamageAble{
     
     IEnumerator AttackDelayCoroutine()
     {
-        yield return new WaitForSeconds(attackDelay);
+        yield return new WaitForSeconds(monsterSO.attackDelay);
         attackable = true;
     }
 
@@ -245,6 +254,10 @@ public abstract class Monster : MonoBehaviour, IDamageAble{
     public void EnableChase()
     {
         isActing = false;
+        if (isLeft)
+        {
+            moveSpeed *= -1;
+        }
         Chase(player);
     }
 }

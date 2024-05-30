@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Cinemachine;
 
 public class TheWidow : Boss {
     [SerializeField] private GameObject _meleeAttack;
@@ -12,6 +13,10 @@ public class TheWidow : Boss {
     [SerializeField] private GameObject _webAttack;
     [SerializeField] private GameObject _warningBox;
     [SerializeField] private GameObject _bezierMissileShooter;
+
+    [SerializeField] private float leftSide;
+    [SerializeField] private float rightSide;
+    [SerializeField] private float parentX;
     bool isBuffed = false;
     
     int attackIndex = 0;
@@ -27,28 +32,31 @@ public class TheWidow : Boss {
         
         attackActions.Add(new Tuple<float, Action>(10f, MeleeAttack));
         attackActions.Add(new Tuple<float, Action>(10f, RangeAttack));
-        attackActions.Add(new Tuple<float, Action>(0f, JumpAttack));
         attackActions.Add(new Tuple<float, Action>(0f, BezierMissileAttack));
-
-        attackIndex = UnityEngine.Random.Range(0, attackActions.Count);
+        attackActions.Add(new Tuple<float, Action>(0f, JumpAttack));
+        
         minAttackRange = attackActions[attackIndex].Item1;
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        
+        impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     // Update is called once per frame
     protected override void FixedUpdate()
     {
+        if(Input.GetKeyDown(KeyCode.P))
+            TakeHit(1000, player);
         base.FixedUpdate();
-        if(Input.GetKeyDown(KeyCode.T))
-             WakeUp();
-            //StateMachine.SetState(BossStateType.Dead);
-        if(Input.GetKeyDown(KeyCode.Y))
-            TakeHit(6, player);
     }
     
     public override void OnBuff()
     {
-        attackActions[0] = new Tuple<float, Action>(15f, SuperMeleeAttack);
-        attackActions[1] = new Tuple<float, Action>(20f, SuperRangeAttack);
+        attackActions[0] = new Tuple<float, Action>(10f, SuperMeleeAttack);
+        attackActions[1] = new Tuple<float, Action>(12f, SuperRangeAttack);
         _bezierMissileShooter.GetComponent<BezierMissileShooter>().m_shotCount = 12;
         StartCoroutine(BuffColorChange(this));
     }
@@ -67,21 +75,38 @@ public class TheWidow : Boss {
             StateMachine.SetState(BossStateType.Buff);
         }
     }
-    
+
     public override void OnAttack()
     {
         curAttackLength = minAttackRange;
         attackActions[attackIndex].Item2();
-        attackIndex = UnityEngine.Random.Range(0, attackActions.Count);
+        attackIndex = (attackIndex + 1) % attackActions.Count;
         minAttackRange = attackActions[attackIndex].Item1;
     }
-    
+
     public void BackStep()
     {
-        if(transform.localScale.x > 0)
-            transform.position = new Vector2(player.position.x - curAttackLength, transform.position.y);
+        float dis = 0;
+        if (transform.localScale.x > 0)
+        {
+            dis = player.position.x - curAttackLength;
+            if (dis < leftSide+ parentX)
+            {
+                rb.MovePosition(new Vector2(leftSide + parentX, transform.position.y));
+            }
+            else
+            {
+                rb.MovePosition(new Vector2(player.position.x - curAttackLength, transform.position.y));
+            }
+        }
         else
-            transform.position = new Vector2(player.position.x + curAttackLength, transform.position.y);
+        {
+            dis = player.position.x + curAttackLength;
+            if(dis > rightSide + parentX)
+                rb.MovePosition(new Vector2(rightSide + parentX, transform.position.y));
+            else
+                rb.MovePosition(new Vector2(player.position.x + curAttackLength, transform.position.y));
+        }
     }
     
     private void Turn()
@@ -121,6 +146,8 @@ public class TheWidow : Boss {
     private void JumpAttack()
     {
         animator.SetInteger("AttackType", 2);
+        bossCollider.enabled = false;
+        rb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
     }
     
     private void SuperMeleeAttack()
@@ -260,10 +287,22 @@ public class TheWidow : Boss {
 
     public void DoLand(Transform target = null)
     {
-        if(transform != null)
-            transform.position = new Vector3(target.position.x, transform.position.y, transform.position.z);
-        spriteRenderer.color = new Color(1, 1, 1, 1);
+        if (target != null)
+        {
+            float pos = target.position.x-parentX;
+            if (pos < leftSide)
+                rb.MovePosition(new Vector3(parentX + leftSide, transform.position.y, transform.position.z));
+            else if (pos > rightSide)
+                rb.MovePosition(new Vector3(parentX + rightSide, transform.position.y, transform.position.z));
+            else
+                rb.MovePosition(new Vector3(target.position.x, transform.position.y, transform.position.z));
+        }
+        if(isBuffed)
+            spriteRenderer.color = new Color(1f, 0.6f, 0.4f); // 목표 색상
+        else
+            spriteRenderer.color = new Color(1, 1, 1, 1);
         isSuperArmor = false;
+        bossCollider.enabled = true;
         _landAttack.SetActive(true);
         animator.SetTrigger(Land);
     }

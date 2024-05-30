@@ -79,7 +79,7 @@ public class BossStateSleep : IBossState
     
     public void Exit(Boss boss)
     {
-        boss.animator.SetBool("isWake", true);
+        //boss.animator.SetBool("isWake", true);
         boss.isSuperArmor = false;
     }
 }
@@ -108,6 +108,7 @@ public class BossStateWake : IBossState
     {
         boss.attackCollider.enabled = true;
         boss.isSuperArmor = false;
+        boss.animator.SetBool("isWake", true);
     }
 }
 

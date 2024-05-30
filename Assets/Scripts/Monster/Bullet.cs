@@ -9,6 +9,9 @@ public class Bullet : MonoBehaviour {
     public bool activeSelf;
     public float disableTime=1.5f;
 
+    public delegate void OnHitCallBack(Transform target);
+    private OnHitCallBack callBack;
+
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -24,12 +27,19 @@ public class Bullet : MonoBehaviour {
     IEnumerator DisableBullet()
     {
         yield return new WaitForSeconds(disableTime);
+        Destroy(gameObject);
     }
     
     public void Fire(Vector3 dir, float speed)
     {
         //addforce 방식
         _rigidbody2D.AddForce(dir * speed, ForceMode2D.Impulse);
+        StartCoroutine(DisableBullet());
+    }
+    
+    public void SetOnHitCallBack(OnHitCallBack onHitCallBack)
+    {
+        callBack = onHitCallBack;
     }
     
     private void OnDisable()
@@ -37,16 +47,18 @@ public class Bullet : MonoBehaviour {
         _collider2D.enabled = false;
         StopAllCoroutines();
     }
-    private void OnBecameInvisible()
-    {
-        gameObject.SetActive(false);
-    }
+    // private void OnBecameInvisible()
+    // {
+    //     gameObject.SetActive(false);
+    // }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            gameObject.SetActive(false);
+            if(callBack != null)
+                callBack(this.transform);
+            Destroy(gameObject);
         }
     }
 }

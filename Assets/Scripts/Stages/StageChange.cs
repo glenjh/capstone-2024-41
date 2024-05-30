@@ -14,6 +14,7 @@ public class StageChange : MonoBehaviour
             {
                 DataManager.instance.rushData.score += 1000;
             }
+            Player.player.Heal();
             DataManager.instance.SaveData();
             Destroy(this.gameObject);
             MySceneManager.instance.ChangeScene(nextStage);

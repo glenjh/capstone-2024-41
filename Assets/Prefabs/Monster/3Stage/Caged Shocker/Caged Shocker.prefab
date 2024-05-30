@@ -179,7 +179,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &233963078177354580
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -297,17 +297,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7529f64421b23ae47adaa2a51452b15f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterSO: {fileID: 11400000, guid: c9aaa47c864d2864bac723d5b10cd03f, type: 2}
   monsterName: 
   health: 8
-  maxHealth: 8
-  attackDamage: 1
-  attackRange: 3
-  chaseRange: 5
-  moveSpeed: 3
   stateType: 0
-  moveType: 0
-  attackDelay: 1
   attackable: 1
+  moveSpeed: 3
   rb: {fileID: 0}
   animator: {fileID: 0}
   spriteRenderer: {fileID: 0}

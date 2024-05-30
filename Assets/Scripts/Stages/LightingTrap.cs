@@ -17,7 +17,7 @@ public class LightingTrap : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Player") && !_player.isHit)
         {
-            _player.TakeHit(1, null);
+            _player.TakeHit(1, this.transform);
         }
     }
 
@@ -25,7 +25,7 @@ public class LightingTrap : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player")&& !_player.isHit)
         {
-            _player.TakeHit(1, null);
+            _player.TakeHit(1, this.transform);
         }
     }
 }

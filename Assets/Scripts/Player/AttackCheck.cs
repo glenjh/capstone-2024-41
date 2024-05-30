@@ -12,14 +12,13 @@ public class AttackCheck : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Enemy") || col.gameObject.CompareTag("Boss"))
         {
-            Debug.Log("Hit");
             if (!player.isRage)
             {
                 player.Charge();
             }
             col.GetComponent<IDamageAble>()?.TakeHit(damage,this.transform);
             CameraManager.instance.CamShake();
-            player._pauser.HitStop(0.1f); 
+            player._pauser.HitStop(0.08f); 
         }
     }
 }

@@ -13,7 +13,7 @@ public class FallingZone : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            player.TakeHit(1, null);
+            player.TakeHit(1, this.transform);
             player.transform.position = respawnPoint.position;
         }
     }

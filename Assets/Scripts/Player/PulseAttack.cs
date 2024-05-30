@@ -7,9 +7,9 @@ public class PulseAttack : MonoBehaviour
 {
     public void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.CompareTag("Enemy"))
+        if (col.gameObject.CompareTag("Enemy") || col.gameObject.CompareTag("Boss"))
         {
-            col.GetComponent<IDamageAble>()?.TakeHit(1,this.transform);
+            col.GetComponent<IDamageAble>()?.TakeHit(10,this.transform);
         }
     }
 }

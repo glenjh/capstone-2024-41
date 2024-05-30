@@ -24,6 +24,7 @@ public class UpgradeChip : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.F))
             {
                 AchiveManager.BossDefeated(bossType);
+                AudioManager.instance.PlaySFX("Upgrade");
                 chipUI.SetActive(false);
                 this.gameObject.SetActive(false);
             }
@@ -36,6 +37,7 @@ public class UpgradeChip : MonoBehaviour
     
     public void ActiveSignal()
     {
+        AudioManager.instance.PlaySFX("Chip");
         this.gameObject.SetActive(true);
     }
 }

@@ -136,6 +136,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.6666667
+    functionName: PlaySFX
+    data: "\uD30C\uC9C1"
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 1
     functionName: OffSuperRange
     data: 
@@ -143,7 +150,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.8333334
+  - time: 1.75
     functionName: OnIdle
     data: 
     objectReferenceParameter: {fileID: 0}

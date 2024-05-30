@@ -39,7 +39,7 @@ public class MonStateIdle : IMonState
     
     public void Action(Monster monster)
     {        
-        if(monster.moveType != MoveType.Fly)
+        if(monster.monsterSO.moveType != MoveType.Fly)
         {
             if(monster.DecideAttack())
                 return;
@@ -73,24 +73,31 @@ public class MonStateMove :IMonState
     
     public void Action(Monster monster)
     {
-        if (monster.moveType == MoveType.Fly)
+        if (!monster.isDamaged)
         {
-            //x, y축 랜덤 이동
-            monster.rb.velocity = new Vector2(monster.moveSpeed*-1f, Random.Range(-1f, 1f));
-            monster.DecideChase();
-            return;
+            if (monster.monsterSO.moveType == MoveType.Fly)
+            {
+                //x, y축 랜덤 이동
+                monster.rb.velocity = new Vector2(monster.moveSpeed * -1f, Random.Range(-1f, 1f));
+                monster.DecideChase();
+                return;
+            }
+
+            // 다음 지형이 바닥인지 확인
+            Vector2 frontVec = new Vector2(monster.rb.position.x + (monster.moveSpeed > 0 ? 0.5f : -0.5f),
+                monster.rb.position.y);
+            int layerMask = (1 << LayerMask.NameToLayer("Ground")) + (1 << LayerMask.NameToLayer("HoverGround"));
+
+            RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down,
+                monster.spriteRenderer.sprite.bounds.size.y / 2 + 0.1f, layerMask);
+            if (rayHit.collider == null)
+            {
+                monster.Turn();
+            }
+
+            monster.rb.velocity = new Vector2(monster.moveSpeed, monster.rb.velocity.y);
         }
-        // 다음 지형이 바닥인지 확인
-        Vector2 frontVec = new Vector2(monster.rb.position.x + (monster.moveSpeed >0 ? 0.5f:-0.5f), monster.rb.position.y);
-        int layerMask = (1 << LayerMask.NameToLayer("Ground")) + (1 << LayerMask.NameToLayer("HoverGround"));
-        
-        RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down, monster.spriteRenderer.sprite.bounds.size.y/2+0.1f, layerMask);
-        if (rayHit.collider == null)
-        {
-            monster.Turn();
-        }
-        
-        monster.rb.velocity = new Vector2(monster.moveSpeed, monster.rb.velocity.y);
+
         if(monster.DecideAttack())
         {
             return;
@@ -132,7 +139,7 @@ public class MonStateAttack : IMonState
         // 상태가 시작될 때 동작 구현
         monster.animator.SetBool("isAttack", true);
         monster.animator.SetTrigger("doAttack");
-        monster.rb.velocity = new Vector2(0, monster.rb.velocity.y);
+        if(!monster.isDamaged) monster.rb.velocity = new Vector2(0, monster.rb.velocity.y);
     }
     
     public void Action(Monster monster)
@@ -191,7 +198,7 @@ public class MonStateChase : IMonState
     {
         // 상태가 시작될 때 동작 구현
         monster.animator.SetBool("isMove", true);
-        if(monster.moveType == MoveType.Fly)
+        if(monster.monsterSO.moveType == MoveType.Fly)
         {
             monster.moveSpeed*=2;
         }
@@ -203,44 +210,53 @@ public class MonStateChase : IMonState
             return;
         float gap = target.position.x - monster.transform.position.x;
         
-        if (monster.moveType == MoveType.Fly)
+        if (monster.monsterSO.moveType == MoveType.Fly)
         {
-            var dir = (target.position - monster.transform.position).normalized;
-            if (Mathf.Abs(gap) > 1f)
+            if (!monster.isDamaged)
             {
-                if (gap > 0 && monster.moveSpeed > 0)
+                var dir = (target.position - monster.transform.position).normalized;
+                if (Mathf.Abs(gap) > 1f)
                 {
-                    monster.Turn();
+                    if (gap > 0 && monster.moveSpeed > 0)
+                    {
+                        monster.Turn();
+                    }
+                    else if (gap < 0 && monster.moveSpeed < 0)
+                    {
+                        monster.Turn();
+                    }
                 }
-                else if (gap < 0 && monster.moveSpeed < 0)
-                {
-                    monster.Turn();
-                }
+
+                monster.rb.velocity = dir * Mathf.Abs(monster.moveSpeed);
             }
-            monster.rb.velocity = dir * Mathf.Abs(monster.moveSpeed);
-            
+
             if(!monster.DecideChase())
                 monster.StateMachine.SetState(MonStateType.Idle);
             
             return;
         }
 
-        if (Mathf.Abs(gap) > monster.attackRange)
+
+        if (!monster.isDamaged)
         {
-            if (gap > 0 && monster.moveSpeed < 0)
+            if (Mathf.Abs(gap) > monster.monsterSO.attackRange)
             {
-                monster.Turn();
+                if (gap > 0 && monster.moveSpeed < 0)
+                {
+                    monster.Turn();
+                }
+                else if (gap < 0 && monster.moveSpeed > 0)
+                {
+                    monster.Turn();
+                }
+
+                monster.rb.velocity = new Vector2(monster.moveSpeed, monster.rb.velocity.y);
             }
-            else if (gap < 0 && monster.moveSpeed > 0)
+            else
             {
-                monster.Turn();
+                //monster.StateMachine.SetState(MonStateType.Idle);
+                monster.rb.velocity = new Vector2(0, monster.rb.velocity.y);
             }
-            monster.rb.velocity = new Vector2(monster.moveSpeed, monster.rb.velocity.y);
-        }
-        else
-        {
-            //monster.StateMachine.SetState(MonStateType.Idle);
-            monster.rb.velocity = new Vector2(0, monster.rb.velocity.y);
         }
 
         if(monster.DecideAttack())
@@ -257,7 +273,7 @@ public class MonStateChase : IMonState
     {
         // 상태가 종료될 때 동작 구현
         monster.animator.SetBool("isMove", false);
-        if(monster.moveType == MoveType.Fly)
+        if(monster.monsterSO.moveType == MoveType.Fly)
         {
             monster.moveSpeed/=2;
         }

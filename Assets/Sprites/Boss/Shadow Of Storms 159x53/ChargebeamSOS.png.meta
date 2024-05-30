@@ -67,7 +67,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 8192
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -119,8 +119,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30aded28dc9184645b29ae1076df31a7
-      internalID: -1207155956
+      spriteID: 64b160a200a2bad419fae49ab4903803
+      internalID: -1016677968
       vertices: []
       indices: 
       edges: []
@@ -140,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e0071550a65eee54b99a5c2f20816b63
-      internalID: 1958797257
+      spriteID: e162eed97744bb74abab2fa6888e6e98
+      internalID: -1354561450
       vertices: []
       indices: 
       edges: []
@@ -161,8 +161,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d6d8bff8a9686ff45996db1e7fa05fe8
-      internalID: -1557330163
+      spriteID: ce73e48a19ee38149979b3a93067f4df
+      internalID: -1139284278
       vertices: []
       indices: 
       edges: []
@@ -182,8 +182,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9f20ffae0bc0634f855a2f0cb0e95c4
-      internalID: 2050797389
+      spriteID: 0476f1d40c9762e4c88b8acae5ff12f9
+      internalID: -1751774918
       vertices: []
       indices: 
       edges: []
@@ -203,8 +203,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 98a886f94bfb863498a390bde4e4f355
-      internalID: -894079046
+      spriteID: 22e7f192327f0364c840e0ab996926a8
+      internalID: 649189040
       vertices: []
       indices: 
       edges: []
@@ -224,8 +224,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3feac11ffaaf51845bf40fb6060b25fd
-      internalID: 2001230121
+      spriteID: df4f9057122d87642b7d92e613ba517a
+      internalID: -1715706382
       vertices: []
       indices: 
       edges: []
@@ -245,8 +245,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d63ab78e23d16cc4f9b32fcc3e3c1d14
-      internalID: -1040683645
+      spriteID: 5a2d4dbef20fc8c48929201173b0d121
+      internalID: -323133454
       vertices: []
       indices: 
       edges: []
@@ -266,8 +266,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dcf73358ba042434f8a5c6b015ff640d
-      internalID: 1996937472
+      spriteID: 134c8c99b94ca26478a77452f7253e25
+      internalID: -1919740083
       vertices: []
       indices: 
       edges: []
@@ -287,8 +287,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d71c8568004ae16469bf52c88abf0eb6
-      internalID: -1232999969
+      spriteID: 49a103b497ddeb64496587ddac467d64
+      internalID: -1729138554
       vertices: []
       indices: 
       edges: []
@@ -308,8 +308,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a006ca3ea7c4bcd4d911d272a9eb968e
-      internalID: -581117093
+      spriteID: 75017493cd7352c42b2e6c194186de85
+      internalID: 1612333926
       vertices: []
       indices: 
       edges: []
@@ -329,8 +329,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ee98c88cb86e78344b35896db8821310
-      internalID: -1407814302
+      spriteID: 0c3c13c3b051a5e42a655d65c1cf1bf7
+      internalID: 83812620
       vertices: []
       indices: 
       edges: []
@@ -350,8 +350,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3101c63ba739d84ab1ee3169610c22f
-      internalID: 1361491802
+      spriteID: 28c5ec62b0b322b46ab3f3241726be22
+      internalID: 516329059
       vertices: []
       indices: 
       edges: []
@@ -371,8 +371,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ab526810cc18f14439fe45228837b337
-      internalID: -1326746439
+      spriteID: 6d6788f79069f024da6c845ca3d2ce3f
+      internalID: 693021082
       vertices: []
       indices: 
       edges: []
@@ -392,8 +392,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9b62aebc09c729f4282c243b8a43f131
-      internalID: -336377985
+      spriteID: 27550233799789c4aa8e6033116e501c
+      internalID: 1158976733
       vertices: []
       indices: 
       edges: []
@@ -413,8 +413,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c932986200099574da0a432dcf86c199
-      internalID: -918411679
+      spriteID: 491c7471ecc26284dbcfe808ec043e1a
+      internalID: -660411727
       vertices: []
       indices: 
       edges: []
@@ -430,21 +430,21 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ChargebeamSOS_5: 2001230121
-      ChargebeamSOS_14: -918411679
-      ChargebeamSOS_1: 1958797257
-      ChargebeamSOS_8: -1232999969
-      ChargebeamSOS_2: -1557330163
-      ChargebeamSOS_10: -1407814302
-      ChargebeamSOS_0: -1207155956
-      ChargebeamSOS_11: 1361491802
-      ChargebeamSOS_13: -336377985
-      ChargebeamSOS_3: 2050797389
-      ChargebeamSOS_9: -581117093
-      ChargebeamSOS_6: -1040683645
-      ChargebeamSOS_12: -1326746439
-      ChargebeamSOS_4: -894079046
-      ChargebeamSOS_7: 1996937472
+      ChargebeamSOS_5: -1715706382
+      ChargebeamSOS_14: -660411727
+      ChargebeamSOS_1: -1354561450
+      ChargebeamSOS_8: -1729138554
+      ChargebeamSOS_2: -1139284278
+      ChargebeamSOS_10: 83812620
+      ChargebeamSOS_0: -1016677968
+      ChargebeamSOS_11: 516329059
+      ChargebeamSOS_13: 1158976733
+      ChargebeamSOS_3: -1751774918
+      ChargebeamSOS_9: 1612333926
+      ChargebeamSOS_6: -323133454
+      ChargebeamSOS_12: 693021082
+      ChargebeamSOS_4: 649189040
+      ChargebeamSOS_7: -1919740083
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -73,7 +73,6 @@ public class Boomarang : MonoBehaviour {
 
     private void OnDisable()
     {
-        print("Disable");
         BoomarangOff();
     }
 

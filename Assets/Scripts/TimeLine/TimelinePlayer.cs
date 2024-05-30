@@ -11,6 +11,7 @@ public class TimelinePlayer : MonoBehaviour
 {
     [SerializeField] 
     private PlayableDirector EnterTimeLine;
+    public AudioClip bossBGM;
     public BoxCollider2D col;
     public Player player;
     public Image flash;
@@ -24,6 +25,7 @@ public class TimelinePlayer : MonoBehaviour
             player._stateMachine.ChangeState(PlayerStates.IDLE);
             player.controlAble = false;
             col.enabled = false;
+            AudioManager.instance.FadeOut(0.2f);
             StartCoroutine("PlayBuffering");
         }
     }
@@ -31,11 +33,15 @@ public class TimelinePlayer : MonoBehaviour
     IEnumerator PlayBuffering()
     {
         yield return new WaitForSeconds(0.5f);
+        AudioManager.instance.bgmPlayer.clip = bossBGM;
+        AudioManager.instance.FadeIn(7f);
         EnterTimeLine.Play();
     }
 
     public void Flash()
     {
+        AudioManager.instance.PlaySFX("BossDie");
+        AudioManager.instance.bgmPlayer.Pause();
         player.rigid.velocity = new Vector2(0, player.rigid.velocity.y);
         player.rigid.gravityScale = player.normalGravity;
         

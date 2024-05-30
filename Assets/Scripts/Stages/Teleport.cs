@@ -24,11 +24,13 @@ public class Teleport : MonoBehaviour
             buttonImg.SetActive(true);
             if (Input.GetKeyDown(KeyCode.F))
             {
+                AudioManager.instance.PlaySFX("Teleport");
                 player.GetComponent<SpriteRenderer>().enabled = false;
                 col.enabled = false;
                 anim.SetBool("isWarp", true);
 
                 StartCoroutine("TonextStage");
+                player.Heal();
             }
         }
         else

@@ -83,5 +83,17 @@ public class PoolManager : MonoSingleton<PoolManager>
         GetPool<T>(name).Take(component);
 
     #endregion
+
+    #region Clear
+
+    public void ClearPool()
+    {
+        foreach (var VARIABLE in _poolsObjects)
+        {
+            VARIABLE.TakeAll();
+        }
+    }
+
+    #endregion
 }
     

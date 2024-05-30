@@ -20,11 +20,11 @@ public class Shielder : Monster {
         //Init();
     }
     
-    public override void Init(string name)
+    public override void Init(string name, bool isActor = false)
     {
-        base.Init(name);
+        base.Init(name,isActor);
     
-        health = maxHealth;
+        health = monsterSO.maxHealth;
         StateMachine.SetState(MonStateType.Idle);
     }
     // Update is called once per frame
@@ -39,11 +39,9 @@ public class Shielder : Monster {
         if (!attackable)
             return false;
         //공격 범위 내로 플레이어가 들어오면 공격
-        RaycastHit2D rayRange = Physics2D.Raycast(rb.position + Vector2.down, (moveSpeed >0 ? Vector3.right: Vector3.left), attackRange, LayerMask.GetMask("Player"));
+        RaycastHit2D rayRange = Physics2D.Raycast(rb.position + Vector2.down, (moveSpeed >0 ? Vector3.right: Vector3.left), monsterSO.attackRange, LayerMask.GetMask("Player"));
         if (rayRange.collider != null && StateMachine.currentState.StateType != MonStateType.Attack)
         {
-            if (bullet.activeSelf)
-                return false;
             //meleeRange 내로 플레이어가 들어오면 근접공격
             RaycastHit2D rayMelee = Physics2D.Raycast(rb.position + Vector2.down, (moveSpeed >0 ? Vector3.right: Vector3.left),
                 meleeRange, LayerMask.GetMask("Player"));
@@ -56,6 +54,7 @@ public class Shielder : Monster {
                 animator.SetInteger(ChoiseAttack, 1);
             }
 
+            attackable = false;
             StateMachine.SetState(MonStateType.Attack);
             return true;
         }
@@ -63,12 +62,13 @@ public class Shielder : Monster {
         return false;
     }
 
-    public void Fire()
+    public void Shot()
     {
         // 총알을 생성하고 발사할 방향 설정
-        bullet.SetActive(true);
-        Vector3 bulletDirection = ((player.position+Vector3.up/2) - transform.position).normalized;
-        bullet.transform.position = transform.position;
-        bullet.GetComponent<Bullet>().Fire(bulletDirection, bulletSpeed);
+        Bullet _bullet = Instantiate(bullet).GetComponent<Bullet>();
+        
+        _bullet.transform.position = transform.position;
+        //좌우 판단
+        _bullet.Fire(moveSpeed > 0 ? Vector2.right : Vector2.left, bulletSpeed);
     }
 }

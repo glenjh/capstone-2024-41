@@ -15,7 +15,7 @@ public class PlayerData
     public float playTime = 0;
     public float score = 0;
     public string currStage = "";
-    public int life = 10;
+    public int life = 20;
     public float charge = 0f;
     public bool[] skillUnlock = {false, false, false, false}; // Q, W, E, R
     public bool[] additionalStates = {false, false}; // parrying, wallSlide
@@ -83,8 +83,6 @@ public class DataManager : MonoBehaviour
 
     public void SaveData()
     {
-        Debug.Log("Saved");
-
         if (FindObjectOfType<Player>())
         {
             Player.player._playerData.playTime = MySceneManager.instance.timer;
@@ -100,7 +98,6 @@ public class DataManager : MonoBehaviour
         MySceneManager.instance.countAble = true;
         if (File.Exists(storyPath))
         {
-            Debug.Log("Old Story");
             string data = File.ReadAllText(storyPath);
             storyData = JsonUtility.FromJson<PlayerData>(data);
             
@@ -108,7 +105,6 @@ public class DataManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("New Story");
             storyData = new PlayerData("Stage 0");
             SaveData();
             MySceneManager.instance.ChangeScene("Stage 0");
@@ -120,7 +116,6 @@ public class DataManager : MonoBehaviour
         MySceneManager.instance.countAble = true;
         if (File.Exists(rushPath))
         {
-            Debug.Log("Old rush");
             string data = File.ReadAllText(rushPath);
             rushData = JsonUtility.FromJson<PlayerData>(data);
             
@@ -128,7 +123,6 @@ public class DataManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("New rush");
             rushData = new PlayerData("Rush 1");
             SaveData();
             MySceneManager.instance.ChangeScene("Rush 1");

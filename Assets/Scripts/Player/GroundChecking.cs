@@ -41,10 +41,10 @@ public class GroundChecking : MonoBehaviour
         // Vector2 bottomLeft = raycastOrigin + new Vector2(-halfSize.x, -halfSize.y);
         // Vector2 bottomRight = raycastOrigin + new Vector2(halfSize.x, -halfSize.y);
         //
-        // Debug.DrawLine(topLeft, topRight, Color.green);
-        // Debug.DrawLine(topRight, bottomRight, Color.green);
-        // Debug.DrawLine(bottomRight, bottomLeft, Color.green);
-        // Debug.DrawLine(bottomLeft, topLeft, Color.green);
+        // Debug.DrawLine(topLeft, topRight, Color.blue);
+        // Debug.DrawLine(topRight, bottomRight, Color.blue);
+        // Debug.DrawLine(bottomRight, bottomLeft, Color.blue);
+        // Debug.DrawLine(bottomLeft, topLeft, Color.blue);
 
         if (raycastHit2D.collider != null)
         {
