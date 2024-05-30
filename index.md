@@ -28,7 +28,7 @@ https://drive.google.com/file/d/1QePBBb-dwJlE-fLp8zePX7vVrYkRuq5k/view?usp=drive
 
 ### 5. 사용법
 
-1. [Google Drive]([https://drive.google.com/drive/folders/1PLdymtSjLYZg932usjZbjHqhsccBn9oi?usp=drive_link](https://drive.google.com/drive/folders/1CnmOz2qzNYevITge8F4unQB_5P3UnDba?usp=drive_link)) 접속(구글 드라이브)
+1. [구글 드라이브](https://drive.google.com/drive/folders/1CnmOz2qzNYevITge8F4unQB_5P3UnDba?usp=drive_link) 접속(구글 드라이브)
 2. 운영체제에 맞게 다운로드
 3. Zip 파일을 압축해제
 4. Adam 실행
